@@ -3,7 +3,7 @@ from validate import *
 gamemode1 = "english"
 target1 = "what"
 letters1 = 4
-word11 = "sfdg"
+word11 = "watt"
 word12 = "talk"
 word13 = "what"
 

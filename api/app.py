@@ -1,4 +1,5 @@
 from models import *
+from validate import *
 from flask import Flask
 from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
@@ -29,6 +30,13 @@ def validate():
     word = args['word']
     mode = args['mode']
     target = args['target']
+    if not acceptable(word, mode, len(target)):
+        if mode == "francais":
+            return "Ce mot n'est pas dans notre dictionnaire"
+        if mode == "anglais":
+            return "Ce mot n'est pas dans notre dictionnaire"
+    else:
+        return verification(word, mode, len(target), target)
 
 
 @app.route('/api/getword', methods=['GET'])
