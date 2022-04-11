@@ -12,17 +12,16 @@ def acceptable(word, gamemode, letters):
 
 def verification(word, gamemode, letters, target):
     result = [0 for i in range(letters)]
-    
+    t=list(target)
     if acceptable(word, gamemode, letters):
         for i in range (letters):
-            if word[i]==target[i]:
+            if word[i]==t[i]:
                 result[i]=2
-                t=list(target)
                 t[i]='0'
-                target = "".join(t)
         for i in range (letters):
             for j in range(letters):
-                if word[i]==target[j] and i!=j:
+                if word[i]==t[j] and i!=j:
                     result[i]=1
+                    t[i]='0'
     return result
             

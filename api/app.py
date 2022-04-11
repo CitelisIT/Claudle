@@ -1,4 +1,3 @@
-from models import *
 from validate import *
 from flask import Flask
 from flask.helpers import flash

@@ -1,11 +1,11 @@
 from validate import *
 
 gamemode1 = "english"
-target1 = "what"
+target1 = "watt"
 letters1 = 4
-word11 = "watt"
-word12 = "talk"
-word13 = "what"
+word11 = "that"
+word12 = "what"
+word13 = "watt"
 
 
 gamemode2 = "francais"
