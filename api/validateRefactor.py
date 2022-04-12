@@ -55,6 +55,10 @@ def verification(word, target):
                     target = ''.join(targetList)
 
                     break
+
+                elif targetCharacter == '$' or character != targetCharacter:
+                    continue
+
                 else:
                     #The character must be in target
                     hint = 1
@@ -83,18 +87,22 @@ def verification(word, target):
 #print(verification(word13, target))
 #print(verification(word14, target))
 #
-#target = "ABCDE"
-#
-#word1 = "AXXXX"
-#word2 = "XAXXX"
-#word3 = "AAXXX"
-#word4 = "XAAXX"
-#word5 = "AXBXX"
-#word6 = "EDCBA"
-#
-#print(verification(word1, target))
-#print(verification(word2, target))
-#print(verification(word3, target))
-#print(verification(word4, target))
-#print(verification(word5, target))
-#print(verification(word6, target))
+target = "ABCDE"
+
+word1 = "AXXXX"
+word2 = "XAXXX"
+word3 = "AAXXX"
+word4 = "XAAXX"
+word5 = "AXBXX"
+word6 = "EDCBA"
+
+print(verification(word1, target))
+print(verification(word2, target))
+print(verification(word3, target))
+print(verification(word4, target))
+print(verification(word5, target))
+print(verification(word6, target))
+
+#word = "needs"
+#target = "event"
+#print(verification(word, target))
