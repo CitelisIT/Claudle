@@ -16,7 +16,7 @@ import csv
 def parseWord():
     """
     Depending on how we get the word from the app, 
-    we'll hve to parse the word in order to work with it.
+    we'll have to parse the word in order to work with it.
     """
     return
 
@@ -74,6 +74,14 @@ def verification(word, target):
     return output
 
 
+#print(verification("needs", "event"))
+#print(verification("event", "needs"))
+#print(verification("black", "brand"))
+#print(verification("about", "black"))
+#print(verification("brand", "cable"))
+#print(verification("about", "table"))
+
+
 ##Testing
 
 #target = "about"
@@ -87,21 +95,21 @@ def verification(word, target):
 #print(verification(word13, target))
 #print(verification(word14, target))
 #
-target = "ABCDE"
+# target = "ABCDE"
 
-word1 = "AXXXX"
-word2 = "XAXXX"
-word3 = "AAXXX"
-word4 = "XAAXX"
-word5 = "AXBXX"
-word6 = "EDCBA"
+# word1 = "AXXXX"
+# word2 = "XAXXX"
+# word3 = "AAXXX"
+# word4 = "XAAXX"
+# word5 = "AXBXX"
+# word6 = "EDCBA"
 
-print(verification(word1, target))
-print(verification(word2, target))
-print(verification(word3, target))
-print(verification(word4, target))
-print(verification(word5, target))
-print(verification(word6, target))
+# print(verification(word1, target))
+# print(verification(word2, target))
+# print(verification(word3, target))
+# print(verification(word4, target))
+# print(verification(word5, target))
+# print(verification(word6, target))
 
 #word = "needs"
 #target = "event"
