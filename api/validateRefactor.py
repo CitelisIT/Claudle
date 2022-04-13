@@ -31,10 +31,10 @@ def getWords(length, language):
     return words
 
 #Temp
-english = "english"
-words = getWords(5, english)
+#english = "english"
+#words = getWords(5, english)
 
-def validWord(word):
+def validWord(word,words):
     return word in words
 
 def verification(word, target):
