@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .app-wrapper {
+    @apply relative min-h-screen overflow-y-hidden bg-gray-900;
+  }
+}
