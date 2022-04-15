@@ -16,10 +16,22 @@
   }
 
   .letter-square--correct {
-    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-green-400;
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-green-600;
   }
 
   .letter-square__letter {
     @apply text-lg font-semibold text-gray-200 select-none md:text-xl lg:text-2xl;
+  }
+
+  .game-wrapper {
+    @apply flex items-center justify-center m-12 md:m-16;
+  }
+
+  .game-board {
+    @apply flex flex-col items-center justify-center gap-1;
+  }
+
+  .game-board__row {
+    @apply flex flex-row items-center justify-center gap-1;
   }
 }
