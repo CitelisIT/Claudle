@@ -3,9 +3,10 @@ import { BackspaceIcon, ArrowRightIcon } from "@heroicons/react/outline";
 
 interface Props {
   layout: string;
+  addLetter(key: string): void;
 }
 
-export default function Keyboard(layout: Props) {
+export default function Keyboard({ layout, addLetter }: Props) {
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
   const qwerty = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
@@ -24,7 +25,7 @@ export default function Keyboard(layout: Props) {
   return (
     <section className="keyboard-wrapper">
       <div className="keyboard">
-        {keyboards.get(layout.layout)?.map((row) => {
+        {keyboards.get(layout)?.map((row) => {
           return (
             <div className="keyboard__row">
               {row.map((key) => (
@@ -38,6 +39,7 @@ export default function Keyboard(layout: Props) {
                       ? "keyboard__letter--out"
                       : "keyboard__letter--default"
                   }
+                  onClick={() => addLetter(key)}
                 >
                   {key === "Enter" || key === "Entrée" ? (
                     <ArrowRightIcon className="keyboard__icon" />
