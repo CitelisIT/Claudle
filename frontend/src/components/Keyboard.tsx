@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { BackspaceIcon, ArrowRightIcon } from "@heroicons/react/outline";
 
 interface Props {
   layout: string;
   addLetter(key: string): void;
+  keyboardHints: Map<string, number>;
 }
 
-export default function Keyboard({ layout, addLetter }: Props) {
-  const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
+export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
   const qwerty = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],

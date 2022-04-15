@@ -12,6 +12,7 @@ export default function HomePage() {
   const [hints, setHints] = useState<number[][]>([]);
   const [currentWord, setCurrentWord] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
 
   function addLetter(key: string) {
     var newCurrentWord = currentWord;
@@ -64,7 +65,11 @@ export default function HomePage() {
     <>
       <Navbar />
       <GameBoard size={size} tries={tries} words={words} hints={hints} />
-      <Keyboard layout={layout} addLetter={addLetter} />
+      <Keyboard
+        layout={layout}
+        addLetter={addLetter}
+        keyboardHints={keyboardHints}
+      />
       <Footer />
     </>
   );
