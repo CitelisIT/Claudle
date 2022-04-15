@@ -6,4 +6,20 @@
   .app-wrapper {
     @apply relative min-h-screen overflow-y-hidden bg-gray-900;
   }
+
+  .letter-square--default {
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-gray-900;
+  }
+
+  .letter-square--misplaced {
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-amber-400;
+  }
+
+  .letter-square--correct {
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-green-400;
+  }
+
+  .letter-square__letter {
+    @apply text-lg font-semibold text-gray-200 select-none md:text-xl lg:text-2xl;
+  }
 }
