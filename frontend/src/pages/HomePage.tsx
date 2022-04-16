@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import GameBoard from "../components/GameBoard";
 import Keyboard from "../components/Keyboard";
 import Navbar from "../components/Navbar";
+import { SettingsContext } from "../App";
 
 export default function HomePage() {
-  const [layout, setLayout] = useState<string>("qwerty");
-  const [size, setSize] = useState<number>(5);
-  const [tries, setTries] = useState<number>(6);
+  const settingsContext = useContext(SettingsContext);
   const [words, setWords] = useState<string[][]>([]);
   const [hints, setHints] = useState<number[][]>([]);
   const [currentWord, setCurrentWord] = useState<string>("");
@@ -15,7 +14,6 @@ export default function HomePage() {
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
 
   function addLetter(key: string) {
-    console.log(key);
     var newCurrentWord = currentWord;
     var newCurrentIndex = currentIndex;
     if (key === "Del") {
@@ -24,7 +22,7 @@ export default function HomePage() {
       }
     } else if (key === "Enter") {
       // TODO : validate word
-      if (currentWord.length === size) {
+      if (currentWord.length === settingsContext.size) {
         newCurrentWord = "";
         setCurrentIndex(currentIndex + 1);
         newCurrentIndex += 1;
@@ -32,7 +30,7 @@ export default function HomePage() {
         return;
       }
     } else if (
-      currentWord.length < size &&
+      currentWord.length < settingsContext.size &&
       "qwertyuiopasdfghjklzxcvbnm".includes(key)
     ) {
       newCurrentWord = currentWord + key;
@@ -40,7 +38,7 @@ export default function HomePage() {
     setCurrentWord(newCurrentWord);
     var _words = words;
     var currWordArray = newCurrentWord.split("");
-    while (currWordArray.length < size) {
+    while (currWordArray.length < settingsContext.size) {
       currWordArray.push("");
     }
     _words[newCurrentIndex] = currWordArray;
@@ -51,26 +49,31 @@ export default function HomePage() {
     // Initialize the letters and hints
     const letterRow = [];
     const hintRow = [];
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < settingsContext.size; i++) {
       letterRow.push("");
       hintRow.push(0);
     }
     const _letters = [];
     const _hints = [];
-    for (let i = 0; i < tries; i++) {
+    for (let i = 0; i < settingsContext.tries; i++) {
       _letters.push(letterRow);
       _hints.push(hintRow.slice());
     }
     setWords(_letters);
     setHints(_hints);
-  }, [size, tries]);
+  }, [settingsContext.size, settingsContext.tries]);
 
   return (
     <>
       <Navbar />
-      <GameBoard size={size} tries={tries} words={words} hints={hints} />
+      <GameBoard
+        size={settingsContext.size}
+        tries={settingsContext.tries}
+        words={words}
+        hints={hints}
+      />
       <Keyboard
-        layout={layout}
+        layout={settingsContext.layout}
         addLetter={addLetter}
         keyboardHints={keyboardHints}
       />
