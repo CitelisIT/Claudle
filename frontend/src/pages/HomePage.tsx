@@ -18,11 +18,11 @@ export default function HomePage() {
     console.log(key);
     var newCurrentWord = currentWord;
     var newCurrentIndex = currentIndex;
-    if (key === "del" || key === "suppr") {
+    if (key === "Del") {
       if (currentWord.length > 0) {
         newCurrentWord = currentWord.slice(0, -1);
       }
-    } else if (key === "enter" || key === "entrée") {
+    } else if (key === "Enter") {
       // TODO : validate word
       if (currentWord.length === size) {
         newCurrentWord = "";

@@ -9,14 +9,14 @@ interface Props {
 
 export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
   const qwerty = [
-    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-    ["Enter", "Z", "X", "C", "V", "B", "N", "M", "Del"],
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+    ["Enter", "z", "x", "c", "v", "b", "n", "m", "Del"],
   ];
   const azerty = [
-    ["A", "Z", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["Q", "S", "D", "F", "G", "H", "J", "K", "L", "M"],
-    ["Entrée", "W", "X", "C", "V", "B", "N", "Suppr"],
+    ["a", "z", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["q", "s", "d", "f", "g", "h", "j", "k", "l", "m"],
+    ["Enter", "w", "x", "c", "v", "b", "n", "Del"],
   ];
   const keyboards = new Map([
     ["azerty", azerty],
@@ -58,14 +58,14 @@ export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
                       ? "keyboard__letter--out"
                       : "keyboard__letter--default"
                   }
-                  onClick={() => addLetter(key.toLowerCase())}
+                  onClick={() => addLetter(key)}
                 >
-                  {key === "Enter" || key === "Entrée" ? (
+                  {key === "Enter" ? (
                     <ArrowRightIcon className="keyboard__icon" />
-                  ) : key === "Del" || key === "Suppr" ? (
+                  ) : key === "Del" ? (
                     <BackspaceIcon className="keyboard__icon" />
                   ) : (
-                    key
+                    key.toUpperCase()
                   )}
                 </button>
               ))}
