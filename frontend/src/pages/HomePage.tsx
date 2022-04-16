@@ -15,6 +15,7 @@ export default function HomePage() {
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
 
   function addLetter(key: string) {
+    console.log(key);
     var newCurrentWord = currentWord;
     var newCurrentIndex = currentIndex;
     if (key === "Del" || key === "Suppr") {
@@ -30,7 +31,10 @@ export default function HomePage() {
       } else {
         return;
       }
-    } else if (currentWord.length < size) {
+    } else if (
+      currentWord.length < size &&
+      "qwertyuiopasdfghjklzxcvbnm".includes(key)
+    ) {
       newCurrentWord = currentWord + key;
     }
     setCurrentWord(newCurrentWord);

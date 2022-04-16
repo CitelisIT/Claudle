@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BackspaceIcon, ArrowRightIcon } from "@heroicons/react/outline";
 
 interface Props {
@@ -22,6 +22,25 @@ export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
     ["azerty", azerty],
     ["qwerty", qwerty],
   ]);
+
+  //   Get key pressed by user
+  function handleKeyPress(event: KeyboardEvent) {
+    const keyName = event.key;
+    if (keyName === "Backspace") {
+      addLetter("Del");
+    }
+    if (keyName === "Enter") {
+      addLetter("Enter");
+    } else if ("qwertyuiopasdfghjklzxcvbnm".includes(keyName)) {
+      addLetter(keyName);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  });
+
   return (
     <section className="keyboard-wrapper">
       <div className="keyboard">
