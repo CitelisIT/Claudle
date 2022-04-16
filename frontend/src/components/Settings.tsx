@@ -13,10 +13,11 @@ const tryNumbers = [4, 5, 6, 7, 8, 9, 10];
 const layouts = ["qwerty", "azerty"];
 
 export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
-  const [selectedLen, setSelectedLen] = useState(lengths[1]);
-  const [selectedLayout, setSelectedLayout] = useState(layouts[0]);
+  const [size, setSize] = useState(5);
+  const [tries, setTries] = useState(6);
   const [hardMode, setHardMode] = useState(false);
-  const [tryNumber, setTryNumber] = useState(tryNumbers[2]);
+  const [layout, setLayout] = useState("qwerty");
+
   return (
     <Transition
       as={Fragment}
@@ -50,10 +51,10 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             Longueur
           </span>
           <div className="text-lg justify-self-end">
-            <Listbox value={selectedLen} onChange={setSelectedLen}>
+            <Listbox value={size} onChange={setSize}>
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{selectedLen}</span>
+                  <span className="relative">{size}</span>
                   <span className="relative">
                     <SelectorIcon className="w-5 h-5" aria-hidden="true" />
                   </span>
@@ -81,10 +82,10 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             Nombre d'essais
           </span>
           <div className="text-lg justify-self-end">
-            <Listbox value={tryNumber} onChange={setTryNumber}>
+            <Listbox value={tries} onChange={setTries}>
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{tryNumber}</span>
+                  <span className="relative">{tries}</span>
                   <span className="relative">
                     <SelectorIcon className="w-5 h-5" aria-hidden="true" />
                   </span>
@@ -129,10 +130,10 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             Clavier
           </span>
           <div className="text-lg justify-self-end">
-            <Listbox value={selectedLayout} onChange={setSelectedLayout}>
+            <Listbox value={layout} onChange={setLayout}>
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{selectedLayout}</span>
+                  <span className="relative">{layout}</span>
                   <span className="relative">
                     <SelectorIcon className="w-5 h-5" aria-hidden="true" />
                   </span>
