@@ -58,7 +58,7 @@ export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
                       ? "keyboard__letter--out"
                       : "keyboard__letter--default"
                   }
-                  onClick={() => addLetter(key)}
+                  onClick={() => addLetter(key.toLowerCase())}
                 >
                   {key === "Enter" || key === "Entrée" ? (
                     <ArrowRightIcon className="keyboard__icon" />
