@@ -1,21 +1,52 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import StatsPage from "./pages/StatsPage";
 
+export interface SettingsContextInterface {
+  layout: string;
+  setLayout: React.Dispatch<React.SetStateAction<string>>;
+  size: number;
+  setSize: React.Dispatch<React.SetStateAction<number>>;
+  tries: number;
+  setTries: React.Dispatch<React.SetStateAction<number>>;
+  hardMode: boolean;
+  setHardMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const SettingsContext = createContext<SettingsContextInterface>(
+  undefined!
+);
+
 export default function App() {
+  const [layout, setLayout] = useState<string>("qwerty");
+  const [size, setSize] = useState<number>(5);
+  const [tries, setTries] = useState<number>(6);
+  const [hardMode, setHardMode] = useState<boolean>(false);
+  const value = {
+    layout,
+    setLayout,
+    size,
+    setSize,
+    tries,
+    setTries,
+    hardMode,
+    setHardMode,
+  };
   return (
-    <Router>
-      <div className="app-wrapper">
-        <Routes>
-          <Route path="" element={<HomePage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/stats" element={<StatsPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <SettingsContext.Provider value={value}>
+      <Router>
+        <div className="app-wrapper">
+          <Routes>
+            <Route path="" element={<HomePage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/stats" element={<StatsPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </SettingsContext.Provider>
   );
 }
