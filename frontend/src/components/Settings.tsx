@@ -1,7 +1,8 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext } from "react";
 import { Dialog, Listbox, Switch, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { SelectorIcon } from "@heroicons/react/solid";
+import { SettingsContext } from "../App";
 
 interface Props {
   settingsOpen: boolean;
@@ -13,10 +14,7 @@ const tryNumbers = [4, 5, 6, 7, 8, 9, 10];
 const layouts = ["qwerty", "azerty"];
 
 export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
-  const [size, setSize] = useState(5);
-  const [tries, setTries] = useState(6);
-  const [hardMode, setHardMode] = useState(false);
-  const [layout, setLayout] = useState("qwerty");
+  const settingsContext = useContext(SettingsContext);
 
   return (
     <Transition
@@ -51,10 +49,13 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             Longueur
           </span>
           <div className="text-lg justify-self-end">
-            <Listbox value={size} onChange={setSize}>
+            <Listbox
+              value={settingsContext.size}
+              onChange={settingsContext.setSize}
+            >
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{size}</span>
+                  <span className="relative">{settingsContext.size}</span>
                   <span className="relative">
                     <SelectorIcon className="w-5 h-5" aria-hidden="true" />
                   </span>
@@ -82,10 +83,13 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             Nombre d'essais
           </span>
           <div className="text-lg justify-self-end">
-            <Listbox value={tries} onChange={setTries}>
+            <Listbox
+              value={settingsContext.tries}
+              onChange={settingsContext.setTries}
+            >
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{tries}</span>
+                  <span className="relative">{settingsContext.tries}</span>
                   <span className="relative">
                     <SelectorIcon className="w-5 h-5" aria-hidden="true" />
                   </span>
@@ -113,16 +117,16 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             Mode difficile
           </span>
           <Switch
-            checked={hardMode}
-            onChange={setHardMode}
+            checked={settingsContext.hardMode}
+            onChange={settingsContext.setHardMode}
             className={`${
-              hardMode ? "bg-green-600" : "bg-gray-600"
+              settingsContext.hardMode ? "bg-green-600" : "bg-gray-600"
             } relative inline-flex items-center h-6 rounded-full w-11 justify-self-end`}
           >
             <span className="sr-only">Activer le mode difficile</span>
             <span
               className={`${
-                hardMode ? "translate-x-6" : "translate-x-1"
+                settingsContext.hardMode ? "translate-x-6" : "translate-x-1"
               } inline-block w-4 h-4 transform bg-white rounded-full`}
             />
           </Switch>
@@ -130,10 +134,13 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             Clavier
           </span>
           <div className="text-lg justify-self-end">
-            <Listbox value={layout} onChange={setLayout}>
+            <Listbox
+              value={settingsContext.layout}
+              onChange={settingsContext.setLayout}
+            >
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{layout}</span>
+                  <span className="relative">{settingsContext.layout}</span>
                   <span className="relative">
                     <SelectorIcon className="w-5 h-5" aria-hidden="true" />
                   </span>
