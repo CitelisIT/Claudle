@@ -1,6 +1,6 @@
 from getopt import getopt
 from msvcrt import getwch
-from wordSelect import *
+from api.wordSelect import *
 
 def testjustNewWords():
     assert justNewWords(5, "english", getWords(5, "english")[2:]) == ["about", "other"]
