@@ -1,0 +1,94 @@
+\documentclass[12pt,a4paper,final]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\begin{document}
+
+
+\begin{center}
+\Large \textbf{Compte-rendu de la réunion du 16 mars 2022}
+\end{center}
+
+\textbf{Horaire et lieu : 16h35 -- Salle 1.15}
+\vskip 0,5cm
+
+\begin{center}
+\begin{tabular}{|l|r|}
+    \hline
+    Présent & Absent \\
+    \hline
+    Tom BENE & Personne \\
+    Alexandre LI & \\
+    Camille MOUSSU & \\
+    Guillaume RICARD & \\
+    \hline
+\end{tabular}
+\end{center}
+
+\begin{flushleft}
+    \textbf{Ordre du jour}
+\end{flushleft}
+
+\begin{enumerate}
+    \item Première réunion du groupe
+	\item Élection du chef de projet
+    \item Définition du projet
+	\item Début de la répartition des tâches pour la définition du projet
+
+\end{enumerate}
+
+\begin{flushleft}
+    \textbf{Élection du Chef de projet}
+\end{flushleft}
+Camille est candidate, un vote est effectué et Camille est élue avec 3 votes pour et une abstention
+\begin{flushleft}
+    \textbf{Définition du projet}
+\end{flushleft}
+
+\begin{flushleft}
+    \textit{Wordle}
+\end{flushleft}
+Le groupe décide d'adopter différents moyens pour la mise en place du site:
+\begin{enumerate}
+    \item JavaScript pour le frontend (plus précisément React) et Tailwind pour la mise en page
+    \item La partie API en Flask avec SQLalchemy pour les appels à la base de données
+    \item La base de donnée en SQlite 
+\end{enumerate}
+Le groupe discute aussi des fonctionnalités à faire:
+\begin{enumerate}
+    \item Jeu paramétrable par le joueur (longueur des mots, nombre max d'essais, choix du dictionnaire)
+    \item Sauvegarder dans une base de données les parties jouées (pour chaque joueurs et en général)
+    \item Mode difficile (on utilise forcément les indices)
+    \item Plusieurs dictionnaires (Anglais, Français, Langues régionales)
+\end{enumerate}
+\newpage 
+\begin{flushleft}
+    \textit{Solveur}
+\end{flushleft}
+Le groupe est assez hésitant sur cette partie puisqu'il y n'a pas encore eu de cours sur le C et qu'aucun d'entre nous n'a d'expérience.\\
+Le groupe envisage quand même une petite fonctionnalité annexe si le solveur arrive a être mis en place sans trop de difficulté: une version automatique du solveur.
+
+
+\begin{flushleft}
+    \textbf{Répartition des taches:}
+\end{flushleft}
+\begin{itemize}
+    \item Tom: définition du front end
+    \item Alexandre: pré-définition du solveur
+    \item Camille: API et BD
+    \item Guillaume: pré-définition du solveur
+\end{itemize}
+
+\begin{flushleft}
+    \textbf{Réunion suivante \textit{(Fin de définition)} :} mardi 22/03/2022 à 16h
+\end{flushleft}
+
+\textit{Fin de réunion à 17h10}
+
+\end{document}
