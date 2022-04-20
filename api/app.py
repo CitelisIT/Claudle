@@ -1,18 +1,10 @@
 from validateRefactor import *
 from wordSelect import *
 from flask import Flask
-from flask.helpers import flash
 from flask_sqlalchemy import SQLAlchemy
-from flask import render_template, request, abort, url_for, session, redirect
-from hashlib import sha256
-from datetime import datetime
-from sqlalchemy import or_, desc
-import pickle
+from flask import request, session
 
 
-from sqlalchemy.orm import query
-from sqlalchemy.sql.functions import current_timestamp
-from sqlalchemy.sql.expression import func
 
 
 app = Flask(__name__)
@@ -38,7 +30,7 @@ def validate():
         if language == "francais":
             return "Ce mot n'est pas dans notre dictionnaire"
         if language == "english":
-            return "this word isn't in our dictionnary"
+            return "This word isn't in our dictionnary"
     else:
         result = verification(word, target)
     response_body = {
