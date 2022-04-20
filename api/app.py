@@ -3,7 +3,7 @@ from wordSelect import *
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, session
-
+import json
 
 
 
@@ -49,8 +49,7 @@ def getword():
         result = select(length, language, wordsMet)
         response_body = {"words": result }
         return response_body
-    user = User.query.filter(User.user_id==session.get('user_id')).first()
-    wordsMet = Games.query.join(user, Games.user_Id == User.Id).add_columns(Games.word).filter(User.Id==Games.user_Id).all()
+    wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == session.get('user_id')).distinct().all()]
     result = select(length, language, wordsMet)
     response_body = {"words": result }
     return response_body
