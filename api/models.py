@@ -14,4 +14,5 @@ class Games(db.Model):
     User_Id= db.Column(db.Integer,db.ForeignKey(User.Id))
     Word = db.Column(db.String(10))
     Tries_Num = db.Column(db.Integer)
+    Tries = db.Column(db.String(109))
     
