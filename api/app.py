@@ -36,7 +36,7 @@ def validate():
     response_body = {
         "hint": result
     }
-    return response_body
+    return json.dumps(response_body)
 
 
 @app.route('/api/getword', methods=['GET'])
@@ -52,7 +52,7 @@ def getword():
     wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == session.get('user_id')).distinct().all()]
     result = select(length, language, wordsMet)
     response_body = {"words": result }
-    return response_body
+    return json.dumps(response_body)
 
 @app.route('/api/register', methods=['POST'])
 @app.route('/api/login', methods=['POST'])
