@@ -2,6 +2,11 @@ from models import *
 
 
 #Global Stats
+
+def numberOfUsers():
+    number = User.query.count()
+    return number
+
 def numberOfGames():
     number = Games.query.count()
     return number
@@ -18,6 +23,14 @@ def numberOfWonGamesTriesNumber(TriesNumber):
     number = Games.query.filter(Games.Tries_Num == TriesNumber).count()
     return number
 
+def BestStreak():
+    BestStreak = 0
+    BestStreakUser = ""
+    for i in range(1, numberOfUsers()+1):
+        if bestStreakByUser(i) > BestStreak:
+            BestStreak = bestStreakByUser(i)
+            BestStreakUser = User.query.filter(User.Id == i).first().Username
+    return (BestStreak, BestStreakUser)
 
 
 #User Stats
