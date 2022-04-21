@@ -33,8 +33,8 @@ def numberOfWonGamesTriesNumberByUser(UserId, TriesNumber):
 def currentStreakByUser(UserId):
     streak = 0
     result = Games.query.filter(Games.Tries_Num).filter(Games.User_Id == UserId).order_by(Games.Game_Id.desc()).all()
-    for i in range(result):
-        if result[i] != -1:
+    for el in result:
+        if el.Tries_Num != -1:
             streak += 1
         else:
             break
