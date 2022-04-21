@@ -1,8 +1,13 @@
 from models import *
 
+
 #Global Stats
 def numberOfGames():
     number = Games.query.count()
+    return number
+
+def numberOfWonGames():
+    number = Games.query.filter(Games.Tries_Num != -1).count()
     return number
 
 def percentageOfWonGames():
@@ -21,6 +26,9 @@ def numberOfGamesByUser(UserId):
     number = Games.query.filter(Games.User_Id == UserId).count()
     return number
 
+def numberOfWonGamesByUser(UserId):
+    number = Games.query.filter(Games.User_Id == UserId).filter(Games.Tries_Num != -1).count()
+    return number
 
 def percentageOfWonGamesByUser(UserId):
     number = Games.query.filter(Games.User_Id == UserId).filter(Games.Tries_Num != -1).count()
