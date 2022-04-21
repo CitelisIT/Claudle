@@ -82,6 +82,7 @@ def test_getStats():
     nbGames = numberOfGames()
     percGamesWon = percentageOfWonGames()
     nbGamesWon = numberOfWonGames()
+<<<<<<< HEAD
     bStreak,BestUser = BestStreak()
     winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
 
@@ -89,6 +90,16 @@ def test_getStats():
                     "percGamesWon":percGamesWon,
                     "bestStreak": bStreak,
                     "bestUser":BestUser,
+=======
+    bestStreak = BestStreak()[0]
+    bestStreakUser = BestStreak()[1]
+    
+    winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
+
+    response_body={"nbGamesWon": nbGamesWon,
+                    "bestStreak": bestStreak,
+                    "bestStreakUser": bestStreakUser,
+>>>>>>> dfbbdcfd51f9afc02532bb7f52e3112724a37b05
                     "winsByTries": winsByTries}
     return json.dumps(response_body)
 
