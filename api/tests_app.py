@@ -80,12 +80,13 @@ print(test_profile(1))
 def test_getStats():
     percGamesWon = percentageOfWonGames()
     nbGamesWon = numberOfWonGames()
-    
+    bStreak,BestUser = BestStreak()
     winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
 
     response_body={"nbGamesWon": nbGamesWon,
                     "percGamesWon":percGamesWon,
-                    "bestStreak": "nothing for now",
+                    "bestStreak": bStreak,
+                    "bestUser":BestUser,
                     "winsByTries": winsByTries}
     return json.dumps(response_body)
 
