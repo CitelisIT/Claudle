@@ -78,6 +78,8 @@ print(test_profile(1))
 
 
 def test_getStats():
+    nbUsers = numberOfUsers()
+    nbGames = numberOfGames()
     percGamesWon = percentageOfWonGames()
     nbGamesWon = numberOfWonGames()
     bStreak,BestUser = BestStreak()
@@ -89,6 +91,7 @@ def test_getStats():
                     "bestUser":BestUser,
                     "winsByTries": winsByTries}
     return json.dumps(response_body)
+
 
 
 print(test_getStats())
