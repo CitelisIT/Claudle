@@ -72,7 +72,8 @@ def profile():
     bestStreak = bestStreakByUser(user.Id)
     winsByTries = [numberOfWonGamesTriesNumberByUser(user.Id,i) for i in range (1,10)]
 
-    response_body={"username":username,
+    response_body={"user_id":user.Id,
+                    "username":username,
                     "nbGamesWon": nbGamesWon,
                     "percGamesWon": percGamesWon,
                     "currentStreak": currentStreak,
