@@ -4,9 +4,11 @@ import GameBoard from "../components/GameBoard";
 import Keyboard from "../components/Keyboard";
 import Navbar from "../components/Navbar";
 import { SettingsContext } from "../App";
+import axios from "axios";
 
 export default function HomePage() {
   const settingsContext = useContext(SettingsContext);
+  const [target, setTarget] = useState<string>("");
   const [words, setWords] = useState<string[][]>([]);
   const [hints, setHints] = useState<number[][]>([]);
   const [currentWord, setCurrentWord] = useState<string>("");
@@ -46,6 +48,17 @@ export default function HomePage() {
   }
 
   useEffect(() => {
+    // Get target Word
+    axios
+      .get("/api/getword", {
+        params: {
+          language: settingsContext.lang,
+          length: settingsContext.size,
+        },
+      })
+      .then((res) => {
+        setTarget(res.data.words);
+      });
     // Initialize the letters and hints
     const letterRow = [];
     const hintRow = [];
@@ -61,7 +74,7 @@ export default function HomePage() {
     }
     setWords(_letters);
     setHints(_hints);
-  }, [settingsContext.size, settingsContext.tries]);
+  }, [settingsContext.size, settingsContext.tries, settingsContext.lang]);
 
   return (
     <>
