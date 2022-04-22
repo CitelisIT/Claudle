@@ -60,11 +60,11 @@ def test_profile(userID):
         return json.dumps({"results": "error, not connected"})
     user = User.query.filter(User.Id==userID).first()
     username = user.Username
-    percGamesWon = percentageOfWonGamesByUser(user.Id)
-    nbGamesWon = numberOfWonGamesByUser(user.Id)
-    currentStreak = currentStreakByUser(user.Id)
-    bestStreak = bestStreakByUser(user.Id)
-    winsByTries = [numberOfWonGamesTriesNumberByUser(user.Id,i) for i in range (1,10)]
+    percGamesWon = percentageOfWonGamesByUser(userID)
+    nbGamesWon = numberOfWonGamesByUser(userID)
+    currentStreak = currentStreakByUser(userID)
+    bestStreak = bestStreakByUser(userID)
+    winsByTries = [numberOfWonGamesTriesNumberByUser(userID,i) for i in range (1,10)]
 
     response_body={"username":username,
                     "nbGamesWon": nbGamesWon,
@@ -82,7 +82,6 @@ def test_getStats():
     nbGames = numberOfGames()
     percGamesWon = percentageOfWonGames()
     nbGamesWon = numberOfWonGames()
-<<<<<<< HEAD
     bStreak,BestUser = BestStreak()
     winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
 
@@ -90,16 +89,6 @@ def test_getStats():
                     "percGamesWon":percGamesWon,
                     "bestStreak": bStreak,
                     "bestUser":BestUser,
-=======
-    bestStreak = BestStreak()[0]
-    bestStreakUser = BestStreak()[1]
-    
-    winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
-
-    response_body={"nbGamesWon": nbGamesWon,
-                    "bestStreak": bestStreak,
-                    "bestStreakUser": bestStreakUser,
->>>>>>> dfbbdcfd51f9afc02532bb7f52e3112724a37b05
                     "winsByTries": winsByTries}
     return json.dumps(response_body)
 
