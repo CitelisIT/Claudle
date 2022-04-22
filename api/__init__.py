@@ -84,11 +84,11 @@ def profile():
 @app.route('/api/stats', methods=['GET'])
 def getStats():
     percGamesWon = percentageOfWonGames()
-    nbGamesWon = numberOfWonGames()
+    nbGamesPlayed = numberOfGames()
     bStreak,BestUser = BestStreak()
     winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
 
-    response_body={"nbGamesWon": nbGamesWon,
+    response_body={"nbGamesPlayed": nbGamesPlayed,
                     "percGamesWon":percGamesWon,
                     "bestStreak": bStreak,
                     "bestUser":BestUser,

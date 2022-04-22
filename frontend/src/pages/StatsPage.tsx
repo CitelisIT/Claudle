@@ -2,9 +2,11 @@ import React from "react";
 import Footer from "../components/Footer";
 import Graph from "../components/Graph";
 import Navbar from "../components/Navbar";
-import Stats from "../components/Stats";
+import StatsG from "../components/StatsG";
 
 export default function StatsPage() {
+  const URL = "http://127.0.0.1:5000/api/stats";
+
   return (
     <>
       <Navbar />
@@ -15,7 +17,7 @@ export default function StatsPage() {
         <h2 className="mt-4 text-lg md:mt-16 md:mb-6 md:text-xl lg:text-2xl">
           Statistiques :
         </h2>
-        <Stats />
+        <StatsG />
         <Graph />
       </div>
       <Footer />
