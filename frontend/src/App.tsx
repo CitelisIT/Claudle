@@ -6,6 +6,8 @@ import RegisterPage from "./pages/RegisterPage";
 import StatsPage from "./pages/StatsPage";
 
 export interface SettingsContextInterface {
+  lang: string;
+  setLang: React.Dispatch<React.SetStateAction<string>>;
   layout: string;
   setLayout: React.Dispatch<React.SetStateAction<string>>;
   size: number;
@@ -21,11 +23,14 @@ export const SettingsContext = createContext<SettingsContextInterface>(
 );
 
 export default function App() {
+  const [lang, setLang] = useState("english");
   const [layout, setLayout] = useState<string>("qwerty");
   const [size, setSize] = useState<number>(5);
   const [tries, setTries] = useState<number>(6);
   const [hardMode, setHardMode] = useState<boolean>(false);
   const value = {
+    lang,
+    setLang,
     layout,
     setLayout,
     size,
