@@ -5,8 +5,6 @@ import Navbar from "../components/Navbar";
 import StatsG from "../components/StatsG";
 
 export default function StatsPage() {
-  const URL = "http://127.0.0.1:5000/api/stats";
-
   return (
     <>
       <Navbar />
