@@ -1,4 +1,4 @@
-from validateRefactor import *
+from api.validateRefactor import *
 
 #def parseWord_test():
     #TODO

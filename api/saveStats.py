@@ -1,4 +1,4 @@
-from models import *
+from api.models import *
 
 def saveStats(userID, word, numberTries, stringTries):
     """

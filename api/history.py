@@ -1,4 +1,4 @@
-from models import * 
+from api.models import * 
 
 separator = '-' #Can be changed depending on what we decide to use when saving in the database
 

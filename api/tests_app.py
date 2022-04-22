@@ -1,6 +1,6 @@
-from validateRefactor import *
-from wordSelect import *
-from globalStats import *
+from api.validateRefactor import *
+from api.wordSelect import *
+from api.globalStats import *
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, session
