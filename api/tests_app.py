@@ -1,10 +1,11 @@
 from validateRefactor import *
-from globalStats import *
 from wordSelect import *
+from globalStats import *
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, session
 import json
+
 
 
 
@@ -19,9 +20,9 @@ from models import *
 db.create_all()
 
 
-@app.route('/api/validate', methods=['GET'])
-def validate():
-    args = request.args
+
+def test_validate():
+    args = {'word': 'test','language': 'english','target': 'test'}
     word = args['word']
     language = args['language']
     target = args['target']
@@ -31,7 +32,7 @@ def validate():
         if language == "francais":
             return "Ce mot n'est pas dans notre dictionnaire"
         if language == "english":
-            return "This word isn't in our dictionnary"
+            return "this word isn't in our dictionnary"
     else:
         result = verification(word, target)
     response_body = {
@@ -39,29 +40,25 @@ def validate():
     }
     return json.dumps(response_body)
 
+print(test_validate())
 
-@app.route('/api/getword', methods=['GET'])
-def getword():
-    args = request.args
-    language = args['language']
-    length = args['length']
-    if session.get('user_id') is None:
+def getword(language,length,user_id):
+    if user_id is None:
         wordsMet = []
         result = select(length, language, wordsMet)
         response_body = {"words": result }
         return response_body
-    wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == session.get('user_id')).distinct().all()]
+    wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == user_id).distinct().all()]
     result = select(length, language, wordsMet)
     response_body = {"words": result }
     return json.dumps(response_body)
 
-@app.route('/api/register', methods=['POST'])
-@app.route('/api/login', methods=['POST'])
-@app.route('/api/profile', methods=['GET'])
-def profile():
-    if session.get('user_id') is None:
+print(getword("english",4,1))
+
+def test_profile(userID):
+    if userID is None:
         return json.dumps({"results": "error, not connected"})
-    user = User.query.filter(User.Id==session.get('user_id')).first()
+    user = User.query.filter(User.Id==userID).first()
     username = user.Username
     percGamesWon = percentageOfWonGamesByUser(user.Id)
     nbGamesWon = numberOfWonGamesByUser(user.Id)
@@ -77,11 +74,15 @@ def profile():
                     "winsByTries": winsByTries}
     return json.dumps(response_body)
 
+print(test_profile(1))
 
-@app.route('/api/stats', methods=['GET'])
-def getStats():
+
+def test_getStats():
+    nbUsers = numberOfUsers()
+    nbGames = numberOfGames()
     percGamesWon = percentageOfWonGames()
     nbGamesWon = numberOfWonGames()
+<<<<<<< HEAD
     bStreak,BestUser = BestStreak()
     winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
 
@@ -89,5 +90,19 @@ def getStats():
                     "percGamesWon":percGamesWon,
                     "bestStreak": bStreak,
                     "bestUser":BestUser,
+=======
+    bestStreak = BestStreak()[0]
+    bestStreakUser = BestStreak()[1]
+    
+    winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
+
+    response_body={"nbGamesWon": nbGamesWon,
+                    "bestStreak": bestStreak,
+                    "bestStreakUser": bestStreakUser,
+>>>>>>> dfbbdcfd51f9afc02532bb7f52e3112724a37b05
                     "winsByTries": winsByTries}
     return json.dumps(response_body)
+
+
+
+print(test_getStats())

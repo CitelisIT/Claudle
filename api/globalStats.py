@@ -1,8 +1,18 @@
 from models import *
 
+
 #Global Stats
+
+def numberOfUsers():
+    number = User.query.count()
+    return number
+
 def numberOfGames():
     number = Games.query.count()
+    return number
+
+def numberOfWonGames():
+    number = Games.query.filter(Games.Tries_Num != -1).count()
     return number
 
 def percentageOfWonGames():
@@ -13,6 +23,14 @@ def numberOfWonGamesTriesNumber(TriesNumber):
     number = Games.query.filter(Games.Tries_Num == TriesNumber).count()
     return number
 
+def BestStreak():
+    BestStreak = 0
+    BestStreakUser = ""
+    for i in range(1, numberOfUsers()+1):
+        if bestStreakByUser(i) > BestStreak:
+            BestStreak = bestStreakByUser(i)
+            BestStreakUser = User.query.filter(User.Id == i).first().Username
+    return (BestStreak, BestStreakUser)
 
 
 #User Stats
@@ -21,6 +39,9 @@ def numberOfGamesByUser(UserId):
     number = Games.query.filter(Games.User_Id == UserId).count()
     return number
 
+def numberOfWonGamesByUser(UserId):
+    number = Games.query.filter(Games.User_Id == UserId).filter(Games.Tries_Num != -1).count()
+    return number
 
 def percentageOfWonGamesByUser(UserId):
     number = Games.query.filter(Games.User_Id == UserId).filter(Games.Tries_Num != -1).count()
@@ -32,7 +53,7 @@ def numberOfWonGamesTriesNumberByUser(UserId, TriesNumber):
 
 def currentStreakByUser(UserId):
     streak = 0
-    result = Games.query.filter(Games.Tries_Num).filter(Games.User_Id == UserId).order_by(Games.Game_Id.desc()).all()
+    result = Games.query.filter(Games.User_Id == UserId).order_by(Games.Game_Id.desc()).all()
     for el in result:
         if el.Tries_Num != -1:
             streak += 1
@@ -43,9 +64,9 @@ def currentStreakByUser(UserId):
 def bestStreakByUser(UserId):
     BestStreak = 0
     Streak = 0
-    result = Games.query.filter(Games.Tries_Num).filter(Games.User_Id == UserId).order_by(Games.Game_Id.desc()).all()
-    for i in range(len(result)):
-        if result[i] != -1:
+    result = Games.query.filter(Games.User_Id == UserId).order_by(Games.Game_Id.desc()).all()
+    for el in result:
+        if el.Tries_Num != -1:
             Streak += 1
         else:
             BestStreak = Streak if Streak > BestStreak else BestStreak
