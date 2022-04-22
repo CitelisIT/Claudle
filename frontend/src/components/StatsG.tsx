@@ -5,7 +5,7 @@ const URL = "http://127.0.0.1:5000/api/stats";
 
 export default function StatsG() {
   const [stats, setStats] = useState({
-    nbGamesWon: 0,
+    nbGamesPlayed: 0,
     percGamesWon: 0,
     bestStreak: 0,
     bestUser: "",
