@@ -4,7 +4,6 @@ import axios from "axios";
 interface Props {
   user_id: number;
 }
-const URL = "http://127.0.0.1:5000/api/profile";
 
 export default function Stats(user_id: Props) {
   const [stats, setStats] = useState({
@@ -16,7 +15,7 @@ export default function Stats(user_id: Props) {
   });
 
   useEffect(() => {
-    axios.get(URL).then((response) => {
+    axios.get("/api/profile").then((response) => {
       setStats(response.data);
     });
   }, []);

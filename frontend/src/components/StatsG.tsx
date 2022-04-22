@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const URL = "http://127.0.0.1:5000/api/stats";
-
 export default function StatsG() {
   const [stats, setStats] = useState({
     nbGamesPlayed: 0,
@@ -13,7 +11,7 @@ export default function StatsG() {
   });
 
   useEffect(() => {
-    axios.get(URL).then((response) => {
+    axios.get("/api/stats").then((response) => {
       setStats(response.data);
     });
   }, []);
