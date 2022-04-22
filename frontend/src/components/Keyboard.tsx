@@ -44,9 +44,9 @@ export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
   return (
     <section className="keyboard-wrapper">
       <div className="keyboard">
-        {keyboards.get(layout)?.map((row) => {
+        {keyboards.get(layout)?.map((row, index) => {
           return (
-            <div className="keyboard__row">
+            <div className="keyboard__row" key={`row_${index}`}>
               {row.map((key) => (
                 <button
                   className={
@@ -59,6 +59,7 @@ export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
                       : "keyboard__letter--default"
                   }
                   onClick={() => addLetter(key)}
+                  key={key}
                 >
                   {key === "Enter" ? (
                     <ArrowRightIcon className="keyboard__icon" />
