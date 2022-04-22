@@ -16,3 +16,4 @@ class Games(db.Model):
     Tries_Num = db.Column(db.Integer)
     Tries = db.Column(db.String(109))
     
+db.create_all()
