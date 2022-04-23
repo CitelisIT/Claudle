@@ -16,35 +16,71 @@ export default function HomePage() {
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
 
   function addLetter(key: string) {
-    var newCurrentWord = currentWord;
-    var newCurrentIndex = currentIndex;
-    if (key === "Del") {
-      if (currentWord.length > 0) {
-        newCurrentWord = currentWord.slice(0, -1);
+    if (settingsContext.gameState < 2) {
+      if (settingsContext.gameState === 0) {
+        settingsContext.setGameState(1);
       }
-    } else if (key === "Enter") {
-      // TODO : validate word
-      if (currentWord.length === settingsContext.size) {
-        newCurrentWord = "";
-        setCurrentIndex(currentIndex + 1);
-        newCurrentIndex += 1;
-      } else {
-        return;
+      var _words = words;
+      var currWordArray: string[];
+      if (key === "Del") {
+        if (currentWord.length > 0) {
+          setCurrentWord(currentWord.slice(0, -1));
+          currWordArray = currentWord.slice(0, -1).split("");
+          while (currWordArray.length < settingsContext.size) {
+            currWordArray.push("");
+          }
+          _words[currentIndex] = currWordArray;
+          setWords(_words);
+        }
+      } else if (key === "Enter") {
+        if (currentWord.length === settingsContext.size) {
+          axios
+            .get("/api/validate", {
+              params: {
+                word: currentWord,
+                language: settingsContext.lang,
+                target: target,
+              },
+              validateStatus: (status) => {
+                return status < 500;
+              },
+            })
+            .then((res) => {
+              var _hints = hints;
+              const wordHints = res.data.hint;
+              if (wordHints.every((hint: number) => hint === 2)) {
+                settingsContext.setGameState(2);
+              }
+              _hints[currentIndex] = wordHints;
+              setHints(_hints);
+              const letterArray = currentWord.split("");
+              var _keyboardHints = keyboardHints;
+              for (var i = 0, len = letterArray.length; i < len; i++) {
+                _keyboardHints.set(letterArray[i], wordHints[i]);
+              }
+              setKeyboardHints(_keyboardHints);
+              setCurrentWord("");
+              setCurrentIndex(currentIndex + 1);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          return;
+        }
+      } else if (
+        currentWord.length < settingsContext.size &&
+        "qwertyuiopasdfghjklzxcvbnm".includes(key)
+      ) {
+        setCurrentWord(currentWord + key);
+        currWordArray = (currentWord + key).split("");
+        while (currWordArray.length < settingsContext.size) {
+          currWordArray.push("");
+        }
+        _words[currentIndex] = currWordArray;
+        setWords(_words);
       }
-    } else if (
-      currentWord.length < settingsContext.size &&
-      "qwertyuiopasdfghjklzxcvbnm".includes(key)
-    ) {
-      newCurrentWord = currentWord + key;
     }
-    setCurrentWord(newCurrentWord);
-    var _words = words;
-    var currWordArray = newCurrentWord.split("");
-    while (currWordArray.length < settingsContext.size) {
-      currWordArray.push("");
-    }
-    _words[newCurrentIndex] = currWordArray;
-    setWords(_words);
   }
 
   useEffect(() => {
@@ -70,7 +106,7 @@ export default function HomePage() {
     const _hints = [];
     for (let i = 0; i < settingsContext.tries; i++) {
       _letters.push(letterRow);
-      _hints.push(hintRow.slice());
+      _hints.push(hintRow);
     }
     setWords(_letters);
     setHints(_hints);

@@ -1,3 +1,4 @@
+from os import abort
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -32,9 +33,9 @@ def validate():
     result = [0 in range (len(target))]
     if not validWord(word,words):
         if language == "francais":
-            return "Ce mot n'est pas dans notre dictionnaire"
+            return abort(500, "Ce mot n'est pas dans notre dictionnaire")
         if language == "english":
-            return "This word isn't in our dictionnary"
+            return abort(500, "This word isn't in our dictionnary")
     else:
         result = verification(word, target)
     response_body = {
