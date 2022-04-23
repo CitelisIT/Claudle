@@ -16,6 +16,8 @@ export interface SettingsContextInterface {
   setTries: React.Dispatch<React.SetStateAction<number>>;
   hardMode: boolean;
   setHardMode: React.Dispatch<React.SetStateAction<boolean>>;
+  gameState: number;
+  setGameState: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const SettingsContext = createContext<SettingsContextInterface>(
@@ -28,6 +30,7 @@ export default function App() {
   const [size, setSize] = useState<number>(5);
   const [tries, setTries] = useState<number>(6);
   const [hardMode, setHardMode] = useState<boolean>(false);
+  const [gameState, setGameState] = useState<number>(0);
   const value = {
     lang,
     setLang,
@@ -39,6 +42,8 @@ export default function App() {
     setTries,
     hardMode,
     setHardMode,
+    gameState,
+    setGameState,
   };
   return (
     <SettingsContext.Provider value={value}>

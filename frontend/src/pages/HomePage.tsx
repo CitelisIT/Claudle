@@ -14,12 +14,11 @@ export default function HomePage() {
   const [currentWord, setCurrentWord] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
-  const [gameState, setGameState] = useState<number>(0);
 
   function addLetter(key: string) {
-    if (gameState < 2) {
-      if (gameState === 0) {
-        setGameState(1);
+    if (settingsContext.gameState < 2) {
+      if (settingsContext.gameState === 0) {
+        settingsContext.setGameState(1);
       }
       var _words = words;
       var currWordArray: string[];
@@ -50,7 +49,7 @@ export default function HomePage() {
               var _hints = hints;
               const wordHints = res.data.hint;
               if (wordHints.every((hint: number) => hint === 2)) {
-                setGameState(2);
+                settingsContext.setGameState(2);
               }
               _hints[currentIndex] = wordHints;
               setHints(_hints);
