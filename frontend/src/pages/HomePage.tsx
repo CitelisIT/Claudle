@@ -14,64 +14,73 @@ export default function HomePage() {
   const [currentWord, setCurrentWord] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
+  const [gameState, setGameState] = useState<number>(0);
 
   function addLetter(key: string) {
-    var _words = words;
-    var currWordArray: string[];
-    if (key === "Del") {
-      if (currentWord.length > 0) {
-        setCurrentWord(currentWord.slice(0, -1));
-        currWordArray = currentWord.slice(0, -1).split("");
+    if (gameState < 2) {
+      if (gameState === 0) {
+        setGameState(1);
+      }
+      var _words = words;
+      var currWordArray: string[];
+      if (key === "Del") {
+        if (currentWord.length > 0) {
+          setCurrentWord(currentWord.slice(0, -1));
+          currWordArray = currentWord.slice(0, -1).split("");
+          while (currWordArray.length < settingsContext.size) {
+            currWordArray.push("");
+          }
+          _words[currentIndex] = currWordArray;
+          setWords(_words);
+        }
+      } else if (key === "Enter") {
+        if (currentWord.length === settingsContext.size) {
+          axios
+            .get("/api/validate", {
+              params: {
+                word: currentWord,
+                language: settingsContext.lang,
+                target: target,
+              },
+              validateStatus: (status) => {
+                return status < 500;
+              },
+            })
+            .then((res) => {
+              var _hints = hints;
+              const wordHints = res.data.hint;
+              if (wordHints.every((hint: number) => hint === 2)) {
+                setGameState(2);
+              }
+              _hints[currentIndex] = wordHints;
+              setHints(_hints);
+              const letterArray = currentWord.split("");
+              var _keyboardHints = keyboardHints;
+              for (var i = 0, len = letterArray.length; i < len; i++) {
+                _keyboardHints.set(letterArray[i], wordHints[i]);
+              }
+              setKeyboardHints(_keyboardHints);
+              setCurrentWord("");
+              setCurrentIndex(currentIndex + 1);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          return;
+        }
+      } else if (
+        currentWord.length < settingsContext.size &&
+        "qwertyuiopasdfghjklzxcvbnm".includes(key)
+      ) {
+        setCurrentWord(currentWord + key);
+        currWordArray = (currentWord + key).split("");
         while (currWordArray.length < settingsContext.size) {
           currWordArray.push("");
         }
         _words[currentIndex] = currWordArray;
         setWords(_words);
       }
-    } else if (key === "Enter") {
-      if (currentWord.length === settingsContext.size) {
-        axios
-          .get("/api/validate", {
-            params: {
-              word: currentWord,
-              language: settingsContext.lang,
-              target: target,
-            },
-            validateStatus: (status) => {
-              return status < 500;
-            },
-          })
-          .then((res) => {
-            var _hints = hints;
-            const wordHints = res.data.hint;
-            _hints[currentIndex] = wordHints;
-            setHints(_hints);
-            const letterArray = currentWord.split("");
-            var _keyboardHints = keyboardHints;
-            for (var i = 0, len = letterArray.length; i < len; i++) {
-              _keyboardHints.set(letterArray[i], wordHints[i]);
-            }
-            setKeyboardHints(_keyboardHints);
-            setCurrentWord("");
-            setCurrentIndex(currentIndex + 1);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        return;
-      }
-    } else if (
-      currentWord.length < settingsContext.size &&
-      "qwertyuiopasdfghjklzxcvbnm".includes(key)
-    ) {
-      setCurrentWord(currentWord + key);
-      currWordArray = (currentWord + key).split("");
-      while (currWordArray.length < settingsContext.size) {
-        currWordArray.push("");
-      }
-      _words[currentIndex] = currWordArray;
-      setWords(_words);
     }
   }
 
