@@ -1,4 +1,4 @@
-import csv
+
 
 ##################################################
 ##################################################
@@ -23,11 +23,9 @@ def parseWord():
 def getWords(length, language):
     words = []
 
-    with open(f'./Databases/{language}/dico{length}.csv',"r") as csv_file:
-        csv_reader = csv.DictReader(csv_file)
-
-        for row in csv_reader:
-            words.append(row["word"])
+    with open(f'./Databases/{language}/dico{length}.txt',"r") as file:
+        for line in file:
+            words.append(line.rstrip())
     return words
 
 #Temp
