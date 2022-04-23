@@ -50,6 +50,17 @@ export default function HomePage() {
               const wordHints = res.data.hint;
               if (wordHints.every((hint: number) => hint === 2)) {
                 settingsContext.setGameState(2);
+                //saves if victory
+                axios.post("/api/saveStats", {
+                  target: target,
+                  words: words,
+                  nbTries: currentIndex,
+                });
+                console.log({
+                  target: target,
+                  words: words,
+                  nbTries: currentIndex,
+                });
               }
               _hints[currentIndex] = wordHints;
               setHints(_hints);
@@ -65,6 +76,20 @@ export default function HomePage() {
             .catch((error) => {
               console.log(error);
             });
+        } //saves if defeat
+        else if (currentIndex === settingsContext.tries) {
+          axios.post("/api/saveStats", {
+            param: {
+              target: target,
+              words: words,
+              nbTries: -1,
+            },
+          });
+          console.log({
+            target: target,
+            words: words,
+            nbTries: -1,
+          });
         } else {
           return;
         }

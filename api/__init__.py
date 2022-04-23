@@ -21,6 +21,7 @@ db.create_all()
 from api.validateRefactor import *
 from api.globalStats import *
 from api.wordSelect import *
+from api.saveStats import *
 
 
 @app.route('/api/validate', methods=['GET'])
@@ -59,6 +60,31 @@ def getword():
     response_body = {"words": result }
     return json.dumps(response_body)
 
+@app.route('/api/saveStats', methods=['POST'])
+def saveStat():
+    args = request.json
+    target = args['target']
+    nbTries = args['nbTries']
+    words = args['words']
+    stringTries = ""
+    w=""
+    for word in words:
+        for l in word:
+            w+= l
+        if not w =="":
+            stringTries+= w+"/"
+            w=""
+
+    if session.get('user_id') is None:
+        saveStats(0,target,nbTries,stringTries)
+        return {}
+    else :
+        user = User.query.filter(User.Id==session.get('user_id')).first()
+        saveStats(user.Id,target,nbTries,stringTries)
+        return {}
+
+
+
 @app.route('/api/register', methods=['POST'])
 @app.route('/api/login', methods=['POST'])
 @app.route('/api/profile', methods=['GET'])
@@ -88,7 +114,7 @@ def getStats():
     percGamesWon = percentageOfWonGames()
     nbGamesPlayed = numberOfGames()
     bStreak,BestUser = BestStreak()
-    winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (1,10)]
+    winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (10)]
 
     response_body={"nbGamesPlayed": nbGamesPlayed,
                     "percGamesWon":percGamesWon,
