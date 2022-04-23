@@ -15,7 +15,7 @@ const layouts = ["qwerty", "azerty"];
 
 export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
   const settingsContext = useContext(SettingsContext);
-
+  const disabled = settingsContext.gameState === 0 ? false : true;
   return (
     <Transition
       as={Fragment}
@@ -52,6 +52,7 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             <Listbox
               value={settingsContext.size}
               onChange={settingsContext.setSize}
+              {...{ disabled }}
             >
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
@@ -86,6 +87,7 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             <Listbox
               value={settingsContext.tries}
               onChange={settingsContext.setTries}
+              {...{ disabled }}
             >
               <div className="relative">
                 <Listbox.Button className="flex items-center justify-between w-full gap-2">
@@ -122,6 +124,7 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
             className={`${
               settingsContext.hardMode ? "bg-green-600" : "bg-gray-600"
             } relative inline-flex items-center h-6 rounded-full w-11 justify-self-end`}
+            {...{ disabled }}
           >
             <span className="sr-only">Activer le mode difficile</span>
             <span
