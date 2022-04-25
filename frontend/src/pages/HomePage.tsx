@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import GameBoard from "../components/GameBoard";
 import Keyboard from "../components/Keyboard";
@@ -104,7 +104,7 @@ export default function HomePage() {
     }
   }
 
-  useEffect(() => {
+  const resetGame = useCallback(() => {
     // Get target Word
     axios
       .get("/api/getword", {
@@ -131,16 +131,33 @@ export default function HomePage() {
     }
     setWords(_letters);
     setHints(_hints);
+    setKeyboardHints(new Map<string, number>());
+    setCurrentIndex(0);
+    setCurrentWord("");
   }, [settingsContext.size, settingsContext.tries, settingsContext.lang]);
+
+  useEffect(() => {
+    resetGame();
+  }, [
+    settingsContext.size,
+    settingsContext.tries,
+    settingsContext.lang,
+    resetGame,
+  ]);
 
   return (
     <>
       <Navbar />
-      <VictoryPopup gameWon={gameWon} setGameWon={setGameWon} />
+      <VictoryPopup
+        gameWon={gameWon}
+        setGameWon={setGameWon}
+        resetGame={resetGame}
+      />
       <DefeatPopup
         gameLost={gameLost}
         setGameLost={setGameLost}
         target={target}
+        resetGame={resetGame}
       />
       <GameBoard
         size={settingsContext.size}

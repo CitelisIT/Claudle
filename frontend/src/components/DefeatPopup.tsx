@@ -7,9 +7,15 @@ interface Props {
   gameLost: boolean;
   setGameLost: React.Dispatch<React.SetStateAction<boolean>>;
   target: string;
+  resetGame: () => void;
 }
 
-export default function DefeatPopup({ gameLost, setGameLost, target }: Props) {
+export default function DefeatPopup({
+  gameLost,
+  setGameLost,
+  target,
+  resetGame,
+}: Props) {
   const settingsContext = useContext(SettingsContext);
   return (
     <Dialog
@@ -39,6 +45,7 @@ export default function DefeatPopup({ gameLost, setGameLost, target }: Props) {
               onClick={() => {
                 setGameLost(false);
                 settingsContext.setGameState(0);
+                resetGame();
               }}
               className="p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl"
             >
