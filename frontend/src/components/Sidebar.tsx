@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
@@ -6,19 +6,23 @@ import { SettingsContext } from "../App";
 export default function Sidebar() {
   const settingsContext = useContext(SettingsContext);
   const disabled = settingsContext.gameState === 0 ? false : true;
+  const [isShowing, setIsShowing] = useState(true)
+
   return (
-    <Popover className="">
+    <Popover className="" onClick={() => {
+      setIsShowing((isShowing => !isShowing))
+    }}>
       <Popover.Button className="flex items-center justify-center">
         <MenuIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
       </Popover.Button>
       <Transition
-        as={Fragment}
-        enter="transform transition ease-in-out duration-300"
-        enterFrom="-translate-x-full"
-        enterTo="translate-x-0"
-        leave="transform transition ease-in-out duration-300"
-        leaveFrom="translate-x-0"
-        leaveTo="-translate-x-full"
+        show={isShowing}
+        enter="transition-opacity duration-75"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-150"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
       >
         <Popover.Panel className="absolute bottom-0 left-0 flex flex-col items-start justify-start h-[calc(100%-4rem-1px)] gap-12 py-8 bg-gray-900 border-r border-gray-600">
           <div className="flex items-center justify-center gap-8 mx-8">
@@ -26,7 +30,7 @@ export default function Sidebar() {
               Mode de Jeu
             </h1>
             <Popover.Button>
-              <XIcon className="w-8 h-8 text-gray-200" />
+              <XIcon className="w-8 h-8 text-gray-200" onClick={() => setIsShowing((isShowing) => !isShowing)}/>
             </Popover.Button>
           </div>
           <ul className="w-full grow">
@@ -34,6 +38,7 @@ export default function Sidebar() {
               <button
                 onClick={() => {
                   settingsContext.setLang("english");
+                  setIsShowing((isShowing => !isShowing))
                 }}
                 {...{ disabled }}
               > 
