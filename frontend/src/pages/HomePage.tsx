@@ -138,12 +138,7 @@ export default function HomePage() {
 
   useEffect(() => {
     resetGame();
-  }, [
-    settingsContext.size,
-    settingsContext.tries,
-    settingsContext.lang,
-    resetGame,
-  ]);
+  }, [resetGame]);
 
   return (
     <>
