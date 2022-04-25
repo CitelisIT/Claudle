@@ -6,10 +6,14 @@ import { SettingsContext } from "../App";
 export default function Sidebar() {
   const settingsContext = useContext(SettingsContext);
   const disabled = settingsContext.gameState === 0 ? false : true;
+  const flag =
+    settingsContext.lang === "english"
+      ? "./Flag_of_the_United_Kingdom.svg"
+      : "./Flag_of_France.svg";
   return (
     <Popover className="">
       <Popover.Button className="flex items-center justify-center">
-        <MenuIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
+        <img src={flag} alt="Flag" className="h-6 text-gray-200 md:w-8 " />;
       </Popover.Button>
       <Transition
         as={Fragment}
@@ -36,7 +40,7 @@ export default function Sidebar() {
                   settingsContext.setLang("english");
                 }}
                 {...{ disabled }}
-              > 
+              >
                 <span className="mx-8 my-2">English</span>
               </button>
             </li>
