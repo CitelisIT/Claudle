@@ -1,8 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { SettingsContext } from "../App";
 
 export default function Sidebar() {
+  const settingsContext = useContext(SettingsContext);
+  const disabled = settingsContext.gameState === 0 ? false : true;
   return (
     <Popover className="">
       <Popover.Button className="flex items-center justify-center">
@@ -28,10 +31,24 @@ export default function Sidebar() {
           </div>
           <ul className="w-full grow">
             <li className="py-2 text-xl text-gray-200 hover:bg-gray-700">
-              <span className="mx-8 my-2">Game Mode 1</span>
+              <button
+                onClick={() => {
+                  settingsContext.setLang("english");
+                }}
+                {...{ disabled }}
+              >
+                <span className="mx-8 my-2">English</span>
+              </button>
             </li>
             <li className="py-2 text-xl text-gray-200 hover:bg-gray-700">
-              <span className="mx-8 my-2">Game Mode 2</span>
+              <button
+                onClick={() => {
+                  settingsContext.setLang("francais");
+                }}
+                {...{ disabled }}
+              >
+                <span className="mx-8 my-2">Français</span>
+              </button>
             </li>
           </ul>
         </Popover.Panel>

@@ -28,8 +28,19 @@ export default function InfoPopup() {
           </div>
           <div className="w-full border-t-2 border-gray-600"></div>
           <p className="text-base text-gray-200 md:text-lg lg:text-xl">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi
-            optio in tempore aliquam earum quibusdam omnis ipsum!
+            Devinez le mot en un nombre limité d'essais!
+          </p>
+          <p className="text-base text-gray-200 md:text-lg lg:text-xl">
+            Chaque essai doit être avec un mot valide.
+            <br />
+            Après chaque essais, les lettres seront colorées selon leur présence
+            dans le mot.
+            <br />
+            <span className="text-green-600">Vert</span> correspond à une lettre
+            au bon endroit, <span className="text-amber-400">Jaune</span> à une
+            lettre présente dans le mot mais pas au bon endroit et{" "}
+            <span className="text-gray-500">Gris</span> à une lettre inexistante
+            dans le mot.
           </p>
         </Popover.Panel>
       </Transition>

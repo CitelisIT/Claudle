@@ -25,7 +25,6 @@ export default function DefeatPopup({ gameLost, setGameLost, target }: Props) {
             <button
               onClick={() => {
                 setGameLost(false);
-                console.log("perdu");
               }}
             >
               <XIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
