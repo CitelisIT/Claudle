@@ -1,5 +1,5 @@
 import React from "react";
-import GameRow from "./GameBoardRow";
+import GameBoardRow from "./GameBoardRow";
 
 interface Props {
   size: number;
@@ -13,7 +13,7 @@ export default function GameBoard({ size, tries, words, hints }: Props) {
     <section className="game-wrapper">
       <div className="game-board">
         {words.map((row, index) => (
-          <GameRow
+          <GameBoardRow
             size={row.length}
             letters={row}
             hints={hints[index]}

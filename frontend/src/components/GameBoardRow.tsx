@@ -7,7 +7,7 @@ interface Props {
   hints: number[];
 }
 
-export default function GameRow({ size, letters, hints }: Props) {
+export default function GameBoardRow({ size, letters, hints }: Props) {
   return (
     <div className="game-board__row">
       {letters.map((letter, index) => (
