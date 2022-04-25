@@ -28,12 +28,12 @@ export default function InfoPopup() {
           </div>
           <div className="w-full border-t-2 border-gray-600"></div>
           <p className="text-base text-gray-200 md:text-lg lg:text-xl">
-            Devinez le mot en un nombre limité d'essais!
+            Devinez le mot en un nombre limité d'essais !
           </p>
           <p className="text-base text-gray-200 md:text-lg lg:text-xl">
             Chaque essai doit être avec un mot valide.
             <br />
-            Après chaque essais, les lettres seront colorées selon leur présence
+            Après chaque essai, les lettres seront colorées selon leur présence
             dans le mot.
             <br />
             <span className="text-green-600">Vert</span> correspond à une lettre
