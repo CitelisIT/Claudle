@@ -66,4 +66,28 @@
   .keyboard__icon {
     @apply w-4 h-4 md:w-8 md:h-8;
   }
+
+  .footer {
+    @apply absolute bottom-0 w-full p-2 text-sm text-center text-gray-400 md:text-lg;
+  }
+
+  .navbar {
+    @apply flex items-center justify-between h-12 p-2 border-b md:h-16 md:p-4 bg-gray-900 border-gray-600;
+  }
+
+  .navbar__container--left {
+    @apply flex items-center justify-start w-20 gap-2 md:w-32 md:gap-4;
+  }
+
+  .navbar__container--right {
+    @apply flex items-center justify-center gap-2 md:gap-4;
+  }
+
+  .navbar__title {
+    @apply text-2xl font-bold text-gray-200;
+  }
+
+  .navbar__icon {
+    @apply w-6 h-6 text-gray-200 md:w-8 md:h-8;
+  }
 }

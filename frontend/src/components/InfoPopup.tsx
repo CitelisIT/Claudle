@@ -6,7 +6,7 @@ export default function InfoPopup() {
   return (
     <Popover>
       <Popover.Button className="flex items-center justify-center">
-        <QuestionMarkCircleIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
+        <QuestionMarkCircleIcon className="navbar__icon" />
       </Popover.Button>
       <Transition
         as={Fragment}
