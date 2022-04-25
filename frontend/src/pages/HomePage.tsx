@@ -61,6 +61,15 @@ export default function HomePage() {
                   words: words,
                   nbTries: currentIndex,
                 });
+              } else if (currentIndex === settingsContext.tries) {
+                settingsContext.setGameState(2);
+                axios.post("/api/saveStats", {
+                  param: {
+                    target: target,
+                    words: words,
+                    nbTries: -1,
+                  },
+                });
               }
               _hints[currentIndex] = wordHints;
               setHints(_hints);
@@ -76,20 +85,6 @@ export default function HomePage() {
             .catch((error) => {
               console.log(error);
             });
-        } //saves if defeat
-        else if (currentIndex === settingsContext.tries) {
-          axios.post("/api/saveStats", {
-            param: {
-              target: target,
-              words: words,
-              nbTries: -1,
-            },
-          });
-          console.log({
-            target: target,
-            words: words,
-            nbTries: -1,
-          });
         } else {
           return;
         }
