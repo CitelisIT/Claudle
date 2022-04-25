@@ -139,7 +139,7 @@ export default function HomePage() {
       <VictoryPopup gameWon={gameWon} setGameWon={setGameWon} />
       <DefeatPopup
         gameLost={gameLost}
-        setGameLost={setGameWon}
+        setGameLost={setGameLost}
         target={target}
       />
       <GameBoard
