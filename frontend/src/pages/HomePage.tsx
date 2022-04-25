@@ -95,7 +95,8 @@ export default function HomePage() {
         }
       } else if (
         currentWord.length < settingsContext.size &&
-        "qwertyuiopasdfghjklzxcvbnm".includes(key)
+        "qwertyuiopasdfghjklzxcvbnm".includes(key) &&
+        currentIndex < settingsContext.tries
       ) {
         setCurrentWord(currentWord + key);
         currWordArray = (currentWord + key).split("");
