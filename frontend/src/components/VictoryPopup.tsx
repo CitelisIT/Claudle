@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
@@ -6,9 +6,14 @@ import { SettingsContext } from "../App";
 interface Props {
   gameWon: boolean;
   setGameWon: React.Dispatch<React.SetStateAction<boolean>>;
+  resetBoard: () => void;
 }
 
-export default function VictoryPopup({ gameWon, setGameWon }: Props) {
+export default function VictoryPopup({
+  gameWon,
+  setGameWon,
+  resetBoard,
+}: Props) {
   const settingsContext = useContext(SettingsContext);
   return (
     <Dialog
@@ -37,6 +42,7 @@ export default function VictoryPopup({ gameWon, setGameWon }: Props) {
               onClick={() => {
                 setGameWon(false);
                 settingsContext.setGameState(0);
+                resetBoard();
               }}
               className="p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl"
             >

@@ -145,11 +145,16 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <VictoryPopup gameWon={gameWon} setGameWon={setGameWon} />
+      <VictoryPopup
+        gameWon={gameWon}
+        setGameWon={setGameWon}
+        resetBoard={resetBoard}
+      />
       <DefeatPopup
         gameLost={gameLost}
         setGameLost={setGameLost}
         target={target}
+        resetBoard={resetBoard}
       />
       <GameBoard
         size={settingsContext.size}
