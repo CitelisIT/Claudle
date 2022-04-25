@@ -7,6 +7,7 @@ import { SettingsContext } from "../App";
 import axios from "axios";
 import VictoryPopup from "../components/VictoryPopup";
 import DefeatPopup from "../components/DefeatPopup";
+import InvalidWordPopup from "../components/InvalidWordPopup";
 
 export default function HomePage() {
   const settingsContext = useContext(SettingsContext);
@@ -18,6 +19,7 @@ export default function HomePage() {
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
   const [gameWon, setGameWon] = useState<boolean>(false);
   const [gameLost, setGameLost] = useState<boolean>(false);
+  const [badWord, setBadWord] = useState<boolean>(false);
 
   function addLetter(key: string) {
     if (settingsContext.gameState < 2) {
@@ -36,6 +38,11 @@ export default function HomePage() {
           _words[currentIndex] = currWordArray;
           setWords(_words);
         }
+
+        if (badWord === true) {
+          setBadWord(false);
+
+        }
       } else if (key === "Enter") {
         if (currentWord.length === settingsContext.size) {
           axios
@@ -46,6 +53,7 @@ export default function HomePage() {
                 target: target,
               },
               validateStatus: (status) => {
+                setBadWord(true);
                 return status < 500;
               },
             })
@@ -161,6 +169,10 @@ export default function HomePage() {
         tries={settingsContext.tries}
         words={words}
         hints={hints}
+      />
+      <InvalidWordPopup 
+        badWord = {badWord} 
+        setBadWord = {setBadWord}
       />
       <Keyboard
         layout={settingsContext.layout}
