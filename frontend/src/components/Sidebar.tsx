@@ -36,11 +36,11 @@ export default function Sidebar() {
                   settingsContext.setLang("english");
                 }}
                 {...{ disabled }}
-              >
+              > 
                 <span className="mx-8 my-2">English</span>
               </button>
             </li>
-            <li className="py-2 text-xl text-gray-200 hover:bg-gray-700">
+            <li className="py-2 text-xl text-gray-200 selected: bg-grey-700 hover:bg-gray-700">
               <button
                 onClick={() => {
                   settingsContext.setLang("francais");
