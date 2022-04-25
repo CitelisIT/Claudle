@@ -22,17 +22,18 @@ export default function VictoryPopup({
       className="fixed inset-0 w-10/12 p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl mg:p-8 lg:w-5/12 mx-1/2 h-fit"
     >
       <Dialog.Overlay />
+      <button
+        onClick={() => {
+          setGameWon(false);
+        }}
+        className="absolute top-0 right-0 p-4 "
+      >
+        <XIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
+      </button>
       <div className="flex flex-col justify-center w-full gap-4 p-6 md:gap-12 md:p-16 flex-center">
         <Dialog.Title className="mx-24 text-lg font-semibold text-center text-gray-200 md:text-3xl ">
-          <div className="flex items-center justify-end w-full">
+          <div className="flex items-center justify-center w-full">
             <span> Vous avez gagné =) </span>
-            <button
-              onClick={() => {
-                setGameWon(false);
-              }}
-            >
-              <XIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
-            </button>
           </div>
         </Dialog.Title>
 
