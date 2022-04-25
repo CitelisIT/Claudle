@@ -66,4 +66,8 @@
   .keyboard__icon {
     @apply w-4 h-4 md:w-8 md:h-8;
   }
+
+  .footer {
+    @apply absolute bottom-0 w-full p-2 text-sm text-center text-gray-400 md:text-lg;
+  }
 }
