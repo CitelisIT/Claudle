@@ -16,6 +16,7 @@ export default function HomePage() {
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
 
   function addLetter(key: string) {
+    console.log(key.toLowerCase());
     if (settingsContext.gameState < 2) {
       if (settingsContext.gameState === 0) {
         settingsContext.setGameState(1);
@@ -83,7 +84,7 @@ export default function HomePage() {
         }
       } else if (
         currentWord.length < settingsContext.size &&
-        "qwertyuiopasdfghjklzxcvbnm".includes(key) &&
+        "qwertyuiopasdfghjklzxcvbnm".includes(key.toLowerCase()) &&
         currentIndex < settingsContext.tries
       ) {
         setCurrentWord(currentWord + key);

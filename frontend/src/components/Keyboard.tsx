@@ -31,7 +31,7 @@ export default function Keyboard({ layout, addLetter, keyboardHints }: Props) {
     }
     if (keyName === "Enter") {
       addLetter("Enter");
-    } else if ("qwertyuiopasdfghjklzxcvbnm".includes(keyName)) {
+    } else if ("qwertyuiopasdfghjklzxcvbnm".includes(keyName.toLowerCase())) {
       addLetter(keyName);
     }
   }
