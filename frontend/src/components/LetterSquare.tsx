@@ -8,6 +8,10 @@ interface Props {
 export default function LetterSquare({ letter, hint }: Props) {
   var className = "";
   switch (hint) {
+    case 0: {
+      className = "letter-square--out";
+      break;
+    }
     case 1: {
       className = "letter-square--misplaced";
       break;

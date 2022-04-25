@@ -121,7 +121,7 @@ export default function HomePage() {
     const hintRow = [];
     for (let i = 0; i < settingsContext.size; i++) {
       letterRow.push("");
-      hintRow.push(0);
+      hintRow.push(-1);
     }
     const _letters = [];
     const _hints = [];

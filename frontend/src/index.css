@@ -8,15 +8,19 @@
   }
 
   .letter-square--default {
-    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-gray-900;
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-gray-600 bg-gray-900;
   }
 
   .letter-square--misplaced {
-    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-amber-400;
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-gray-600 bg-amber-400;
   }
 
   .letter-square--correct {
-    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-slate-600 bg-green-600;
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-gray-600 bg-green-600;
+  }
+
+  .letter-square--out {
+    @apply flex items-center justify-center w-12 h-12 p-2 border lg:w-16 lg:h-16 border-gray-600 bg-gray-700;
   }
 
   .letter-square__letter {
