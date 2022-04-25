@@ -14,23 +14,23 @@ export default function Navbar() {
     <>
       <Settings settingsOpen={settingsOpen} setSettingsOpen={setSettingsOpen} />
       <LoginPopup loginOpen={loginOpen} setLoginOpen={setLoginOpen} />
-      <nav className="flex items-center justify-between h-12 p-2 border-b md:h-16 md:p-4 bg-grey-900 border-grey-600">
-        <div className="flex items-center justify-start w-20 gap-2 md:w-32 md:gap-4">
+      <nav className="navbar">
+        <div className="navbar__container--left">
           <Sidebar />
           <InfoPopup />
         </div>
-        <Link to="/" className="text-2xl font-bold text-gray-200">
+        <Link to="/" className="navbar__title">
           WORDLE
         </Link>
-        <div className="flex items-center justify-center gap-2 md:gap-4">
+        <div className="navbar__container--right">
           <Link to="/stats">
-            <ChartBarIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
+            <ChartBarIcon className="navbar__icon" />
           </Link>
           <button onClick={() => setLoginOpen(true)}>
-            <UserIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
+            <UserIcon className="navbar__icon" />
           </button>
           <button onClick={() => setSettingsOpen(true)}>
-            <CogIcon className="w-6 h-6 text-gray-200 md:w-8 md:h-8" />
+            <CogIcon className="navbar__icon" />
           </button>
         </div>
       </nav>
