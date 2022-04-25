@@ -90,4 +90,68 @@
   .navbar__icon {
     @apply w-6 h-6 text-gray-200 md:w-8 md:h-8;
   }
+
+  .settings {
+    @apply fixed p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl right-4 top-20 h-fit;
+  }
+
+  .settings__title {
+    @apply flex justify-between items-center;
+  }
+
+  .settings__title__text {
+    @apply text-base font-semibold md:text-lg lg:text-xl;
+  }
+
+  .settings__title__button {
+    @apply w-5 h-5 lg:h-6 lg:w-6;
+  }
+
+  .settings__separator {
+    @apply h-2 my-4 border-t-2 border-gray-700;
+  }
+
+  .settings__container {
+    @apply grid grid-cols-2 gap-x-2 gap-y-4;
+  }
+
+  .settings__label {
+    @apply text-base md:text-lg lg:text-xl justify-self-start;
+  }
+
+  .listbox__wrapper {
+    @apply relative text-lg justify-self-end;
+  }
+
+  .listbox__button {
+    @apply flex items-center justify-between w-full gap-2;
+  }
+
+  .listbox__options {
+    @apply absolute z-10 text-right bg-gray-900 border border-gray-600 rounded;
+  }
+
+  .listbox__option--default {
+    @apply text-gray-200 relative px-2 py-1;
+  }
+
+  .listbox__option--active {
+    @apply text-gray-200 relative px-2 py-1 bg-gray-600;
+  }
+
+  .switch--default {
+    @apply relative inline-flex items-center h-6 rounded-full w-11 justify-self-end bg-gray-600;
+  }
+
+  .switch--active {
+    @apply relative inline-flex items-center h-6 rounded-full w-11 justify-self-end bg-green-600;
+  }
+
+  .switch__inner--default {
+    @apply inline-block w-4 h-4 transform bg-white rounded-full translate-x-1;
+  }
+
+  .switch__inner--active {
+    @apply inline-block w-4 h-4 transform bg-white rounded-full translate-x-6;
+  }
 }
