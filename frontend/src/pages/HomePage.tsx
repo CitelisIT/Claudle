@@ -20,7 +20,6 @@ export default function HomePage() {
   const [gameLost, setGameLost] = useState<boolean>(false);
 
   function addLetter(key: string) {
-    console.log(key.toLowerCase());
     if (settingsContext.gameState < 2) {
       if (settingsContext.gameState === 0) {
         settingsContext.setGameState(1);
@@ -101,6 +100,9 @@ export default function HomePage() {
         _words[currentIndex] = currWordArray;
         setWords(_words);
       }
+    } else if (key === "Enter") {
+      resetGame();
+      settingsContext.setGameState(0);
     }
   }
 
@@ -138,12 +140,7 @@ export default function HomePage() {
 
   useEffect(() => {
     resetGame();
-  }, [
-    settingsContext.size,
-    settingsContext.tries,
-    settingsContext.lang,
-    resetGame,
-  ]);
+  }, [resetGame]);
 
   return (
     <>
