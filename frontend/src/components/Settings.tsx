@@ -31,142 +31,129 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
       <Dialog
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}
-        className="fixed p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl right-4 top-20 h-fit"
+        className="settings"
       >
         <Dialog.Overlay />
-
-        <div className="flex justify-between flex-center">
-          <Dialog.Title className="text-base font-semibold md:text-lg lg:text-xl">
+        <div className="settings__title">
+          <Dialog.Title className="settings__title__text">
             Réglages
           </Dialog.Title>
           <button onClick={() => setSettingsOpen(false)}>
-            <XIcon className="w-5 h-5 lg:h-6 lg:w-6" />
+            <XIcon className="settings__title__button" />
           </button>
         </div>
-        <hr className="h-2 my-4 border-t-2 border-gray-700" />
-        <div className="grid grid-cols-2 gap-x-2 gap-y-4">
-          <span className="text-base md:text-lg lg:text-xl justify-self-left">
-            Longueur
-          </span>
-          <div className="text-lg justify-self-end">
-            <Listbox
-              value={settingsContext.size}
-              onChange={settingsContext.setSize}
-              {...{ disabled }}
-            >
-              <div className="relative">
-                <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{settingsContext.size}</span>
-                  <span className="relative">
-                    <SelectorIcon className="w-5 h-5" aria-hidden="true" />
-                  </span>
-                </Listbox.Button>
-                <Listbox.Options className="absolute z-10 text-right bg-gray-900 border border-gray-600 rounded">
-                  {lengths.map((len) => (
-                    <Listbox.Option
-                      key={len}
-                      value={len}
-                      disabled={false}
-                      className={({ active }) =>
-                        `text-gray-200 relative px-2 py-1 ${
-                          active ? "bg-gray-600" : ""
-                        }`
-                      }
-                    >
-                      {len}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </div>
-            </Listbox>
-          </div>
-          <span className="text-base md:text-lg lg:text-xl justify-self-left">
-            Nombre d'essais
-          </span>
-          <div className="text-lg justify-self-end">
-            <Listbox
-              value={settingsContext.tries}
-              onChange={settingsContext.setTries}
-              {...{ disabled }}
-            >
-              <div className="relative">
-                <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{settingsContext.tries}</span>
-                  <span className="relative">
-                    <SelectorIcon className="w-5 h-5" aria-hidden="true" />
-                  </span>
-                </Listbox.Button>
-                <Listbox.Options className="absolute z-10 text-right bg-gray-900 border border-gray-600 rounded">
-                  {tryNumbers.map((num) => (
-                    <Listbox.Option
-                      key={num}
-                      value={num}
-                      disabled={false}
-                      className={({ active }) =>
-                        `text-gray-200 relative px-2 py-1 ${
-                          active ? "bg-gray-600" : ""
-                        }`
-                      }
-                    >
-                      {num}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </div>
-            </Listbox>
-          </div>
-          <span className="text-base md:text-lg lg:text-xl justify-self-start">
-            Mode difficile
-          </span>
+        <hr className="settings__separator" />
+        <div className="settings__container">
+          <span className="settings__label">Longueur</span>
+          <Listbox
+            value={settingsContext.size}
+            onChange={settingsContext.setSize}
+            {...{ disabled }}
+          >
+            <div className="listbox__wrapper">
+              <Listbox.Button className="listbox__button">
+                <span className="relative">{settingsContext.size}</span>
+                <span className="relative">
+                  <SelectorIcon className="w-5 h-5" aria-hidden="true" />
+                </span>
+              </Listbox.Button>
+              <Listbox.Options className="listbox__options">
+                {lengths.map((len) => (
+                  <Listbox.Option
+                    key={len}
+                    value={len}
+                    disabled={false}
+                    className={({ active }) =>
+                      active
+                        ? "listbox__option--active"
+                        : "listbox__option--default"
+                    }
+                  >
+                    {len}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </div>
+          </Listbox>
+          <span className="settings__label">Nombre d'essais</span>
+          <Listbox
+            value={settingsContext.tries}
+            onChange={settingsContext.setTries}
+            {...{ disabled }}
+          >
+            <div className="listbox__wrapper">
+              <Listbox.Button className="listbox__button">
+                <span className="relative">{settingsContext.tries}</span>
+                <span className="relative">
+                  <SelectorIcon className="w-5 h-5" aria-hidden="true" />
+                </span>
+              </Listbox.Button>
+              <Listbox.Options className="listbox__options">
+                {tryNumbers.map((num) => (
+                  <Listbox.Option
+                    key={num}
+                    value={num}
+                    disabled={false}
+                    className={({ active }) =>
+                      active
+                        ? "listbox__option--active"
+                        : "listbox__option--default"
+                    }
+                  >
+                    {num}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </div>
+          </Listbox>
+          <span className="settings__label">Mode difficile</span>
           <Switch
             checked={settingsContext.hardMode}
             onChange={settingsContext.setHardMode}
-            className={`${
-              settingsContext.hardMode ? "bg-green-600" : "bg-gray-600"
-            } relative inline-flex items-center h-6 rounded-full w-11 justify-self-end`}
+            className={
+              settingsContext.hardMode ? "switch--active" : "switch--default"
+            }
             {...{ disabled }}
           >
             <span className="sr-only">Activer le mode difficile</span>
             <span
-              className={`${
-                settingsContext.hardMode ? "translate-x-6" : "translate-x-1"
-              } inline-block w-4 h-4 transform bg-white rounded-full`}
+              className={
+                settingsContext.hardMode
+                  ? "switch__inner--active"
+                  : "switch__inner--default"
+              }
             />
           </Switch>
-          <span className="text-base md:text-lg lg:text-xl justify-self-start">
-            Clavier
-          </span>
-          <div className="text-lg justify-self-end">
-            <Listbox
-              value={settingsContext.layout}
-              onChange={settingsContext.setLayout}
-            >
-              <div className="relative">
-                <Listbox.Button className="flex items-center justify-between w-full gap-2">
-                  <span className="relative">{settingsContext.layout}</span>
-                  <span className="relative">
-                    <SelectorIcon className="w-5 h-5" aria-hidden="true" />
-                  </span>
-                </Listbox.Button>
-                <Listbox.Options className="absolute z-10 text-right bg-gray-900 border border-gray-600 rounded">
-                  {layouts.map((layout) => (
-                    <Listbox.Option
-                      key={layout}
-                      value={layout}
-                      disabled={false}
-                      className={({ active }) =>
-                        `relative px-2 py-1 text-gray-200 ${
-                          active ? "bg-gray-600" : ""
-                        }`
-                      }
-                    >
-                      {layout}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </div>
-            </Listbox>
-          </div>
+          <span className="settings__label">Clavier</span>
+          <Listbox
+            value={settingsContext.layout}
+            onChange={settingsContext.setLayout}
+          >
+            <div className="listbox__wrapper">
+              <Listbox.Button className="listbox__button">
+                <span className="relative">{settingsContext.layout}</span>
+                <span className="relative">
+                  <SelectorIcon className="w-5 h-5" aria-hidden="true" />
+                </span>
+              </Listbox.Button>
+              <Listbox.Options className="listbox__options">
+                {layouts.map((layout) => (
+                  <Listbox.Option
+                    key={layout}
+                    value={layout}
+                    disabled={false}
+                    className={({ active }) =>
+                      active
+                        ? "listbox__option--active"
+                        : "listbox__option--default"
+                    }
+                  >
+                    {layout}
+                  </Listbox.Option>
+                ))}
+              </Listbox.Options>
+            </div>
+          </Listbox>
         </div>
       </Dialog>
     </Transition>
