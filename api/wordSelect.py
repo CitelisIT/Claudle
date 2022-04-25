@@ -11,11 +11,10 @@ def parseWord():
 def getWords(length, language):
     words = []
 
-    with open(f'./Databases/{language}/dico{length}.csv',"r") as csv_file:
-        csv_reader = csv.DictReader(csv_file)
+    with open(f'./Databases/{language}/dico{length}.txt',"r") as file:
+        for line in file:
+            words.append(line.rstrip())
 
-        for row in csv_reader:
-            words.append(row["word"])
     return words
 
 
