@@ -104,7 +104,18 @@ export default function HomePage() {
     }
   }
 
-  const resetBoard = useCallback(() => {
+  const resetGame = useCallback(() => {
+    // Get target Word
+    axios
+      .get("/api/getword", {
+        params: {
+          language: settingsContext.lang,
+          length: settingsContext.size,
+        },
+      })
+      .then((res) => {
+        setTarget(res.data.words);
+      });
     // Initialize the letters and hints
     const letterRow = [];
     const hintRow = [];
@@ -120,26 +131,18 @@ export default function HomePage() {
     }
     setWords(_letters);
     setHints(_hints);
-  }, [settingsContext.size, settingsContext.tries]);
+    setKeyboardHints(new Map<string, number>());
+    setCurrentIndex(0);
+    setCurrentWord("");
+  }, [settingsContext.size, settingsContext.tries, settingsContext.lang]);
 
   useEffect(() => {
-    // Get target Word
-    axios
-      .get("/api/getword", {
-        params: {
-          language: settingsContext.lang,
-          length: settingsContext.size,
-        },
-      })
-      .then((res) => {
-        setTarget(res.data.words);
-      });
-    resetBoard();
+    resetGame();
   }, [
     settingsContext.size,
     settingsContext.tries,
     settingsContext.lang,
-    resetBoard,
+    resetGame,
   ]);
 
   return (
@@ -148,13 +151,13 @@ export default function HomePage() {
       <VictoryPopup
         gameWon={gameWon}
         setGameWon={setGameWon}
-        resetBoard={resetBoard}
+        resetGame={resetGame}
       />
       <DefeatPopup
         gameLost={gameLost}
         setGameLost={setGameLost}
         target={target}
-        resetBoard={resetBoard}
+        resetGame={resetGame}
       />
       <GameBoard
         size={settingsContext.size}

@@ -6,13 +6,13 @@ import { SettingsContext } from "../App";
 interface Props {
   gameWon: boolean;
   setGameWon: React.Dispatch<React.SetStateAction<boolean>>;
-  resetBoard: () => void;
+  resetGame: () => void;
 }
 
 export default function VictoryPopup({
   gameWon,
   setGameWon,
-  resetBoard,
+  resetGame,
 }: Props) {
   const settingsContext = useContext(SettingsContext);
   return (
@@ -42,7 +42,7 @@ export default function VictoryPopup({
               onClick={() => {
                 setGameWon(false);
                 settingsContext.setGameState(0);
-                resetBoard();
+                resetGame();
               }}
               className="p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl"
             >
