@@ -34,7 +34,6 @@ export default function HomePage() {
         }
       } else if (key === "Enter") {
         if (currentWord.length === settingsContext.size) {
-          console.log(currentIndex, settingsContext.tries);
           axios
             .get("/api/validate", {
               params: {
@@ -60,11 +59,9 @@ export default function HomePage() {
               } else if (currentIndex === settingsContext.tries - 1) {
                 settingsContext.setGameState(2);
                 axios.post("/api/saveStats", {
-                  param: {
-                    target: target,
-                    words: words,
-                    nbTries: -1,
-                  },
+                  target: target,
+                  words: words,
+                  nbTries: -1,
                 });
               }
               _hints[currentIndex] = wordHints;
