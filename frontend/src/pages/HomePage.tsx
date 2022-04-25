@@ -5,6 +5,8 @@ import Keyboard from "../components/Keyboard";
 import Navbar from "../components/Navbar";
 import { SettingsContext } from "../App";
 import axios from "axios";
+import VictoryPopup from "../components/VictoryPopup";
+import DefeatPopup from "../components/DefeatPopup";
 
 export default function HomePage() {
   const settingsContext = useContext(SettingsContext);
@@ -14,6 +16,8 @@ export default function HomePage() {
   const [currentWord, setCurrentWord] = useState<string>("");
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [keyboardHints, setKeyboardHints] = useState(new Map<string, number>());
+  const [gameWon, setGameWon] = useState<boolean>(false);
+  const [gameLost, setGameLost] = useState<boolean>(false);
 
   function addLetter(key: string) {
     console.log(key.toLowerCase());
@@ -57,6 +61,7 @@ export default function HomePage() {
                   words: words,
                   nbTries: currentIndex,
                 });
+                setGameWon(true);
               } else if (currentIndex === settingsContext.tries - 1) {
                 settingsContext.setGameState(2);
                 axios.post("/api/saveStats", {
@@ -64,6 +69,7 @@ export default function HomePage() {
                   words: words,
                   nbTries: -1,
                 });
+                setGameLost(true);
               }
               _hints[currentIndex] = wordHints;
               setHints(_hints);
@@ -130,6 +136,12 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
+      <VictoryPopup gameWon={gameWon} setGameWon={setGameWon} />
+      <DefeatPopup
+        gameLost={gameLost}
+        setGameLost={setGameWon}
+        target={target}
+      />
       <GameBoard
         size={settingsContext.size}
         tries={settingsContext.tries}
