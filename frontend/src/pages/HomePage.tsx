@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import GameBoard from "../components/GameBoard";
 import Keyboard from "../components/Keyboard";
@@ -104,18 +104,7 @@ export default function HomePage() {
     }
   }
 
-  useEffect(() => {
-    // Get target Word
-    axios
-      .get("/api/getword", {
-        params: {
-          language: settingsContext.lang,
-          length: settingsContext.size,
-        },
-      })
-      .then((res) => {
-        setTarget(res.data.words);
-      });
+  const resetBoard = useCallback(() => {
     // Initialize the letters and hints
     const letterRow = [];
     const hintRow = [];
@@ -131,7 +120,27 @@ export default function HomePage() {
     }
     setWords(_letters);
     setHints(_hints);
-  }, [settingsContext.size, settingsContext.tries, settingsContext.lang]);
+  }, [settingsContext.size, settingsContext.tries]);
+
+  useEffect(() => {
+    // Get target Word
+    axios
+      .get("/api/getword", {
+        params: {
+          language: settingsContext.lang,
+          length: settingsContext.size,
+        },
+      })
+      .then((res) => {
+        setTarget(res.data.words);
+      });
+    resetBoard();
+  }, [
+    settingsContext.size,
+    settingsContext.tries,
+    settingsContext.lang,
+    resetBoard,
+  ]);
 
   return (
     <>
