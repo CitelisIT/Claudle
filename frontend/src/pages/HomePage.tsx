@@ -53,7 +53,7 @@ export default function HomePage() {
                 target: target,
               },
               validateStatus: (status) => {
-                setBadWord(true);
+                // If the word is not in the dictionnary
                 return status < 500;
               },
             })
@@ -90,6 +90,7 @@ export default function HomePage() {
               setCurrentIndex(currentIndex + 1);
             })
             .catch((error) => {
+              setBadWord(true);
               console.log(error);
             });
         } else {
