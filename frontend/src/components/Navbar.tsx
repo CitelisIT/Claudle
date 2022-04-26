@@ -19,13 +19,11 @@ export default function Navbar() {
           <Sidebar />
           <InfoPopup />
         </div>
-        
+
         <button onClick={() => window.location.reload()}>
-          <div className="navbar__title">
-          WORDLE
-          </div>
+          <div className="navbar__title">CLAUDLE</div>
         </button>
-        
+
         <div className="navbar__container--right">
           <Link to="/stats">
             <ChartBarIcon className="navbar__icon" />
