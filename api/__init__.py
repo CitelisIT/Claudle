@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask import request, session
 import json
-
+from hashlib import sha256
 
 
 app = Flask(__name__)
@@ -85,6 +85,18 @@ def saveStat():
 
 
 @app.route('/api/register', methods=['POST'])
+def register():
+    args = request.json
+    username = args['username']
+    password = args['password'].encode("utf-8")
+    h = sha256()
+    h.update(password)
+    h_pwd = h.hexdigest()
+    user = User(Username=username, Password_Hash=h_pwd)
+    db.session.add(user)
+    db.session.commit()
+    return {"result": "ok"}
+
 @app.route('/api/login', methods=['POST'])
 @app.route('/api/profile', methods=['GET'])
 def profile():
