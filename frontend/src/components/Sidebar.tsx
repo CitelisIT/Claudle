@@ -1,6 +1,6 @@
-import React, { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
 
 export default function Sidebar() {

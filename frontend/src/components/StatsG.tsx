@@ -1,7 +1,3 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { number } from "yup";
-
 interface Props {
   nbGamesPlayed: number;
   percGamesWon: number;

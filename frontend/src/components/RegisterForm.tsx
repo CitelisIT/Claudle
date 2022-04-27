@@ -1,6 +1,5 @@
 import { UserCircleIcon } from "@heroicons/react/outline";
 import { useForm, SubmitHandler } from "react-hook-form";
-import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

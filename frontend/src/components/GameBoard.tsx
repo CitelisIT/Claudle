@@ -1,4 +1,3 @@
-import React from "react";
 import GameBoardRow from "./GameBoardRow";
 
 interface Props {

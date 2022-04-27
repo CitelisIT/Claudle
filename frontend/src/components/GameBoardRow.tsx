@@ -1,4 +1,3 @@
-import React from "react";
 import LetterSquare from "./LetterSquare";
 
 interface Props {

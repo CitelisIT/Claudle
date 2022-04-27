@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { BackspaceIcon, ArrowRightIcon } from "@heroicons/react/outline";
 
 interface Props {
