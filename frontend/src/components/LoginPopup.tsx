@@ -2,6 +2,13 @@ import React from "react";
 import { Dialog } from "@headlessui/react";
 import { UserCircleIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type Inputs = {
+  username: string;
+  password: string;
+};
 
 interface Props {
   loginOpen: boolean;
@@ -9,10 +16,35 @@ interface Props {
 }
 
 export default function LoginPopup({ loginOpen, setLoginOpen }: Props) {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    axios
+      .post("/api/login", {
+        username: data.username,
+        password: data.password,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          const respData = response.data;
+          sessionStorage.setItem("token", respData.token);
+          reset();
+          setLoginOpen(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <Dialog
       open={loginOpen}
       onClose={() => setLoginOpen(false)}
+      unmount={true}
       className="fixed inset-0 w-10/12 p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl mg:p-8 lg:w-5/12 mx-1/2 h-fit"
     >
       <Dialog.Overlay />
@@ -25,7 +57,7 @@ export default function LoginPopup({ loginOpen, setLoginOpen }: Props) {
         </Dialog.Title>
         <Dialog.Description as="div" className="w-full">
           <form
-            action="/login"
+            onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col items-start justify-center w-full gap-8"
           >
             <fieldset className="w-full">
@@ -37,10 +69,17 @@ export default function LoginPopup({ loginOpen, setLoginOpen }: Props) {
               </label>
               <input
                 type="text"
-                name="username"
+                {...register("username", { required: true })}
                 id="username-input"
                 className="w-full p-2 py-2 my-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
               />
+              {errors.username ? (
+                <p className="form-error">
+                  Veuillez entrer un nom d'utilisateur
+                </p>
+              ) : (
+                <></>
+              )}
             </fieldset>
             <fieldset className="w-full">
               <label
@@ -50,11 +89,16 @@ export default function LoginPopup({ loginOpen, setLoginOpen }: Props) {
                 Mot de passe
               </label>
               <input
-                type="text"
-                name="pwd"
+                type="password"
+                {...register("password", { required: true })}
                 id="pwd-input"
                 className="w-full p-2 py-2 my-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
               />
+              {errors.password ? (
+                <p className="form-error">Veuillez entrer un mot de passe</p>
+              ) : (
+                <></>
+              )}
             </fieldset>
             <div className="flex items-center justify-between w-full">
               <Link
@@ -65,7 +109,7 @@ export default function LoginPopup({ loginOpen, setLoginOpen }: Props) {
                 Créer un compte
               </Link>
               <button
-                type="submit"
+                onClick={handleSubmit(onSubmit)}
                 className="p-2 text-sm text-green-600 border border-green-600 rounded-lg md:text-lg lg:text-xl"
               >
                 Se connecter
