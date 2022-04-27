@@ -13,9 +13,14 @@ type Inputs = {
 interface Props {
   loginOpen: boolean;
   setLoginOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function LoginPopup({ loginOpen, setLoginOpen }: Props) {
+export default function LoginPopup({
+  loginOpen,
+  setLoginOpen,
+  setPopupOpen,
+}: Props) {
   const {
     register,
     handleSubmit,
@@ -43,7 +48,10 @@ export default function LoginPopup({ loginOpen, setLoginOpen }: Props) {
   return (
     <Dialog
       open={loginOpen}
-      onClose={() => setLoginOpen(false)}
+      onClose={() => {
+        setLoginOpen(false);
+        setPopupOpen(false);
+      }}
       unmount={true}
       className="fixed inset-0 w-10/12 p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl mg:p-8 lg:w-5/12 mx-1/2 h-fit"
     >

@@ -11,6 +11,7 @@ import InvalidWordPopup from "../components/InvalidWordPopup";
 
 export default function HomePage() {
   const settingsContext = useContext(SettingsContext);
+  const [popupOpen, setPopupOpen] = useState<boolean>(false);
   const [target, setTarget] = useState<string>("");
   const [words, setWords] = useState<string[][]>([]);
   const [hints, setHints] = useState<number[][]>([]);
@@ -22,96 +23,98 @@ export default function HomePage() {
   const [badWord, setBadWord] = useState<boolean>(false);
 
   function addLetter(key: string) {
-    if (settingsContext.gameState < 2) {
-      if (settingsContext.gameState === 0) {
-        settingsContext.setGameState(1);
-      }
-      var _words = words;
-      var currWordArray: string[];
-      if (key === "Del") {
-        if (currentWord.length > 0) {
-          setCurrentWord(currentWord.slice(0, -1));
-          currWordArray = currentWord.slice(0, -1).split("");
+    if (!popupOpen) {
+      if (settingsContext.gameState < 2) {
+        if (settingsContext.gameState === 0) {
+          settingsContext.setGameState(1);
+        }
+        var _words = words;
+        var currWordArray: string[];
+        if (key === "Del") {
+          if (currentWord.length > 0) {
+            setCurrentWord(currentWord.slice(0, -1));
+            currWordArray = currentWord.slice(0, -1).split("");
+            while (currWordArray.length < settingsContext.size) {
+              currWordArray.push("");
+            }
+            _words[currentIndex] = currWordArray;
+            setWords(_words);
+          }
+
+          if (badWord === true) {
+            setBadWord(false);
+          }
+        } else if (key === "Enter") {
+          if (currentWord.length === settingsContext.size) {
+            axios
+              .get("/api/validate", {
+                params: {
+                  word: currentWord,
+                  language: settingsContext.lang,
+                  target: target,
+                },
+                validateStatus: (status) => {
+                  // If the word is not in the dictionnary
+                  return status < 500;
+                },
+              })
+              .then((res) => {
+                var _hints = hints;
+                const wordHints = res.data.hint;
+                if (wordHints.every((hint: number) => hint === 2)) {
+                  settingsContext.setGameState(2);
+                  //saves if victory
+                  axios.post("/api/saveStats", {
+                    target: target,
+                    words: words,
+                    nbTries: currentIndex,
+                  });
+                  setGameWon(true);
+                } else if (currentIndex === settingsContext.tries - 1) {
+                  settingsContext.setGameState(2);
+                  axios.post("/api/saveStats", {
+                    target: target,
+                    words: words,
+                    nbTries: -1,
+                  });
+                  setGameLost(true);
+                }
+                _hints[currentIndex] = wordHints;
+                setHints(_hints);
+                const letterArray = currentWord.split("");
+                var _keyboardHints = keyboardHints;
+                for (var i = 0, len = letterArray.length; i < len; i++) {
+                  _keyboardHints.set(letterArray[i], wordHints[i]);
+                }
+                setKeyboardHints(_keyboardHints);
+                setCurrentWord("");
+                setCurrentIndex(currentIndex + 1);
+              })
+              .catch((error) => {
+                setBadWord(true);
+                console.log(error);
+              });
+          } else {
+            return;
+          }
+        } else if (
+          currentWord.length < settingsContext.size &&
+          "qwertyuiopasdfghjklzxcvbnm".includes(key.toLowerCase()) &&
+          currentIndex < settingsContext.tries
+        ) {
+          key = key.toLowerCase();
+          setCurrentWord(currentWord + key);
+          currWordArray = (currentWord + key).split("");
           while (currWordArray.length < settingsContext.size) {
             currWordArray.push("");
           }
           _words[currentIndex] = currWordArray;
           setWords(_words);
         }
-
-        if (badWord === true) {
-          setBadWord(false);
-        }
       } else if (key === "Enter") {
-        if (currentWord.length === settingsContext.size) {
-          axios
-            .get("/api/validate", {
-              params: {
-                word: currentWord,
-                language: settingsContext.lang,
-                target: target,
-              },
-              validateStatus: (status) => {
-                // If the word is not in the dictionnary
-                return status < 500;
-              },
-            })
-            .then((res) => {
-              var _hints = hints;
-              const wordHints = res.data.hint;
-              if (wordHints.every((hint: number) => hint === 2)) {
-                settingsContext.setGameState(2);
-                //saves if victory
-                axios.post("/api/saveStats", {
-                  target: target,
-                  words: words,
-                  nbTries: currentIndex,
-                });
-                setGameWon(true);
-              } else if (currentIndex === settingsContext.tries - 1) {
-                settingsContext.setGameState(2);
-                axios.post("/api/saveStats", {
-                  target: target,
-                  words: words,
-                  nbTries: -1,
-                });
-                setGameLost(true);
-              }
-              _hints[currentIndex] = wordHints;
-              setHints(_hints);
-              const letterArray = currentWord.split("");
-              var _keyboardHints = keyboardHints;
-              for (var i = 0, len = letterArray.length; i < len; i++) {
-                _keyboardHints.set(letterArray[i], wordHints[i]);
-              }
-              setKeyboardHints(_keyboardHints);
-              setCurrentWord("");
-              setCurrentIndex(currentIndex + 1);
-            })
-            .catch((error) => {
-              setBadWord(true);
-              console.log(error);
-            });
-        } else {
-          return;
-        }
-      } else if (
-        currentWord.length < settingsContext.size &&
-        "qwertyuiopasdfghjklzxcvbnm".includes(key.toLowerCase()) &&
-        currentIndex < settingsContext.tries
-      ) {
-        key = key.toLowerCase();
-        setCurrentWord(currentWord + key);
-        currWordArray = (currentWord + key).split("");
-        while (currWordArray.length < settingsContext.size) {
-          currWordArray.push("");
-        }
-        _words[currentIndex] = currWordArray;
-        setWords(_words);
+        resetGame();
+        settingsContext.setGameState(0);
       }
-    } else if (key === "Enter") {
-      resetGame();
-      settingsContext.setGameState(0);
     }
   }
 
@@ -153,7 +156,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar setPopupOpen={setPopupOpen} />
       <VictoryPopup
         gameWon={gameWon}
         setGameWon={setGameWon}

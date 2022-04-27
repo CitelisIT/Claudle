@@ -5,7 +5,7 @@ import RegisterForm from "../components/RegisterForm";
 export default function RegisterPage() {
   return (
     <>
-      <Navbar />
+      <Navbar setPopupOpen={() => {}} />
       <RegisterForm />
     </>
   );

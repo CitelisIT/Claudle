@@ -21,7 +21,7 @@ export default function ProfilePage() {
   if (!stats) return null;
   return (
     <>
-      <Navbar />
+      <Navbar setPopupOpen={() => {}} />
       <div className="flex flex-col items-center justify-center gap-6 mx-auto my-16 text-gray-200 md:items-start w-fit">
         <span className="flex items-center justify-center w-full text-xl font-semibold md:text-2xl lg:text-4xl">
           <h1 className="text-center">Bonjour {stats.username}</h1>
@@ -34,13 +34,13 @@ export default function ProfilePage() {
       </div>
       <div className="flex justify-center w-full gap-4 p-6 md:gap-12 md:p-16">
         <button
-                type="submit"
-                className="flex items-center justify-center w-max p-2 text-sm text-red-500 border border-red-500 rounded-lg md:text-lg lg:text-xl"
-              >
-                <LogoutIcon className="w-10 h-10 lg:h-12 lg:w-12" />
-                Se déconnecter
-              </button>
-        </div>
+          type="submit"
+          className="flex items-center justify-center p-2 text-sm text-red-500 border border-red-500 rounded-lg w-max md:text-lg lg:text-xl"
+        >
+          <LogoutIcon className="w-10 h-10 lg:h-12 lg:w-12" />
+          Se déconnecter
+        </button>
+      </div>
       <Footer />
     </>
   );

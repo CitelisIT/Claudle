@@ -7,13 +7,18 @@ import { SettingsContext } from "../App";
 interface Props {
   settingsOpen: boolean;
   setSettingsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setPopupOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const lengths = [4, 5, 6, 7, 8, 9, 10];
 const tryNumbers = [4, 5, 6, 7, 8, 9, 10];
 const layouts = ["qwerty", "azerty"];
 
-export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
+export default function Settings({
+  settingsOpen,
+  setSettingsOpen,
+  setPopupOpen,
+}: Props) {
   const settingsContext = useContext(SettingsContext);
   const disabled = settingsContext.gameState === 0 ? false : true;
   return (
@@ -30,7 +35,10 @@ export default function Settings({ settingsOpen, setSettingsOpen }: Props) {
     >
       <Dialog
         open={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
+        onClose={() => {
+          setSettingsOpen(false);
+          setPopupOpen(false);
+        }}
         className="settings"
       >
         <Dialog.Overlay />
