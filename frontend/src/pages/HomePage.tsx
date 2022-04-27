@@ -64,7 +64,6 @@ export default function HomePage() {
                 if (wordHints.every((hint: number) => hint === 2)) {
                   settingsContext.setGameState(2);
                   //saves if victory
-                  console.log(token);
                   axios.post(
                     "/api/saveStats",
                     {
@@ -77,14 +76,19 @@ export default function HomePage() {
                   setGameWon(true);
                 } else if (currentIndex === settingsContext.tries - 1) {
                   settingsContext.setGameState(2);
-                  axios.post("/api/saveStats", {
-                    target: target,
-                    words: words,
-                    nbTries: -1,
-                    headers: {
-                      Authorization: `Bearer ${token}`,
+                  axios.post(
+                    "/api/saveStats",
+                    {
+                      target: target,
+                      words: words,
+                      nbTries: -1,
                     },
-                  });
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    }
+                  );
                   setGameLost(true);
                 }
                 _hints[currentIndex] = wordHints;
@@ -127,6 +131,7 @@ export default function HomePage() {
   }
 
   const resetGame = useCallback(() => {
+    const token = sessionStorage.getItem("token");
     // Get target Word
     axios
       .get("/api/getword", {
@@ -134,6 +139,7 @@ export default function HomePage() {
           language: settingsContext.lang,
           length: settingsContext.size,
         },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         setTarget(res.data.words);

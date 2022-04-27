@@ -48,19 +48,22 @@ def validate():
 
 
 @app.route('/api/getword', methods=['GET'])
+@jwt_required(optional=True)
 def getword():
+    token_id = get_jwt_identity()
     args = request.args
     language = args['language']
     length = args['length']
-    if session.get('user_id') is None:
+    if token_id is None:
         wordsMet = []
         result = select(length, language, wordsMet)
         response_body = {"words": result }
         return response_body
-    wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == session.get('user_id')).distinct().all()]
+    wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == token_id).distinct().all()]
     result = select(length, language, wordsMet)
     response_body = {"words": result }
     return json.dumps(response_body)
+
 
 @app.route('/api/saveStats', methods=['POST'])
 @jwt_required(optional=True)
@@ -89,7 +92,6 @@ def saveStat():
         return {}
 
 
-
 @app.route('/api/register', methods=['POST'])
 def register():
     args = request.json
@@ -103,6 +105,7 @@ def register():
     db.session.commit()
     token = create_access_token(identity=user.Id)
     return {"result": "ok", "token": token}
+
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -119,6 +122,7 @@ def login():
         return abort(500, "Le mot de passe est incorrect")
     token = create_access_token(identity=user.Id)
     return {"result": "ok", "token": token}
+
 
 @app.route('/api/profile', methods=['GET'])
 def profile():
