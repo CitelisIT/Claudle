@@ -41,7 +41,6 @@ export default function HomePage() {
 
         if (badWord === true) {
           setBadWord(false);
-
         }
       } else if (key === "Enter") {
         if (currentWord.length === settingsContext.size) {
@@ -101,6 +100,7 @@ export default function HomePage() {
         "qwertyuiopasdfghjklzxcvbnm".includes(key.toLowerCase()) &&
         currentIndex < settingsContext.tries
       ) {
+        key = key.toLowerCase();
         setCurrentWord(currentWord + key);
         currWordArray = (currentWord + key).split("");
         while (currWordArray.length < settingsContext.size) {
@@ -171,10 +171,7 @@ export default function HomePage() {
         words={words}
         hints={hints}
       />
-      <InvalidWordPopup 
-        badWord = {badWord} 
-        setBadWord = {setBadWord}
-      />
+      <InvalidWordPopup badWord={badWord} setBadWord={setBadWord} />
       <Keyboard
         layout={settingsContext.layout}
         addLetter={addLetter}

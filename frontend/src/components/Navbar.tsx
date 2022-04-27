@@ -20,9 +20,10 @@ export default function Navbar() {
           <InfoPopup />
         </div>
 
-        <button onClick={() => window.location.reload()}>
-          <div className="navbar__title">CLAUDLE</div>
-        </button>
+        <Link to="/" className="navbar__title">
+          CLAUDLE
+        </Link>
+
 
         <div className="navbar__container--right">
           <Link to="/stats">
