@@ -1,7 +1,7 @@
 from flask import Flask, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from flask import request, session
+from flask import request
 import json
 from hashlib import sha256
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -100,7 +100,7 @@ def register():
     password = args['password'].encode("utf-8")
     h = sha256()
     h.update(password)
-    h_pwd = h.hexdigest()
+    h_pwd = h.hexdigest()   
     user = User(Username=username, Password_Hash=h_pwd)
     db.session.add(user)
     db.session.commit()
