@@ -20,7 +20,7 @@ export default function Navbar() {
           <InfoPopup />
         </div>
 
-        <Link to="/" className="navbar__title">
+        <Link to="/" className="navbar__title" reloadDocument>
           CLAUDLE
         </Link>
 

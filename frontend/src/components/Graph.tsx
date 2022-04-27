@@ -26,6 +26,7 @@ export default function Graph() {
   const normSeven = Math.floor((stats.winsByTries[6] / max) * 100) + "%";
   const normEight = Math.floor((stats.winsByTries[7] / max) * 100) + "%";
   const normNine = Math.floor((stats.winsByTries[8] / max) * 100) + "%";
+  const normTen = Math.floor((stats.winsByTries[9] / max) * 100) + "%";
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="flex flex-col items-start justify-center w-full gap-4 my-8 a -lg lg:text-xl">
@@ -108,6 +109,15 @@ export default function Graph() {
             className={`py-1 min-w-fit text-right bg-green-600 rounded-sm text-end px-2`}
           >
             {stats.winsByTries[8]}
+          </div>
+        </div>
+        <div className="flex flex-row items-center justify-start w-full gap-2">
+          <span>10</span>
+          <div
+            style={{ width: normTen }}
+            className={`py-1 min-w-fit text-right bg-green-600 rounded-sm text-end px-2`}
+          >
+            {stats.winsByTries[9]}
           </div>
         </div>
       </div>
