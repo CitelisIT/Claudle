@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import GameBoard from "../components/GameBoard";
 import Keyboard from "../components/Keyboard";

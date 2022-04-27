@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import Graph from "../components/Graph";
 import Navbar from "../components/Navbar";
 import StatsG from "../components/StatsG";
-import { stat } from "fs";
 
 export default function StatsPage() {
   const [stats, setStats] = useState({
