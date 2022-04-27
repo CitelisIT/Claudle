@@ -39,7 +39,7 @@ export default function DefeatPopup({
           </div>
         </Dialog.Title>
         <Dialog.Description as="div" className="w-full">
-          <div className="flex flex-col items-center justify-center w-full gap-4 p-2 md:gap-12 md:p-8">
+          <div className="flex flex-col items-center justify-center w-full gap-4 p-2 md:gap-12 md:text-xl">
             <span> Le mot cherché etait : {target} </span>
             <button
               onClick={() => {
