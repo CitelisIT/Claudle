@@ -132,6 +132,7 @@ export default function HomePage() {
 
   const resetGame = useCallback(() => {
     const token = sessionStorage.getItem("token");
+    const headers = token ? { Authorization: `Bearer ${token}` } : null;
     // Get target Word
     axios
       .get("/api/getword", {
@@ -139,7 +140,7 @@ export default function HomePage() {
           language: settingsContext.lang,
           length: settingsContext.size,
         },
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { ...headers },
       })
       .then((res) => {
         setTarget(res.data.words);
