@@ -16,7 +16,7 @@ export default function StatsPage() {
           Statistiques :
         </h2>
         <StatsG />
-        <Graph />
+        <Graph winsByTries={[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]} />
       </div>
       <Footer />
     </>
