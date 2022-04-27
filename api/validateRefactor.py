@@ -44,7 +44,7 @@ def verification(word, target):
             hint = 0
         else:
             for targetIndex, targetCharacter in enumerate(target):
-                if character == targetCharacter and index == targetIndex:
+                if character == targetCharacter and index == targetIndex or character == target[index]:
                     hint = 2
 
                     #Change targetCharacter to $ to treat duplicate letter case
