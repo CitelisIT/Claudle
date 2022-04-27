@@ -35,45 +35,39 @@ def getWords(length, language):
 def validWord(word,words):
     return word in words
 
-def verification(word, target):
-    output = []
-    hint = -1
+def validate(input, target):
+    """Given a input, return the hint about each character in the input
+    0 means character not in word target
+    1 in target but not at the right spot
+    2 in target and at the right spot
 
-    for index, character in enumerate(word):
-        if not(character in list(target)):
-            hint = 0
+    Args:
+        input (String): word suggested by user
+        target (String): word that we compare the input to
+    """
+    
+    targetList = list(target)
+    output = [-1] * len(targetList)
+    
+    #Treating the case where the character might be in the right spot
+    for index, character in enumerate(input):
+        if character == targetList[index]:
+            output[index] = 2
+            
+            #Treated cases are not considered anymore -- we remove them
+            targetList[index] = '$'
+            
+    #Treating every other cases
+    for index, character in enumerate(input):
+        if character in targetList and output[index] != 2:
+            output[index] = 1
+            targetList[targetList.index(character)] = '$'
+        
+        elif output[index] == 2:
+            continue
+        
         else:
-            for targetIndex, targetCharacter in enumerate(target):
-                if character == targetCharacter and index == targetIndex:
-                    hint = 2
-
-                    #Change targetCharacter to $ to treat duplicate letter case
-                    targetList = list(target)
-                    targetList[targetIndex] = '$'
-                    target = ''.join(targetList)
-
-                    break
-                
-                elif character == target[index]:
-                    hint = 2
-                    
-                    targetList = list(target)
-                    targetList[index] = '$'
-                    target = ''.join(targetList)
-
-                elif targetCharacter == '$' or character != targetCharacter:
-                    continue
-
-                else:
-                    #The character must be in target
-                    hint = 1
-
-                    targetList = list(target)
-                    targetList[targetList.index(character)] = '$'
-                    target = ''.join(targetList)
-
-                    break
-
-        output.append(hint)
-
+            output[index] = 0
+    
+    
     return output
