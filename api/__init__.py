@@ -5,12 +5,14 @@ from flask import request, session
 import json
 from hashlib import sha256
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from datetime import timedelta
 
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.secret_key = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
 app.config["JWT_SECRET_KEY"] = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -125,10 +127,10 @@ def login():
 
 
 @app.route('/api/profile', methods=['GET'])
+@jwt_required()
 def profile():
-    if session.get('user_id') is None:
-        return json.dumps({"results": "error, not connected"})
-    user = User.query.filter(User.Id==session.get('user_id')).first()
+    token_id = get_jwt_identity()
+    user = User.query.filter(User.Id==token_id).first()
     username = user.Username
     percGamesWon = percentageOfWonGamesByUser(user.Id)
     nbGamesWon = numberOfWonGamesByUser(user.Id)
