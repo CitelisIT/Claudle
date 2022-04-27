@@ -71,7 +71,6 @@ def getword():
 @jwt_required(optional=True)
 def saveStat():
     token_id = get_jwt_identity()
-    print(token_id)
     args = request.json
     target = args['target']
     nbTries = args['nbTries']
