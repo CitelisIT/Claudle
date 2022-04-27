@@ -1,7 +1,23 @@
 import { UserCircleIcon } from "@heroicons/react/outline";
+import { useForm, SubmitHandler } from "react-hook-form";
 import React from "react";
 
+type Inputs = {
+  username: string;
+  password: string;
+  passwordConfirm: string;
+};
+
 export default function RegisterForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const pwd = watch("password", "");
+
   return (
     <div className="flex flex-col items-center justify-center w-full gap-16 p-12 md:p-16">
       <div className="flex flex-col items-center justify-center gap-8">
@@ -11,7 +27,7 @@ export default function RegisterForm() {
         </span>
       </div>
       <form
-        action="/register"
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col items-start justify-center w-10/12 gap-8 text-gray-200 lg:w-5/12"
       >
         <fieldset className="w-full">
@@ -22,11 +38,16 @@ export default function RegisterForm() {
             Nom d'utilisateur
           </label>
           <input
-            type="text"
+            {...register("username", { required: true })}
             name="username"
             id="username-input"
             className="w-full p-2 py-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
           />
+          {errors.username ? (
+            <p>Veuillez entrer un nom d'utilisateur</p>
+          ) : (
+            <></>
+          )}
         </fieldset>
         <fieldset className="w-full">
           <label
@@ -37,10 +58,12 @@ export default function RegisterForm() {
           </label>
           <input
             type="password"
-            name="pwd"
+            {...register("password", { required: true })}
+            name="password"
             id="pwd-input"
             className="w-full p-2 py-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
           />
+          {errors.password ? <p>Veuillez entrer un mot de passe</p> : <></>}
         </fieldset>
         <fieldset className="w-full">
           <label
@@ -51,14 +74,24 @@ export default function RegisterForm() {
           </label>
           <input
             type="password"
-            name="pwd-bis"
+            {...register("passwordConfirm", {
+              required: true,
+              validate: (value) =>
+                value === pwd || "Les mots de passe ne sont pas identiques",
+            })}
+            name="passwordConfirm"
             id="pwd-bis-input"
             className="w-full p-2 py-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
           />
+          {errors.passwordConfirm ? (
+            <p>{errors.passwordConfirm.message}</p>
+          ) : (
+            <></>
+          )}
         </fieldset>
         <div className="flex items-center justify-end w-full">
           <button
-            type="submit"
+            onClick={handleSubmit(onSubmit)}
             className="p-2 text-base text-green-600 border border-green-600 rounded-lg md:text-lg lg:text-xl"
           >
             Créer un compte
