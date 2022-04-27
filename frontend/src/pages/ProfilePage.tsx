@@ -18,9 +18,16 @@ export default function ProfilePage() {
   });
 
   useEffect(() => {
-    axios.get("/api/profile").then((response) => {
-      setStats(response.data);
-    });
+    const token = sessionStorage.getItem("token");
+    axios
+      .get("/api/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setStats(response.data);
+      });
   }, []);
   if (!stats) return null;
   return (

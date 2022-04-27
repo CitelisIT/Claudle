@@ -7,6 +7,8 @@ interface Props {
 
 export default function Stats(user_id: Props) {
   const [stats, setStats] = useState({
+    user_id: 0,
+    username: "",
     nbGamesWon: 0,
     percGamesWon: 0,
     currentStreak: 0,
@@ -15,9 +17,16 @@ export default function Stats(user_id: Props) {
   });
 
   useEffect(() => {
-    axios.get("/api/profile").then((response) => {
-      setStats(response.data);
-    });
+    const token = sessionStorage.getItem("token");
+    axios
+      .get("/api/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setStats(response.data);
+      });
   }, []);
   if (!stats) return null;
   return (
