@@ -102,6 +102,21 @@ def register():
     return {"result": "ok", "token": token}
 
 @app.route('/api/login', methods=['POST'])
+def login():
+    args = request.json
+    username = args['username']
+    password = args['password'].encode("utf-8")
+    h = sha256()
+    h.update(password)
+    h_pwd = h.hexdigest()
+    user = User.query.filter(User.Username==username).first()
+    if user is None:
+        return abort(500, "Ce nom d'utilisateur n'existe pas")
+    if user.Password_Hash != h_pwd:
+        return abort(500, "Le mot de passe est incorrect")
+    token = create_access_token(identity=user.Id)
+    return {"result": "ok", "token": token}
+
 @app.route('/api/profile', methods=['GET'])
 def profile():
     if session.get('user_id') is None:
