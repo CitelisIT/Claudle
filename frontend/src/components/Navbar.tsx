@@ -40,14 +40,20 @@ export default function Navbar({ setPopupOpen }: Props) {
           <Link to="/stats">
             <ChartBarIcon className="navbar__icon" />
           </Link>
-          <button
-            onClick={() => {
-              setPopupOpen(true);
-              setLoginOpen(true);
-            }}
-          >
-            <UserIcon className="navbar__icon" />
-          </button>
+          {sessionStorage.getItem("token") ? (
+            <Link to={"/profile"}>
+              <UserIcon className="navbar__icon" />
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                setPopupOpen(true);
+                setLoginOpen(true);
+              }}
+            >
+              <UserIcon className="navbar__icon" />
+            </button>
+          )}
           <button
             onClick={() => {
               setPopupOpen(true);
