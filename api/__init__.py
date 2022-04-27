@@ -153,7 +153,7 @@ def getStats():
     percGamesWon = percentageOfWonGames()
     nbGamesPlayed = numberOfGames()
     bStreak,BestUser = BestStreak()
-    winsByTries = [numberOfWonGamesTriesNumber(i) for i in range (10)]
+    winsByTries = [numberOfWonGamesTriesNumber(i+1) for i in range (10)]
 
     response_body={"nbGamesPlayed": nbGamesPlayed,
                     "percGamesWon":percGamesWon,
