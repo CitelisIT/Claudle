@@ -44,7 +44,7 @@ export default function RegisterForm() {
             className="w-full p-2 py-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
           />
           {errors.username ? (
-            <p>Veuillez entrer un nom d'utilisateur</p>
+            <p className="form-error">Veuillez entrer un nom d'utilisateur</p>
           ) : (
             <></>
           )}
@@ -63,7 +63,11 @@ export default function RegisterForm() {
             id="pwd-input"
             className="w-full p-2 py-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
           />
-          {errors.password ? <p>Veuillez entrer un mot de passe</p> : <></>}
+          {errors.password ? (
+            <p className="form-error">Veuillez entrer un mot de passe</p>
+          ) : (
+            <></>
+          )}
         </fieldset>
         <fieldset className="w-full">
           <label
@@ -84,7 +88,7 @@ export default function RegisterForm() {
             className="w-full p-2 py-2 bg-gray-900 border border-gray-600 rounded-lg md:my-4"
           />
           {errors.passwordConfirm ? (
-            <p>{errors.passwordConfirm.message}</p>
+            <p className="form-error">{errors.passwordConfirm.message}</p>
           ) : (
             <></>
           )}

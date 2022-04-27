@@ -158,4 +158,8 @@
   .switch__inner--active {
     @apply inline-block w-4 h-4 transform bg-white rounded-full translate-x-6;
   }
+
+  .form-error {
+    @apply text-red-600;
+  }
 }
