@@ -4,14 +4,17 @@ from flask_cors import CORS
 from flask import request, session
 import json
 from hashlib import sha256
+from flask_jwt_extended import JWTManager, create_access_token
 
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.secret_key = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
+app.config["JWT_SECRET_KEY"] = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+jwt = JWTManager(app)
 
 from api.models import * 
 
@@ -95,7 +98,8 @@ def register():
     user = User(Username=username, Password_Hash=h_pwd)
     db.session.add(user)
     db.session.commit()
-    return {"result": "ok"}
+    token = create_access_token(identity=user.Id)
+    return {"result": "ok", "token": token}
 
 @app.route('/api/login', methods=['POST'])
 @app.route('/api/profile', methods=['GET'])
