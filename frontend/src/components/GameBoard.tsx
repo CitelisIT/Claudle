@@ -2,13 +2,11 @@ import React from "react";
 import GameBoardRow from "./GameBoardRow";
 
 interface Props {
-  size: number;
-  tries: number;
   words: string[][];
   hints: number[][];
 }
 
-export default function GameBoard({ size, tries, words, hints }: Props) {
+export default function GameBoard({ words, hints }: Props) {
   return (
     <section className="game-wrapper">
       <div className="game-board">

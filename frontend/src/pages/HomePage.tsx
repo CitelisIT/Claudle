@@ -165,12 +165,7 @@ export default function HomePage() {
         target={target}
         resetGame={resetGame}
       />
-      <GameBoard
-        size={settingsContext.size}
-        tries={settingsContext.tries}
-        words={words}
-        hints={hints}
-      />
+      <GameBoard words={words} hints={hints} />
       <InvalidWordPopup badWord={badWord} setBadWord={setBadWord} />
       <Keyboard
         layout={settingsContext.layout}
