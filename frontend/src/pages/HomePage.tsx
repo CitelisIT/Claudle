@@ -69,7 +69,7 @@ export default function HomePage() {
                     {
                       target: target,
                       words: words,
-                      nbTries: currentIndex,
+                      nbTries: currentIndex + 1,
                     },
                     { headers: { Authorization: `Bearer ${token}` } }
                   );
