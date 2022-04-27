@@ -1,6 +1,8 @@
 import { UserCircleIcon } from "@heroicons/react/outline";
 import { useForm, SubmitHandler } from "react-hook-form";
 import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 type Inputs = {
   username: string;
@@ -9,13 +11,26 @@ type Inputs = {
 };
 
 export default function RegisterForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    axios
+      .post("/api/register", {
+        username: data.username,
+        password: data.password,
+      })
+      .then((response) => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const pwd = watch("password", "");
 
   return (
