@@ -40,7 +40,7 @@ export default function DefeatPopup({
         </Dialog.Title>
         <Dialog.Description as="div" className="w-full">
           <div className="flex flex-col items-center justify-center w-full gap-4 p-2 md:gap-12 md:text-xl">
-            <span> Le mot cherché etait : {target} </span>
+            <span> Le mot recherché etait : {target} </span>
             <button
               onClick={() => {
                 setGameLost(false);
