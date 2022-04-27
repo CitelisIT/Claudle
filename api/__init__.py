@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask import request, session
 import json
 from hashlib import sha256
-from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 
 app = Flask(__name__)
@@ -63,7 +63,10 @@ def getword():
     return json.dumps(response_body)
 
 @app.route('/api/saveStats', methods=['POST'])
+@jwt_required(optional=True)
 def saveStat():
+    token_id = get_jwt_identity()
+    print(token_id)
     args = request.json
     target = args['target']
     nbTries = args['nbTries']
@@ -77,11 +80,11 @@ def saveStat():
             stringTries+= w+"/"
             w=""
 
-    if session.get('user_id') is None:
+    if token_id is None:
         saveStats(0,target,nbTries,stringTries)
         return {}
     else :
-        user = User.query.filter(User.Id==session.get('user_id')).first()
+        user = User.query.filter(User.Id==token_id).first()
         saveStats(user.Id,target,nbTries,stringTries)
         return {}
 

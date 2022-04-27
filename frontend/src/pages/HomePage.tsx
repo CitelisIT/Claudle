@@ -40,11 +40,11 @@ export default function HomePage() {
             _words[currentIndex] = currWordArray;
             setWords(_words);
           }
-
           if (badWord === true) {
             setBadWord(false);
           }
         } else if (key === "Enter") {
+          const token = sessionStorage.getItem("token");
           if (currentWord.length === settingsContext.size) {
             axios
               .get("/api/validate", {
@@ -64,11 +64,16 @@ export default function HomePage() {
                 if (wordHints.every((hint: number) => hint === 2)) {
                   settingsContext.setGameState(2);
                   //saves if victory
-                  axios.post("/api/saveStats", {
-                    target: target,
-                    words: words,
-                    nbTries: currentIndex,
-                  });
+                  console.log(token);
+                  axios.post(
+                    "/api/saveStats",
+                    {
+                      target: target,
+                      words: words,
+                      nbTries: currentIndex,
+                    },
+                    { headers: { Authorization: `Bearer ${token}` } }
+                  );
                   setGameWon(true);
                 } else if (currentIndex === settingsContext.tries - 1) {
                   settingsContext.setGameState(2);
@@ -76,6 +81,9 @@ export default function HomePage() {
                     target: target,
                     words: words,
                     nbTries: -1,
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
                   });
                   setGameLost(true);
                 }
