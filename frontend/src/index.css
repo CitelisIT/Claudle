@@ -44,7 +44,7 @@
   }
 
   .keyboard {
-    @apply flex flex-col items-center justify-center w-full gap-1 md:w-7/12 lg:w-5/12 lg:gap-2;
+    @apply flex flex-col items-center justify-center w-full gap-1 min-w-max md:w-7/12 lg:w-5/12 lg:gap-2;
   }
 
   .keyboard__row {
