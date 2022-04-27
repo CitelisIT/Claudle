@@ -26,7 +26,7 @@ export const SettingsContext = createContext<SettingsContextInterface>(
 
 export default function App() {
   const [lang, setLang] = useState("francais");
-  const [layout, setLayout] = useState<string>("qwerty");
+  const [layout, setLayout] = useState<string>("azerty");
   const [size, setSize] = useState<number>(5);
   const [tries, setTries] = useState<number>(6);
   const [hardMode, setHardMode] = useState<boolean>(false);
