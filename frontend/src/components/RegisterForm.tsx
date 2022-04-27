@@ -25,7 +25,11 @@ export default function RegisterForm() {
         password: data.password,
       })
       .then((response) => {
-        navigate("/");
+        if (response.status === 200) {
+          const respData = response.data;
+          sessionStorage.setItem("token", respData.token);
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.log(error);
