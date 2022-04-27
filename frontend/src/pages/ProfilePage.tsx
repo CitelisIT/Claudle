@@ -40,7 +40,12 @@ export default function ProfilePage() {
         <h2 className="mt-4 text-lg md:mt-16 md:mb-6 md:text-xl lg:text-2xl">
           Voici tes performances :
         </h2>
-        <Stats user_id={stats.user_id} />
+        <Stats
+          nbGamesWon={stats.nbGamesWon}
+          percGamesWon={stats.percGamesWon}
+          currentStreak={stats.currentStreak}
+          bestStreak={stats.bestStreak}
+        />
         <Graph winsByTries={stats.winsByTries} />
       </div>
       <div className="flex justify-center w-full gap-4 p-6 md:gap-12 md:p-16">
