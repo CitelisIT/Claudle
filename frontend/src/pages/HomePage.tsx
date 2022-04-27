@@ -45,6 +45,7 @@ export default function HomePage() {
           }
         } else if (key === "Enter") {
           const token = sessionStorage.getItem("token");
+          const headers = token ? { Authorization: `Bearer ${token}` } : null;
           if (currentWord.length === settingsContext.size) {
             axios
               .get("/api/validate", {
@@ -71,7 +72,7 @@ export default function HomePage() {
                       words: words,
                       nbTries: currentIndex + 1,
                     },
-                    { headers: { Authorization: `Bearer ${token}` } }
+                    { headers: { ...headers } }
                   );
                   setGameWon(true);
                 } else if (currentIndex === settingsContext.tries - 1) {
@@ -85,7 +86,7 @@ export default function HomePage() {
                     },
                     {
                       headers: {
-                        Authorization: `Bearer ${token}`,
+                        ...headers,
                       },
                     }
                   );
