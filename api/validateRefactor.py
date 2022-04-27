@@ -35,7 +35,7 @@ def getWords(length, language):
 def validWord(word,words):
     return word in words
 
-def validate(input, target):
+def verification(input, target):
     """Given a input, return the hint about each character in the input
     0 means character not in word target
     1 in target but not at the right spot
