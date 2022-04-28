@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Component, useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
@@ -8,6 +8,27 @@ interface Props {
   setGameLost: React.Dispatch<React.SetStateAction<boolean>>;
   target: string;
   resetGame: () => void;
+}
+
+function DefinitionLink(props: any) {
+  const settingsContext = useContext(SettingsContext);
+  const lang = settingsContext.lang == "english" ? "en" : "fr";
+  return (
+    <button
+      className="p-2 mt-12 text-sm text-amber-400 border border-amber-400 rounded-lg w-max md:text-lg lg:text-xl"
+      onClick={() =>
+        window.open(
+          lang == "fr"
+            ? "https://www.cnrtl.fr/definition/" + props.target
+            : "https://dictionary.cambridge.org/dictionary/english/" +
+                props.target,
+          "_blank"
+        )
+      }
+    >
+      Définition
+    </button>
+  );
 }
 
 export default function DefeatPopup({
@@ -41,6 +62,7 @@ export default function DefeatPopup({
         <Dialog.Description as="div" className="w-full">
           <div className="flex flex-col items-center justify-center w-full gap-4 p-2 md:gap-12 md:text-xl">
             <span> Le mot recherché etait : {target} </span>
+            <DefinitionLink target={target} />
             <button
               onClick={() => {
                 setGameLost(false);
