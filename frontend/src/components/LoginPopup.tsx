@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { UserCircleIcon, LoginIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
@@ -21,6 +21,7 @@ export default function LoginPopup({
   setLoginOpen,
   setPopupOpen,
 }: Props) {
+  const [loginError, setLoginError] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -28,6 +29,7 @@ export default function LoginPopup({
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    setLoginError(false);
     axios
       .post("/api/login", {
         username: data.username,
@@ -41,6 +43,7 @@ export default function LoginPopup({
         }
       })
       .catch((error) => {
+        setLoginError(true);
         console.log(error);
       });
   };
@@ -107,6 +110,11 @@ export default function LoginPopup({
                 <></>
               )}
             </fieldset>
+                {loginError ? (
+                  <p className="form-error w-full flex justify-center items-center text-center">Nom ou mot de passe incorect</p>
+                ) : (
+                  <></>
+                )}
             <div className="flex items-center justify-between w-full">
               <Link
                 onClick={() => setLoginOpen(false)}
