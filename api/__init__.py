@@ -40,10 +40,14 @@ def validate():
     words = getWords(len(target), language)
     result = [0 in range (len(target))]
     if language == "cloclo":
-        result = verification(word, target)
-        response_body = {
-        "hint": result
-        }
+        wordsFR = getWords(len(target), "francais")
+        if not validWord(word,wordsFR):
+            return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
+        else:
+            result = verification(word, target)
+            response_body = {
+            "hint": result
+            }
     else:
         if not validWord(word,words):
             if language == "francais":
