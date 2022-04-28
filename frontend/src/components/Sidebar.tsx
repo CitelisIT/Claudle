@@ -1,6 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { XIcon, MinusSmIcon } from "@heroicons/react/outline";
+import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
 
 export default function Sidebar() {
@@ -41,7 +41,7 @@ export default function Sidebar() {
             </Popover.Button>
           </div>
           <ul className="w-full grow">
-            <li className="flex justify-start items-center py-2 text-xl text-gray-200 hover:bg-gray-700">
+            <li className="flex items-center justify-start py-2 text-xl text-gray-200 hover:bg-gray-700">
               <span className="flex items-center justify-center w-6 mx-4 text-3xl">
                 {settingsContext.lang === "english" ? "•" : ""}
               </span>
@@ -56,11 +56,11 @@ export default function Sidebar() {
                 <img
                   src="./Flag_of_the_United_Kingdom.svg"
                   alt="Flag"
-                  className="h-5 md:w-8  "
+                  className="h-5 md:w-8 "
                 />
               </button>
             </li>
-            <li className="flex justify-start items-center py-2 text-xl text-gray-200 selected: bg-grey-700 hover:bg-gray-700">
+            <li className="flex items-center justify-start py-2 text-xl text-gray-200 selected: bg-grey-700 hover:bg-gray-700">
               <span className="flex items-center justify-center w-6 mx-4 text-3xl">
                 {settingsContext.lang === "francais" ? "•" : ""}
               </span>
@@ -75,7 +75,7 @@ export default function Sidebar() {
                 <img
                   src="./Flag_of_France.svg"
                   alt="Flag"
-                  className="h-5 md:w-8  "
+                  className="h-5 md:w-8 "
                 />
               </button>
             </li>
