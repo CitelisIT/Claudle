@@ -41,9 +41,9 @@ def validate():
     result = [0 in range (len(target))]
     if not validWord(word,words):
         if language == "francais":
-            return abort(500, "Ce mot n'est pas dans notre dictionnaire")
+            return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
         if language == "english":
-            return abort(500, "This word isn't in our dictionnary")
+            return jsonify(error = "This word isn't in our dictionnary"), 404
     else:
         result = verification(word, target)
     response_body = {
@@ -78,6 +78,7 @@ def saveStat():
     target = args['target']
     nbTries = args['nbTries']
     words = args['words']
+    gamemode = args['gamemode']
     stringTries = ""
     w=""
     for word in words:
@@ -122,9 +123,9 @@ def login():
     h_pwd = h.hexdigest()
     user = User.query.filter(User.Username==username).first()
     if user is None:
-        return abort(500, "Ce nom d'utilisateur n'existe pas")
+        return jsonify(error = "Ce nom d'utilisateur n'existe pas"), 401
     if user.Password_Hash != h_pwd:
-        return abort(500, "Le mot de passe est incorrect")
+        return jsonify(error = "Mot de passe incorrect"), 401
     token = create_access_token(identity=user.Id)
     response = jsonify({"login": "ok"})
     set_access_cookies(response, token)
