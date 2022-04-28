@@ -1,6 +1,6 @@
 import React from "react";
 import { Dialog } from "@headlessui/react";
-import { UserCircleIcon } from "@heroicons/react/outline";
+import { UserCircleIcon, LoginIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -121,8 +121,9 @@ export default function LoginPopup({
                   setPopupOpen(false);
                   handleSubmit(onSubmit);
                 }}
-                className="p-2 text-sm text-green-600 border border-green-600 rounded-lg md:text-lg lg:text-xl"
+                className="button--green"
               >
+                <LoginIcon className="button__icon" />
                 Se connecter
               </button>
             </div>

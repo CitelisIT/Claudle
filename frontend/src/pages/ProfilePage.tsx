@@ -49,11 +49,8 @@ export default function ProfilePage() {
         <Graph winsByTries={stats.winsByTries} />
       </div>
       <div className="flex justify-center w-full gap-4 p-6 md:gap-12 md:p-16">
-        <button
-          type="submit"
-          className="flex items-center justify-center p-2 text-sm text-red-500 border border-red-500 rounded-lg w-max md:text-lg lg:text-xl"
-        >
-          <LogoutIcon className="w-10 h-10 lg:h-12 lg:w-12" />
+        <button type="submit" className="button--red">
+          <LogoutIcon className="button__icon" />
           Se déconnecter
         </button>
       </div>
