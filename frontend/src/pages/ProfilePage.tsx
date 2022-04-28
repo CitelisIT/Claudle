@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import { LogoutIcon } from "@heroicons/react/outline";
+import { LogoutIcon, TrashIcon } from "@heroicons/react/outline";
+
 import axios from "axios";
 import Footer from "../components/Footer";
 import Graph from "../components/Graph";
 import Navbar from "../components/Navbar";
 import Stats from "../components/Stats";
 import { getCookie } from "../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
   const [stats, setStats] = useState({
     user_id: 0,
     username: "",
@@ -18,6 +21,45 @@ export default function ProfilePage() {
     winsByTries: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   });
 
+  function logout() {
+    axios
+      .post(
+        "/api/logout",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "X-CSRF-Token": getCookie("csrf_access_token")!,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status === 200 && response.data.logout === "ok") {
+          sessionStorage.removeItem("loggedin");
+          navigate("/");
+        }
+      });
+  }
+
+  function delUser() {
+    axios
+      .delete(
+        "/api/delUser",
+
+        {
+          withCredentials: true,
+          headers: {
+            "X-CSRF-Token": getCookie("csrf_access_token")!,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status === 200 && response.data.logout === "ok") {
+          sessionStorage.removeItem("loggedin");
+          navigate("/");
+        }
+      });
+  }
   useEffect(() => {
     axios
       .get("/api/profile", {
@@ -50,9 +92,15 @@ export default function ProfilePage() {
         <Graph winsByTries={stats.winsByTries} />
       </div>
       <div className="flex justify-center w-full gap-4 p-6 md:gap-12 md:p-16">
-        <button type="submit" className="button--red">
+        <button type="submit" className="button--red" onClick={() => logout()}>
           <LogoutIcon className="button__icon" />
           Se déconnecter
+        </button>
+      </div>
+      <div className="flex justify-center w-full gap-4 p-6 md:gap-12 md:p-16">
+        <button type="submit" className="button--red" onClick={() => delUser()}>
+          <TrashIcon className="button__icon" />
+          SUPPRIMER LE COMPTE
         </button>
       </div>
       <Footer />

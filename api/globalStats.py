@@ -17,7 +17,8 @@ def numberOfWonGames():
 
 def percentageOfWonGames():
     number = Games.query.filter(Games.Tries_Num != -1).count()
-    return round(number/numberOfGames()*100,2)
+    winrate = round(number/numberOfGames()*100,2) if numberOfGames != 0 else 0
+    return winrate
 
 def numberOfWonGamesTriesNumber(TriesNumber):
     number = Games.query.filter(Games.Tries_Num == TriesNumber).count()
@@ -45,7 +46,8 @@ def numberOfWonGamesByUser(UserId):
 
 def percentageOfWonGamesByUser(UserId):
     number = Games.query.filter(Games.User_Id == UserId).filter(Games.Tries_Num != -1).count()
-    return round(number/numberOfGamesByUser(UserId)*100,2)
+    userWinrate = round(number/numberOfGamesByUser(UserId)*100,2) if numberOfGamesByUser(UserId) != 0 else 0
+    return userWinrate
 
 def numberOfWonGamesTriesNumberByUser(UserId, TriesNumber):
     number = Games.query.filter(Games.User_Id == UserId).filter(Games.Tries_Num == TriesNumber).count()

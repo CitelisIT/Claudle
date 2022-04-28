@@ -4,8 +4,8 @@ from flask_cors import CORS
 from flask import request
 import json
 from hashlib import sha256
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_access_cookies
-from datetime import timedelta
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt, get_jwt_identity, set_access_cookies, unset_access_cookies, verify_jwt_in_request
+from datetime import datetime, timedelta, timezone
 
 
 app = Flask(__name__)
@@ -128,6 +128,11 @@ def login():
     set_access_cookies(response, token)
     return response
 
+@app.route("/api/logout", methods=["POST"])
+def logout():
+    response = jsonify({"logout": "ok"})
+    unset_access_cookies(response)
+    return response
 
 @app.route('/api/profile', methods=['GET'])
 @jwt_required()
@@ -164,3 +169,29 @@ def getStats():
                     "bestUser":BestUser,
                     "winsByTries": winsByTries}
     return json.dumps(response_body)
+
+@app.after_request
+def refresh_token(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        curr_time = datetime.now(timezone.utc)
+        target_timestamp = timedelta(curr_time + timedelta(minutes=15))
+        if target_timestamp > exp_timestamp:
+            token_id = get_jwt_identity()
+            token = create_access_token(identity=token_id)
+            set_access_cookies(response, token)
+        return response
+    except Exception as e:
+        return response
+
+
+@app.route("/api/delUser", methods=['DELETE'])
+@jwt_required()
+def delUser():
+    token_id = get_jwt_identity()
+    User.query.filter(User.Id==token_id).delete()
+    Games.query.filter(Games.User_Id==token_id).delete()
+    db.session.commit()
+    response = jsonify({"logout": "ok"})
+    unset_access_cookies(response)
+    return response
