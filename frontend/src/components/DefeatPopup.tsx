@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
@@ -12,13 +12,13 @@ interface Props {
 
 function DefinitionLink(props: any) {
   const settingsContext = useContext(SettingsContext);
-  const lang = settingsContext.lang == "english" ? "en" : "fr";
+  const lang = settingsContext.lang === "english" ? "en" : "fr";
   return (
     <button
-      className="p-2 mt-12 text-sm text-amber-400 border border-amber-400 rounded-lg w-max md:text-lg lg:text-xl"
+      className=" p-2 mt-12 text-sm text-amber-400 border border-amber-400 rounded-lg w-max md:text-lg lg:text-xl mr-8"
       onClick={() =>
         window.open(
-          lang == "fr"
+          lang === "fr"
             ? "https://www.cnrtl.fr/definition/" + props.target
             : "https://dictionary.cambridge.org/dictionary/english/" +
                 props.target,
@@ -62,6 +62,8 @@ export default function DefeatPopup({
         <Dialog.Description as="div" className="w-full">
           <div className="flex flex-col items-center justify-center w-full gap-4 p-2 md:gap-12 md:text-xl">
             <span> Le mot recherché etait : {target} </span>
+          </div>
+          <div className="flex items-center justify-center">
             <DefinitionLink target={target} />
             <button
               onClick={() => {
@@ -69,7 +71,7 @@ export default function DefeatPopup({
                 settingsContext.setGameState(0);
                 resetGame();
               }}
-              className="p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl"
+              className="p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl inline-block"
             >
               Nouvelle partie
             </button>
