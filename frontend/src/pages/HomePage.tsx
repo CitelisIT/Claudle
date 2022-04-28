@@ -8,6 +8,7 @@ import axios from "axios";
 import VictoryPopup from "../components/VictoryPopup";
 import DefeatPopup from "../components/DefeatPopup";
 import InvalidWordPopup from "../components/InvalidWordPopup";
+import { getCookie } from "../utils/utils";
 
 export default function HomePage() {
   const settingsContext = useContext(SettingsContext);
@@ -44,8 +45,6 @@ export default function HomePage() {
             setBadWord(false);
           }
         } else if (key === "Enter") {
-          const token = sessionStorage.getItem("token");
-          const headers = token ? { Authorization: `Bearer ${token}` } : null;
           if (currentWord.length === settingsContext.size) {
             axios
               .get("/api/validate", {
@@ -72,7 +71,12 @@ export default function HomePage() {
                       words: words,
                       nbTries: currentIndex + 1,
                     },
-                    { headers: { ...headers } }
+                    {
+                      withCredentials: true,
+                      headers: {
+                        "X-CSRF-TOKEN": getCookie("csrf_access_token")!,
+                      },
+                    }
                   );
                   setGameWon(true);
                 } else if (currentIndex === settingsContext.tries - 1) {
@@ -85,8 +89,9 @@ export default function HomePage() {
                       nbTries: -1,
                     },
                     {
+                      withCredentials: true,
                       headers: {
-                        ...headers,
+                        "X-CSRF-TOKEN": getCookie("csrf_access_token")!,
                       },
                     }
                   );
@@ -132,8 +137,6 @@ export default function HomePage() {
   }
 
   const resetGame = useCallback(() => {
-    const token = sessionStorage.getItem("token");
-    const headers = token ? { Authorization: `Bearer ${token}` } : null;
     // Get target Word
     axios
       .get("/api/getword", {
@@ -141,7 +144,10 @@ export default function HomePage() {
           language: settingsContext.lang,
           length: settingsContext.size,
         },
-        headers: { ...headers },
+        withCredentials: true,
+        headers: {
+          "X-CSRF-TOKEN": getCookie("csrf_access_token")!,
+        },
       })
       .then((res) => {
         setTarget(res.data.words);

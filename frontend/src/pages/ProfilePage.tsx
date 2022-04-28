@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Graph from "../components/Graph";
 import Navbar from "../components/Navbar";
 import Stats from "../components/Stats";
+import { getCookie } from "../utils/utils";
 
 export default function ProfilePage() {
   const [stats, setStats] = useState({
@@ -18,11 +19,11 @@ export default function ProfilePage() {
   });
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
     axios
       .get("/api/profile", {
+        withCredentials: true,
         headers: {
-          Authorization: `Bearer ${token}`,
+          "X-CSRF-Token": getCookie("csrftoken")!,
         },
       })
       .then((response) => {

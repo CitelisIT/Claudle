@@ -1,10 +1,10 @@
-from flask import Flask, abort
+from flask import Flask, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask import request
 import json
 from hashlib import sha256
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, set_access_cookies, unset_access_cookies
 from datetime import timedelta
 
 
@@ -12,7 +12,8 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.secret_key = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
 app.config["JWT_SECRET_KEY"] = '60a725867b515697115ccb2c561c2fee5694f2bc0d96372a4a033880702fa4a4'
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=2)
+app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -105,8 +106,9 @@ def register():
     db.session.add(user)
     db.session.commit()
     token = create_access_token(identity=user.Id)
-    return {"result": "ok", "token": token}
-
+    response = jsonify({"register": "ok"})
+    set_access_cookies(response, token)
+    return response
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -122,7 +124,9 @@ def login():
     if user.Password_Hash != h_pwd:
         return abort(500, "Le mot de passe est incorrect")
     token = create_access_token(identity=user.Id)
-    return {"result": "ok", "token": token}
+    response = jsonify({"login": "ok"})
+    set_access_cookies(response, token)
+    return response
 
 
 @app.route('/api/profile', methods=['GET'])

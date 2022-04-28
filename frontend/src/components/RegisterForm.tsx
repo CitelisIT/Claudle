@@ -25,8 +25,7 @@ export default function RegisterForm() {
       })
       .then((response) => {
         if (response.status === 200) {
-          const respData = response.data;
-          sessionStorage.setItem("token", respData.token);
+          sessionStorage.setItem("loggedin", "true");
           navigate("/");
         }
       })

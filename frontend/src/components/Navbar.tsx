@@ -45,7 +45,7 @@ export default function Navbar({ setPopupOpen }: Props) {
           <Link to="/stats">
             <ChartBarIcon className="navbar__icon" />
           </Link>
-          {sessionStorage.getItem("token") ? (
+          {sessionStorage.getItem("loggedin") === "true" ? (
             <Link to={"/profile"}>
               <UserIcon className="navbar__icon" />
             </Link>
