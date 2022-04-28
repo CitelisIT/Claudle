@@ -10,7 +10,9 @@ export default function Sidebar() {
   const flag =
     settingsContext.lang === "english"
       ? "./Flag_of_the_United_Kingdom.svg"
-      : "./Flag_of_France.svg";
+      : settingsContext.lang === "francais"
+      ? "./Flag_of_France.svg"
+      : "./ClaudeFrancois.jpg";
   return (
     <Popover
       className=""
