@@ -79,6 +79,25 @@ export default function Sidebar() {
                 />
               </button>
             </li>
+            <li className="flex items-center justify-start py-2 text-xl text-gray-200 selected: bg-grey-700 hover:bg-gray-700">
+              <span className="flex items-center justify-center w-6 mx-4 text-3xl">
+                {settingsContext.lang === "cloclo" ? "•" : ""}
+              </span>
+              <button
+                className="flex items-center justify-center gap-4"
+                onClick={() => {
+                  settingsContext.setLang("cloclo");
+                }}
+                {...{ disabled }}
+              >
+                <span>Claude François</span>
+                <img
+                  src="./ClaudeFrancois.jpg"
+                  alt="Flag"
+                  className="h-5 md:w-8 "
+                />
+              </button>
+            </li>
           </ul>
         </Popover.Panel>
       </Transition>
