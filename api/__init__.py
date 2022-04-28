@@ -44,6 +44,8 @@ def validate():
             return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
         if language == "english":
             return jsonify(error = "This word isn't in our dictionnary"), 404
+        if language == "cloclo":
+            return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
     else:
         result = verification(word, target)
     response_body = {

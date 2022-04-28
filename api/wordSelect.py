@@ -10,18 +10,21 @@ def parseWord():
 
 def getWords(length, language):
     words = []
-
-    with open(f'./Databases/{language}/dico{length}.txt',"r") as file:
-        for line in file:
-            words.append(line.rstrip())
-
+    if language == "cloclo":
+        with open('./Databases/special/dicloclo.txt', 'r') as f: 
+            for line in f: 
+                words.append(line.strip())
+    else:
+        with open(f'./Databases/{language}/dico{length}.txt',"r") as file:
+            for line in file:
+                words.append(line.rstrip())
     return words
 
 
 
 
 def justNewWords(lenght, language, wordsMet):
-    #select word not encountered by the player
+    #select word not encountered by the player        
     allWords = getWords(lenght, language)
     newWords = []
     for word in allWords:
@@ -30,7 +33,11 @@ def justNewWords(lenght, language, wordsMet):
     return newWords
     
 def select(lenght, language, wordsMet):
-    words = justNewWords(lenght, language, wordsMet)
+    if language == "cloclo":
+        words = justNewWords(lenght, language, wordsMet)
+        return words[random.randint(0,len(words))]
+    else:
+        words = justNewWords(lenght, language, wordsMet)
     return  words[random.randint(0,len(words))]
 
 #Tests
