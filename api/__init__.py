@@ -183,3 +183,15 @@ def refresh_token(response):
         return response
     except Exception as e:
         return response
+
+
+@app.route("/api/delUser", methods=['DELETE'])
+@jwt_required()
+def delUser():
+    token_id = get_jwt_identity()
+    User.query.filter(User.Id==token_id).delete()
+    Games.query.filter(Games.User_Id==token_id).delete()
+    db.session.commit()
+    response = jsonify({"logout": "ok"})
+    unset_access_cookies(response)
+    return response
