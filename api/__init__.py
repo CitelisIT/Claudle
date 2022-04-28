@@ -23,7 +23,7 @@ from api.models import *
 
 db.create_all()
 
-from api.validateRefactor import *
+from api.validate import *
 from api.globalStats import *
 from api.wordSelect import *
 from api.saveStats import *
