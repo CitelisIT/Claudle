@@ -39,18 +39,22 @@ def validate():
     target = args['target']
     words = getWords(len(target), language)
     result = [0 in range (len(target))]
-    if not validWord(word,words):
-        if language == "francais":
-            return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
-        if language == "english":
-            return jsonify(error = "This word isn't in our dictionnary"), 404
-        if language == "cloclo":
-            return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
-    else:
+    if language == "cloclo":
         result = verification(word, target)
-    response_body = {
+        response_body = {
         "hint": result
-    }
+        }
+    else:
+        if not validWord(word,words):
+            if language == "francais":
+                return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
+            if language == "english":
+                return jsonify(error = "This word isn't in our dictionnary"), 404
+        else:
+            result = verification(word, target)
+        response_body = {
+            "hint": result
+        }
     return json.dumps(response_body)
 
 
