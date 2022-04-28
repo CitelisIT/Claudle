@@ -16,7 +16,7 @@ function DefinitionLink(props: any) {
     settingsContext.lang === "english" ? "en" : "francais" ? "fr" : "cloclo";
   return (
     <button
-      className=" p-2 mt-12 text-sm text-amber-400 border border-amber-400 rounded-lg w-max md:text-lg lg:text-xl mr-8"
+      className="p-2 mt-12 mr-8 text-sm border rounded-lg  text-amber-400 border-amber-400 w-max md:text-lg lg:text-xl"
       onClick={() =>
         window.open(
           lang === "fr"
@@ -57,7 +57,11 @@ export default function VictoryPopup({
       <div className="flex flex-col justify-center w-full gap-4 p-6 md:gap-12 md:p-16 flex-center">
         <Dialog.Title className="mx-24 text-lg font-semibold text-center text-gray-200 md:text-3xl ">
           <div className="flex items-center justify-center w-full">
-            <span> Vous avez gagné =) </span>
+            <span> Vous avez gagné </span>
+            <img
+              src="./ClaudeFrancoisJoie.jpg"
+              className="w-6 h-6 ml-6 text-gray-200 md:w-20 md:h-20"
+            />
           </div>
         </Dialog.Title>
 
@@ -76,7 +80,7 @@ export default function VictoryPopup({
                 settingsContext.setGameState(0);
                 resetGame();
               }}
-              className="p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl mr-8"
+              className="p-2 mt-12 mr-8 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl"
             >
               Nouvelle partie
             </button>
