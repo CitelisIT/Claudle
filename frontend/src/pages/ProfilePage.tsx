@@ -3,8 +3,7 @@ import { LogoutIcon, TrashIcon } from "@heroicons/react/outline";
 
 import axios from "axios";
 import Footer from "../components/Footer";
-import Graph from "../components/Graph";
-import History from "../components/History";
+import ProfileTabs from "../components/ProfileTabs";
 import Navbar from "../components/Navbar";
 import Stats from "../components/Stats";
 import { getCookie } from "../utils/utils";
@@ -90,9 +89,8 @@ export default function ProfilePage() {
           currentStreak={stats.currentStreak}
           bestStreak={stats.bestStreak}
         />
-        {/* <Graph winsByTries={stats.winsByTries} /> */}
+        <ProfileTabs winsByTries={stats.winsByTries} />
       </div>
-      <History />
       <div className="flex justify-center w-full gap-4 p-6 md:gap-12 md:p-16">
         <button type="submit" className="button--red" onClick={() => logout()}>
           <LogoutIcon className="button__icon" />
