@@ -88,7 +88,6 @@ def saveStat():
     target = args['target']
     nbTries = args['nbTries']
     words = args['words']
-    gamemode = args['gamemode']
     stringTries = ""
     w=""
     for word in words:
@@ -97,7 +96,6 @@ def saveStat():
         if not w =="":
             stringTries+= w+"/"
             w=""
-
     if token_id is None:
         saveStats(0,target,nbTries,stringTries)
         return {}
