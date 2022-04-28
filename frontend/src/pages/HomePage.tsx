@@ -151,6 +151,9 @@ export default function HomePage() {
       })
       .then((res) => {
         setTarget(res.data.words);
+        if (settingsContext.lang === "cloclo") {
+          settingsContext.setSize(res.data.words.length);
+        }
       });
     // Initialize the letters and hints
     const letterRow = [];
