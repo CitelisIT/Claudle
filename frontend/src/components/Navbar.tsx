@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { CogIcon, UserIcon, ChartBarIcon } from "@heroicons/react/outline";
+import {
+  CogIcon,
+  UserIcon,
+  ChartBarIcon,
+  LoginIcon,
+} from "@heroicons/react/outline";
 import Settings from "./Settings";
 import InfoPopup from "./InfoPopup";
 import Sidebar from "./Sidebar";
@@ -51,7 +56,7 @@ export default function Navbar({ setPopupOpen }: Props) {
                 setLoginOpen(true);
               }}
             >
-              <UserIcon className="navbar__icon" />
+              <LoginIcon className="navbar__icon" />
             </button>
           )}
           <button

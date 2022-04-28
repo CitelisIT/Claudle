@@ -162,4 +162,16 @@
   .form-error {
     @apply text-red-600;
   }
+
+  .button--green {
+    @apply flex items-center justify-center gap-2 p-3 text-sm text-green-600 border border-green-600 rounded-lg md:text-lg lg:text-xl;
+  }
+
+  .button--red {
+    @apply flex items-center justify-center gap-2 p-3 text-sm text-red-600 border border-red-600 rounded-lg md:text-lg lg:text-xl;
+  }
+
+  .button__icon {
+    @apply w-6 h-6 lg:h-8 lg:w-8;
+  }
 }

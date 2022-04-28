@@ -1,6 +1,6 @@
 import React from "react";
 import { Dialog } from "@headlessui/react";
-import { UserCircleIcon } from "@heroicons/react/outline";
+import { UserCircleIcon, LoginIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -49,8 +49,8 @@ export default function LoginPopup({
     <Dialog
       open={loginOpen}
       onClose={() => {
-        setLoginOpen(false);
         setPopupOpen(false);
+        setLoginOpen(false);
       }}
       unmount={true}
       className="fixed inset-0 w-10/12 p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl mg:p-8 lg:w-5/12 mx-1/2 h-fit"
@@ -117,9 +117,13 @@ export default function LoginPopup({
                 Créer un compte
               </Link>
               <button
-                onClick={handleSubmit(onSubmit)}
-                className="p-2 text-sm text-green-600 border border-green-600 rounded-lg md:text-lg lg:text-xl"
+                onClick={() => {
+                  setPopupOpen(false);
+                  handleSubmit(onSubmit);
+                }}
+                className="button--green"
               >
+                <LoginIcon className="button__icon" />
                 Se connecter
               </button>
             </div>
