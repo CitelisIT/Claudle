@@ -7,16 +7,16 @@ export default function Graph({ winsByTries }: Props) {
     (op: any, item: any) => (op = op > item ? op : item),
     0
   );
-  const normOne = Math.floor((winsByTries[0] / max) * 100) + "%";
-  const normTwo = Math.floor((winsByTries[1] / max) * 100) + "%";
-  const normThree = Math.floor((winsByTries[2] / max) * 100) + "%";
-  const normFour = Math.floor((winsByTries[3] / max) * 100) + "%";
-  const normFive = Math.floor((winsByTries[4] / max) * 100) + "%";
-  const normSix = Math.floor((winsByTries[5] / max) * 100) + "%";
-  const normSeven = Math.floor((winsByTries[6] / max) * 100) + "%";
-  const normEight = Math.floor((winsByTries[7] / max) * 100) + "%";
-  const normNine = Math.floor((winsByTries[8] / max) * 100) + "%";
-  const normTen = Math.floor((winsByTries[9] / max) * 100) + "%";
+  const normOne = (max != 0 ? Math.floor((winsByTries[0] / max) * 100) : 0) + "%";
+  const normTwo = (max != 0 ? Math.floor((winsByTries[1] / max) * 100) : 0 ) + "%";
+  const normThree = (max != 0 ? Math.floor((winsByTries[2] / max) * 100) : 0) + "%";
+  const normFour = (max != 0 ? Math.floor((winsByTries[3] / max) * 100) : 0) + "%";
+  const normFive = (max != 0 ? Math.floor((winsByTries[4] / max) * 100) : 0) + "%";
+  const normSix = (max != 0 ? Math.floor((winsByTries[5] / max) * 100) : 0) + "%";
+  const normSeven = (max != 0 ? Math.floor((winsByTries[6] / max) * 100) : 0) + "%";
+  const normEight = (max != 0 ? Math.floor((winsByTries[7] / max) * 100) : 0) + "%";
+  const normNine = (max != 0 ? Math.floor((winsByTries[8] / max) * 100) : 0) + "%";
+  const normTen = (max != 0 ? Math.floor((winsByTries[9] / max) * 100) : 0) + "%";
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="flex flex-col items-start justify-center w-full gap-4 my-8 a -lg lg:text-xl">
