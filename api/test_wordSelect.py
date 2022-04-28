@@ -1,5 +1,4 @@
-from getopt import getopt
-from msvcrt import getwch
+
 from api.wordSelect import *
 
 def testjustNewWords():

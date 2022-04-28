@@ -1,4 +1,3 @@
-import re
 from flask import Flask, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
