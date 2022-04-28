@@ -128,6 +128,11 @@ def login():
     set_access_cookies(response, token)
     return response
 
+@app.route("/api/logout", methods=["POST"])
+def logout():
+    response = jsonify({"logout": "ok"})
+    unset_access_cookies(response)
+    return response
 
 @app.route('/api/profile', methods=['GET'])
 @jwt_required()
