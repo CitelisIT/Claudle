@@ -1,10 +1,11 @@
+from enum import unique
 from api import db
 
 db.metadata.clear()
 
 class User(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
-    Username = db.Column(db.String(32))
+    Username = db.Column(db.String(32), unique = True)
     Password_Hash = db.Column(db.String(64))
 
     
