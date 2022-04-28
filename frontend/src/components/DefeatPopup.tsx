@@ -58,7 +58,7 @@ export default function DefeatPopup({
           <div className="flex items-center justify-center w-full">
             <span> Vous avez perdu </span>
             <img
-              src="./ClaudeFrancoisJoieTriste.jpg"
+              src="./ClaudeFrancoisTriste.jpg"
               className="w-6 h-6 ml-6 text-gray-200 md:w-20 md:h-20"
             />
           </div>
