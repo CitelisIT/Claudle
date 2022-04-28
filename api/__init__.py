@@ -1,3 +1,4 @@
+import re
 from flask import Flask, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -27,6 +28,7 @@ from api.validateRefactor import *
 from api.globalStats import *
 from api.wordSelect import *
 from api.saveStats import *
+from api.history import *
 
 
 @app.route('/api/validate', methods=['GET'])
@@ -184,6 +186,14 @@ def refresh_token(response):
     except Exception as e:
         return response
 
+@app.route("/api/history", methods=['GET'])
+@jwt_required()
+def histo():
+    token_id = get_jwt_identity()
+    reponse = json.dumps({"histo":getHistory(token_id)})
+    return reponse
+
+    
 
 @app.route("/api/delUser", methods=['DELETE'])
 @jwt_required()
