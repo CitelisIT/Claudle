@@ -13,7 +13,6 @@ class Games(db.Model):
     Game_Id = db.Column(db.Integer, primary_key=True)
     User_Id= db.Column(db.Integer,db.ForeignKey(User.Id))
     Word = db.Column(db.String(10))
-    GameMode = db.Column(db.String(8))
     Tries_Num = db.Column(db.Integer)
     Tries = db.Column(db.String(109))
     
