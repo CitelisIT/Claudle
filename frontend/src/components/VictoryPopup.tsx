@@ -12,7 +12,8 @@ interface Props {
 
 function DefinitionLink(props: any) {
   const settingsContext = useContext(SettingsContext);
-  const lang = settingsContext.lang === "english" ? "en" : "fr";
+  const lang =
+    settingsContext.lang === "english" ? "en" : "francais" ? "fr" : "cloclo";
   return (
     <button
       className=" p-2 mt-12 text-sm text-amber-400 border border-amber-400 rounded-lg w-max md:text-lg lg:text-xl mr-8"
@@ -61,9 +62,14 @@ export default function VictoryPopup({
         </Dialog.Title>
 
         <Dialog.Description as="div" className="w-full">
-          {/* <div className="flex flex-col items-center justify-center w-full gap-4 p-2 md:gap-12 md:p-8"> */}
           <div className="flex items-center justify-center">
-            <DefinitionLink target={target} />
+            {settingsContext.lang === "english" ? (
+              <DefinitionLink target={target} />
+            ) : settingsContext.lang === "francais" ? (
+              <DefinitionLink target={target} />
+            ) : (
+              <div></div>
+            )}
             <button
               onClick={() => {
                 setGameWon(false);
@@ -75,7 +81,6 @@ export default function VictoryPopup({
               Nouvelle partie
             </button>
           </div>
-          {/* </div> */}
         </Dialog.Description>
       </div>
     </Dialog>
