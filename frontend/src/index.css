@@ -174,4 +174,12 @@
   .button__icon {
     @apply w-6 h-6 lg:h-8 lg:w-8;
   }
+
+  .tab--default {
+    @apply text-gray-200 p-4 bg-gray-900;
+  }
+
+  .tab--selected {
+    @apply text-gray-200 p-4 bg-gray-600;
+  }
 }

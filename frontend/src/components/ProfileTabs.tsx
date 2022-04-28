@@ -9,13 +9,25 @@ interface Props {
 
 export default function ProfileTabs({ winsByTries }: Props) {
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex flex-col items-center justify-center w-full">
       <Tab.Group>
-        <Tab.List>
-          <Tab className="text-gray-200">Graphe</Tab>
-          <Tab className="text-gray-200">Historique</Tab>
+        <Tab.List className="flex items-center justify-center border-2 border-gray-600 rounded-lg text-md md:text-lg lg:text-xl">
+          <Tab
+            className={({ selected }) =>
+              selected ? "tab--selected" : "tab--default"
+            }
+          >
+            Graphe
+          </Tab>
+          <Tab
+            className={({ selected }) =>
+              selected ? "tab--selected" : "tab--default"
+            }
+          >
+            Historique
+          </Tab>
         </Tab.List>
-        <Tab.Panels>
+        <Tab.Panels className="w-full py-12">
           <Tab.Panel>
             <Graph winsByTries={winsByTries} />
           </Tab.Panel>
