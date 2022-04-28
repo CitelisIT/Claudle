@@ -48,26 +48,28 @@ export default function History() {
   }
 
   return ready ? (
-    <ul>
+    <ul className="w-full">
       {history.map((game, index) => (
         <li
-          className="flex items-center justify-between text-gray-200"
+          className={`flex items-center justify-between text-xl w-full text-gray-200 border p-4 border-gray-800 rounded-lg ${
+            game.status === "Victoire" ? "bg-green-600 " : " bg-red-600"
+          }`}
           key={game.target}
         >
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center gap-4">
             {game.status === "Victoire" ? (
-              <CheckIcon className="w-6 h-6" />
+              <CheckIcon className="w-8 h-8" />
             ) : (
-              <XIcon className="w-6 h-6" />
+              <XIcon className="w-8 h-8" />
             )}
             <span>{game.status}</span>
-            <span>{game.target}</span>
           </div>
+          <div>{game.target.toUpperCase()}</div>
 
           <HistoryPopup
             listWord={game.listWord}
             hints={game.hints}
-            histoOpen={histoOpen[index]}
+            target={game.target}
             togglePopup={(state: boolean) => togglePopup(index, state)}
           />
         </li>
