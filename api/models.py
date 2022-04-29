@@ -15,5 +15,11 @@ class Games(db.Model):
     Word = db.Column(db.String(10))
     Tries_Num = db.Column(db.Integer)
     Tries = db.Column(db.String(109))
+
+class Cloclo(db.Model):
+    Title = db.Column(db.String(64), primary_key=True)
+    Hint = db.Column(db.String(10), db.ForeignKey(Games.Word))
+    Link = db.Column(db.String(64))
     
+
 db.create_all()
