@@ -1,4 +1,3 @@
-from enum import unique
 from api import db
 
 db.metadata.clear()
@@ -15,5 +14,12 @@ class Games(db.Model):
     Word = db.Column(db.String(10))
     Tries_Num = db.Column(db.Integer)
     Tries = db.Column(db.String(109))
+
+
+class Word(db.Model):
+    Hash = db.Column(db.String(64), primary_key=True)
+    Word = db.Column(db.String(10))
+    Length = db.Column(db.Integer)
+    Language = db.Column(db.String(8))
     
 db.create_all()
