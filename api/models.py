@@ -17,7 +17,8 @@ class Games(db.Model):
     Tries = db.Column(db.String(109))
 
 class Cloclo(db.Model):
-    Title = db.Column(db.String(64), primary_key=True)
+    Song_Id = db.Column(db.Integer, primary_key=True)
+    Title = db.Column(db.String(64))
     Hint = db.Column(db.String(10), db.ForeignKey(Games.Word))
     Link = db.Column(db.String(64))
     
