@@ -80,6 +80,7 @@ export default function DefeatPopup({
               Nouvelle partie
             </button>
           </div>
+          <p className="flex flex-col items-center justify-center w-full text-sm mt-1">ou appuyez sur entrée pour rejouer</p>
         </Dialog.Description>
       </div>
     </Dialog>
