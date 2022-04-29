@@ -16,6 +16,12 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=2)
 app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_BINDS'] = {
+    "dico": "sqlite:///dico.db",
+}
+
+db = SQLAlchemy(app)
+jwt = JWTManager(app)
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
@@ -33,17 +39,20 @@ from api.history import *
 @app.route('/api/validate', methods=['GET'])
 def validate():
     args = request.args
-    word = args['word']
+    word_text = args['word']
+    word = Word.query.filter(Word.Word==word_text).first()
     language = args['language']
-    target = args['target']
-    words = getWords(len(target), language)
-    result = [0 in range (len(target))]
+    target_hash = args['target']
+    target = Word.query.filter(Word.Hash==target_hash).first()
+    target_word = target.Word
+    words = getWords(len(target_word), language)
+    result = [0 in range (len(target_word))]
     if language == "cloclo":
-        wordsFR = getWords(len(target), "francais")
+        wordsFR = getWords(len(target_word), "francais")
         if not validWord(word,wordsFR):
             return jsonify(error = "Ce mot n'est pas dans notre dictionnaire"), 404
         else:
-            result = verification(word, target)
+            result = verification(word_text, target_word)
             response_body = {
             "hint": result
             }
@@ -54,7 +63,7 @@ def validate():
             if language == "english":
                 return jsonify(error = "This word isn't in our dictionnary"), 404
         else:
-            result = verification(word, target)
+            result = verification(word_text, target_word)
         response_body = {
             "hint": result
         }
@@ -71,11 +80,11 @@ def getword():
     if token_id is None:
         wordsMet = []
         result = select(length, language, wordsMet)
-        response_body = {"words": result }
+        response_body = {"words": result.Hash }
         return response_body
     wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == token_id).distinct().all()]
     result = select(length, language, wordsMet)
-    response_body = {"words": result }
+    response_body = {"words": result.Hash }
     return json.dumps(response_body)
 
 
