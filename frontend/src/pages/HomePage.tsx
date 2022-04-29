@@ -186,12 +186,12 @@ export default function HomePage() {
         gameWon={gameWon}
         setGameWon={setGameWon}
         resetGame={resetGame}
-        target={target}
+        hash={target}
       />
       <DefeatPopup
         gameLost={gameLost}
         setGameLost={setGameLost}
-        target={target}
+        hash={target}
         resetGame={resetGame}
       />
       <GameBoard words={words} hints={hints} />

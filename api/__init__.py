@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -114,6 +115,13 @@ def saveStat():
         saveStats(user.Id,target,nbTries,stringTries)
         return {}
 
+@app.route('/api/endgame', methods=['GET'])
+def endGame():
+    args = request.args
+    whash = args["whash"]
+    target = Word.query.filter(Word.Hash == whash).first().Word
+    return json.dumps({"target":target})
+    
 
 @app.route('/api/register', methods=['POST'])
 def register():
