@@ -84,7 +84,9 @@ def getword():
         return response_body
     wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == token_id).distinct().all()]
     result = select(length, language, wordsMet)
-    response_body = {"words": result.Hash }
+    response_body = {"words": result.Hash,
+    "length": length
+     }
     return json.dumps(response_body)
 
 
