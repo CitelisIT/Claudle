@@ -20,18 +20,6 @@ def parseWord():
     """
     return
 
-def getWords(length, language):
-    words = []
-    if language == "cloclo":
-        with open('./Databases/special/dicloclo.txt', 'r') as f: 
-            for line in f: 
-                words.append(line.strip())
-    else:
-        with open(f'./Databases/{language}/dico{length}.txt',"r") as file:
-            for line in file:
-                words.append(line.rstrip())
-    return words
-
 
 def validWord(word,words):
     return word in words
