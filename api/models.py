@@ -17,6 +17,7 @@ class Games(db.Model):
 
 
 class Word(db.Model):
+    __bind_key__ = 'dico'
     Hash = db.Column(db.String(64), primary_key=True)
     Word = db.Column(db.String(10))
     Length = db.Column(db.Integer)

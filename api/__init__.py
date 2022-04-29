@@ -16,6 +16,12 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=2)
 app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_BINDS'] = {
+    "dico": "sqlite:///dico.db",
+}
+
+db = SQLAlchemy(app)
+jwt = JWTManager(app)
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
