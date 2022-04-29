@@ -1,4 +1,5 @@
 import random
+from api.models import Word
 
 def parseWord():
     """
@@ -8,17 +9,7 @@ def parseWord():
     return
 
 def getWords(length, language):
-    words = []
-    if language == "cloclo":
-        with open('./Databases/special/dicloclo.txt', 'r') as f: 
-            for line in f: 
-                words.append(line.strip())
-    else:
-        with open(f'./Databases/{language}/dico{length}.txt',"r") as file:
-            for line in file:
-                words.append(line.rstrip())
-    return words
-
+    return Word.query.filter(Word.Length==length, Word.Language.contains(language)).all()
 
 
 
