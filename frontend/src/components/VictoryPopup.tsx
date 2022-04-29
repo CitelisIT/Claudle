@@ -16,7 +16,7 @@ function DefinitionLink(props: any) {
     settingsContext.lang === "english" ? "en" : "francais" ? "fr" : "cloclo";
   return (
     <button
-      className="p-2 mt-12 mr-8 text-sm border rounded-lg  text-amber-400 border-amber-400 w-max md:text-lg lg:text-xl"
+      className="p-2 mt-12 mr-8 text-sm border rounded-lg text-amber-400 border-amber-400 w-max md:text-lg lg:text-xl"
       onClick={() =>
         window.open(
           lang === "fr"
@@ -85,7 +85,9 @@ export default function VictoryPopup({
               Nouvelle partie
             </button>
           </div>
-          <p className="flex flex-col items-center justify-center w-full text-sm mt-1">ou appuyez sur entrée pour rejouer</p>
+          <p className="flex flex-col items-center justify-center w-full mt-1 text-sm text-gray-600">
+            ou appuyez sur entrée pour rejouer
+          </p>
         </Dialog.Description>
       </div>
     </Dialog>
