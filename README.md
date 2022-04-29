@@ -8,14 +8,18 @@ Il a été réalisé par :
 - NOIRAY MOUSSU Camille
 - RICARD Guillaume
 
+![Preview](preview.png)
+
 ## Documentation
 
-- [Prérequis](#prérequis)
-- [Installation](#installation)
-- [Utilisation](#utilisation)
-  - [Comment jouer?](#comment-jouer)
-  - [Lancer le jeu](#lancer-le-jeu)
-- [Documentation](#documentation-1)
+- [Claudle](#claudle)
+  - [Documentation](#documentation)
+  - [Prérequis](#prérequis)
+  - [Installation](#installation)
+  - [Utilisation](#utilisation)
+    - [Lancer le jeu](#lancer-le-jeu)
+    - [Comment jouer?](#comment-jouer)
+  - [Documentation](#documentation-1)
 
 ## Prérequis
 
@@ -25,13 +29,13 @@ Il a été réalisé par :
 
 ## Installation
 
-Pour installer les **dépendances**, il faut exécuter le script `setup.sh` dans un terminal.
+Pour installer les **dépendances**, rendez-vous dans le dossier, puis exécuter le script `setup.sh` dans un terminal.
 
 ## Utilisation
 
 ### Lancer le jeu
 
-Executez le script `launch.sh` dans un terminal pour lancer le jeu.
+Placez vous dans le fichier project2-E30, puis executez le script `launch.sh` dans un terminal pour lancer le jeu.
 
 ### Comment jouer?
 
