@@ -85,7 +85,7 @@ export default function VictoryPopup({
               Nouvelle partie
             </button>
           </div>
-          <p className="flex flex-col items-center justify-center w-full mt-1 text-sm text-gray-600">
+          <p className="flex flex-col items-center justify-center w-full p-3 mt-1 text-sm text-gray-600">
             ou appuyez sur entrée pour rejouer
           </p>
         </Dialog.Description>
