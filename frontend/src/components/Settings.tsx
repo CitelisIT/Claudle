@@ -114,24 +114,6 @@ export default function Settings({
               </Listbox.Options>
             </div>
           </Listbox>
-          <span className="settings__label">Mode difficile</span>
-          <Switch
-            checked={settingsContext.hardMode}
-            onChange={settingsContext.setHardMode}
-            className={
-              settingsContext.hardMode ? "switch--active" : "switch--default"
-            }
-            {...{ disabled }}
-          >
-            <span className="sr-only">Activer le mode difficile</span>
-            <span
-              className={
-                settingsContext.hardMode
-                  ? "switch__inner--active"
-                  : "switch__inner--default"
-              }
-            />
-          </Switch>
           <span className="settings__label">Clavier</span>
           <Listbox
             value={settingsContext.layout}
