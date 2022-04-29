@@ -8,6 +8,8 @@ Il a été réalisé par :
 - NOIRAY MOUSSU Camille
 - RICARD Guillaume
 
+![Preview](preview.png)
+
 ## Documentation
 
 - [Prérequis](#prérequis)
