@@ -1,5 +1,5 @@
 from api.models import * 
-from api.validateRefactor import *
+from api.validate import *
 
 separator = '/' #Can be changed depending on what we decide to use when saving in the database
 
