@@ -74,6 +74,7 @@ def validate():
 @app.route('/api/getword', methods=['GET'])
 @jwt_required(optional=True)
 def getword():
+    response_status = 200
     token_id = get_jwt_identity()
     args = request.args
     language = args['language']
@@ -81,6 +82,9 @@ def getword():
     if token_id is None:
         wordsMet = []
         result = select(length, language, wordsMet)
+        if result is None:
+            response_body = {"words": None}
+            response_status = 404
         response_body = {"words": result.Hash }
         return response_body
     wordsMet = [r.Word for r in Games.query.filter( Games.User_Id == token_id).distinct().all()]
@@ -88,7 +92,7 @@ def getword():
     response_body = {"words": result.Hash,
     "length": length
      }
-    return json.dumps(response_body)
+    return json.dumps(response_body), response_status
 
 
 @app.route('/api/saveStats', methods=['POST'])
