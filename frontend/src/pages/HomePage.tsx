@@ -102,7 +102,12 @@ export default function HomePage() {
                 const letterArray = currentWord.split("");
                 var _keyboardHints = keyboardHints;
                 for (var i = 0, len = letterArray.length; i < len; i++) {
-                  _keyboardHints.set(letterArray[i], wordHints[i]);
+                  if (
+                    !_keyboardHints.has(letterArray[i]) ||
+                    _keyboardHints.get(letterArray[i])! < wordHints
+                  ) {
+                    _keyboardHints.set(letterArray[i], wordHints[i]);
+                  }
                 }
                 setKeyboardHints(_keyboardHints);
                 setCurrentWord("");
