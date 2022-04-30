@@ -3,7 +3,6 @@ import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
 import axios from "axios";
-import { getCookie } from "../utils/utils";
 
 interface Props {
   gameLost: boolean;
@@ -78,6 +77,7 @@ export default function DefeatPopup({
             <img
               src="./ClaudeFrancoisTriste.jpg"
               className="w-6 h-6 ml-6 text-gray-200 md:w-20 md:h-20"
+              alt="Cloclo triste"
             />
           </div>
         </Dialog.Title>
@@ -91,6 +91,7 @@ export default function DefeatPopup({
               onClick={() => {
                 setGameLost(false);
                 settingsContext.setGameState(0);
+                console.log("cocou");
                 resetGame();
               }}
               className="inline-block p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl"

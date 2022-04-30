@@ -77,6 +77,7 @@ export default function VictoryPopup({
             <img
               src="./ClaudeFrancoisJoie.jpg"
               className="w-6 h-6 ml-6 text-gray-200 md:w-20 md:h-20"
+              alt="Cloclo joie"
             />
           </div>
         </Dialog.Title>
