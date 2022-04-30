@@ -24,8 +24,10 @@ def justNewWords(lenght, language, wordsMet):
     
 def select(lenght, language, wordsMet):
     if language == "cloclo":
-        words = justNewWords(lenght, language, wordsMet)
-        return words[random.randint(0,len(words))]
+        words = getWords(lenght, language)
+        if not words:
+            return None
+        return random.choice(words)
     else:
         words = justNewWords(lenght, language, wordsMet)
     return  words[random.randint(0,len(words))]
