@@ -14,7 +14,7 @@ interface DefinitionProps {
   target: string;
 }
 
-function DefinitionLink(target: DefinitionProps) {
+function DefinitionLink({ target }: DefinitionProps) {
   const settingsContext = useContext(SettingsContext);
   const lang = settingsContext.lang === "english" ? "en" : "fr";
   return (

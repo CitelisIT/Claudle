@@ -14,10 +14,9 @@ interface DefinitionProps {
   target: string;
 }
 
-function DefinitionLink(target: DefinitionProps) {
+function DefinitionLink({ target }: DefinitionProps) {
   const settingsContext = useContext(SettingsContext);
   const lang = settingsContext.lang === "english" ? "en" : "fr";
-
   return (
     <button
       className="p-2 mt-12 mr-8 text-sm border rounded-lg text-amber-400 border-amber-400 w-max md:text-lg lg:text-xl"
