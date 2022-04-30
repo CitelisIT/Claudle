@@ -173,7 +173,7 @@ export default function HomePage() {
     setKeyboardHints(new Map<string, number>());
     setCurrentIndex(0);
     setCurrentWord("");
-  }, [settingsContext.size, settingsContext.tries, settingsContext.lang]);
+  }, [settingsContext]);
 
   useEffect(() => {
     resetGame();
