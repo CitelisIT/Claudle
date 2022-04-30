@@ -11,30 +11,21 @@ interface Props {
   resetGame: () => void;
 }
 
-function DefinitionLink(props: any) {
-  const settingsContext = useContext(SettingsContext);
-  const lang =
-    settingsContext.lang === "english" ? "en" : "francais" ? "fr" : "cloclo";
-  const [soluce, setSoluce] = useState("");
-  axios
-    .get("/api/endgame", {
-      params: {
-        whash: props.hash,
-      },
-    })
-    .then((response) => {
-      setSoluce(response.data.target);
-    });
+interface DefinitionProps {
+  target: string;
+}
 
+function DefinitionLink(target: DefinitionProps) {
+  const settingsContext = useContext(SettingsContext);
+  const lang = settingsContext.lang === "english" ? "en" : "fr";
   return (
     <button
       className="p-2 mt-12 mr-8 text-sm border rounded-lg text-amber-400 border-amber-400 w-max md:text-lg lg:text-xl"
       onClick={() =>
         window.open(
           lang === "fr"
-            ? "https://www.cnrtl.fr/definition/" + props.target
-            : "https://dictionary.cambridge.org/dictionary/english/" +
-                props.target,
+            ? "https://www.cnrtl.fr/definition/" + target
+            : "https://dictionary.cambridge.org/dictionary/english/" + target,
           "_blank"
         )
       }
@@ -52,15 +43,18 @@ export default function VictoryPopup({
 }: Props) {
   const settingsContext = useContext(SettingsContext);
   const [soluce, setSoluce] = useState("");
-  axios
-    .get("/api/endgame", {
-      params: {
-        whash: hash,
-      },
-    })
-    .then((response) => {
-      setSoluce(response.data.target);
-    });
+  useEffect(() => {
+    axios
+      .get("/api/endgame", {
+        params: {
+          whash: hash,
+        },
+      })
+      .then((response) => {
+        setSoluce(response.data.target);
+      });
+  }, [hash]);
+
   return (
     <Dialog
       open={gameWon}

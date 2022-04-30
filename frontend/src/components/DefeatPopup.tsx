@@ -12,7 +12,11 @@ interface Props {
   resetGame: () => void;
 }
 
-function DefinitionLink(props: any) {
+interface DefinitionProps {
+  target: string;
+}
+
+function DefinitionLink(target: DefinitionProps) {
   const settingsContext = useContext(SettingsContext);
   const lang = settingsContext.lang === "english" ? "en" : "fr";
 
@@ -22,9 +26,8 @@ function DefinitionLink(props: any) {
       onClick={() =>
         window.open(
           lang === "fr"
-            ? "https://www.cnrtl.fr/definition/" + props.target
-            : "https://dictionary.cambridge.org/dictionary/english/" +
-                props.target,
+            ? "https://www.cnrtl.fr/definition/" + target
+            : "https://dictionary.cambridge.org/dictionary/english/" + target,
           "_blank"
         )
       }
@@ -42,16 +45,17 @@ export default function DefeatPopup({
 }: Props) {
   const settingsContext = useContext(SettingsContext);
   const [soluce, setSoluce] = useState("");
-  axios
-    .get("/api/endgame", {
-      params: {
-        whash: hash,
-      },
-    })
-    .then((response) => {
-      setSoluce(response.data.target);
-    });
-
+  useEffect(() => {
+    axios
+      .get("/api/endgame", {
+        params: {
+          whash: hash,
+        },
+      })
+      .then((response) => {
+        setSoluce(response.data.target);
+      });
+  }, [hash]);
   return (
     <Dialog
       open={gameLost}
