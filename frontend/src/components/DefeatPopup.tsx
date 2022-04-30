@@ -44,13 +44,19 @@ export default function DefeatPopup({
   return (
     <Dialog
       open={gameLost}
-      onClose={() => setGameLost(false)}
+      onClose={() => {
+        setGameLost(false);
+        settingsContext.setGameState(0);
+        resetGame();
+      }}
       className="fixed inset-0 w-10/12 p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl mg:p-8 lg:w-5/12 mx-1/2 h-fit"
     >
       <Dialog.Overlay />
       <button
         onClick={() => {
           setGameLost(false);
+          settingsContext.setGameState(0);
+          resetGame();
         }}
         className="absolute top-0 right-0 p-4 "
       >
@@ -77,7 +83,6 @@ export default function DefeatPopup({
               onClick={() => {
                 setGameLost(false);
                 settingsContext.setGameState(0);
-                console.log("cocou");
                 resetGame();
               }}
               className="inline-block p-2 mt-12 text-sm text-green-600 border border-green-600 rounded-lg w-max md:text-lg lg:text-xl"

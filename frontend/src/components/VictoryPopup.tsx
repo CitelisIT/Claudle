@@ -45,13 +45,19 @@ export default function VictoryPopup({
   return (
     <Dialog
       open={gameWon}
-      onClose={() => setGameWon(false)}
+      onClose={() => {
+        setGameWon(false);
+        settingsContext.setGameState(0);
+        resetGame();
+      }}
       className="fixed inset-0 w-10/12 p-4 m-auto text-gray-200 bg-gray-900 border border-gray-600 rounded-lg shadow-2xl mg:p-8 lg:w-5/12 mx-1/2 h-fit"
     >
       <Dialog.Overlay />
       <button
         onClick={() => {
           setGameWon(false);
+          settingsContext.setGameState(0);
+          resetGame();
         }}
         className="absolute top-0 right-0 p-4 "
       >
