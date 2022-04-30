@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
-import axios from "axios";
 
 interface Props {
   gameLost: boolean;
   setGameLost: React.Dispatch<React.SetStateAction<boolean>>;
-  hash: string;
+  clearWord: string;
   resetGame: () => void;
 }
 
@@ -39,22 +38,10 @@ function DefinitionLink(target: DefinitionProps) {
 export default function DefeatPopup({
   gameLost,
   setGameLost,
-  hash,
+  clearWord,
   resetGame,
 }: Props) {
   const settingsContext = useContext(SettingsContext);
-  const [soluce, setSoluce] = useState("");
-  useEffect(() => {
-    axios
-      .get("/api/endgame", {
-        params: {
-          whash: hash,
-        },
-      })
-      .then((response) => {
-        setSoluce(response.data.target);
-      });
-  }, [hash]);
   return (
     <Dialog
       open={gameLost}
@@ -83,10 +70,10 @@ export default function DefeatPopup({
         </Dialog.Title>
         <Dialog.Description as="div" className="w-full">
           <div className="flex flex-col items-center justify-center w-full gap-4 p-2 md:gap-12 md:text-xl">
-            <span> Le mot recherché etait : {soluce} </span>
+            <span> Le mot recherché etait : {clearWord} </span>
           </div>
           <div className="flex items-center justify-center">
-            <DefinitionLink target={soluce} />
+            <DefinitionLink target={clearWord} />
             <button
               onClick={() => {
                 setGameLost(false);

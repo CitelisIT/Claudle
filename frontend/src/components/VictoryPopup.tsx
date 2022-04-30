@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Dialog } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { SettingsContext } from "../App";
-import axios from "axios";
 
 interface Props {
   gameWon: boolean;
   setGameWon: React.Dispatch<React.SetStateAction<boolean>>;
-  hash: string;
+  clearWord: string;
   resetGame: () => void;
 }
 
@@ -38,22 +37,10 @@ function DefinitionLink(target: DefinitionProps) {
 export default function VictoryPopup({
   gameWon,
   setGameWon,
-  hash,
+  clearWord,
   resetGame,
 }: Props) {
   const settingsContext = useContext(SettingsContext);
-  const [soluce, setSoluce] = useState("");
-  useEffect(() => {
-    axios
-      .get("/api/endgame", {
-        params: {
-          whash: hash,
-        },
-      })
-      .then((response) => {
-        setSoluce(response.data.target);
-      });
-  }, [hash]);
 
   return (
     <Dialog
@@ -85,9 +72,9 @@ export default function VictoryPopup({
         <Dialog.Description as="div" className="w-full">
           <div className="flex items-center justify-center">
             {settingsContext.lang === "english" ? (
-              <DefinitionLink target={soluce} />
+              <DefinitionLink target={clearWord} />
             ) : settingsContext.lang === "francais" ? (
-              <DefinitionLink target={soluce} />
+              <DefinitionLink target={clearWord} />
             ) : (
               <div></div>
             )}

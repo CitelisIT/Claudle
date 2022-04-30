@@ -22,6 +22,7 @@ export default function HomePage() {
   const [gameWon, setGameWon] = useState<boolean>(false);
   const [gameLost, setGameLost] = useState<boolean>(false);
   const [badWord, setBadWord] = useState<boolean>(false);
+  const [clearWord, setClearWord] = useState<string>("");
 
   function addLetter(key: string) {
     if (!popupOpen) {
@@ -78,7 +79,16 @@ export default function HomePage() {
                       },
                     }
                   );
-                  setGameWon(true);
+                  axios
+                    .get("/api/endgame", {
+                      params: {
+                        whash: target,
+                      },
+                    })
+                    .then((response) => {
+                      setClearWord(response.data.target);
+                      setGameWon(true);
+                    });
                 } else if (currentIndex === settingsContext.tries - 1) {
                   settingsContext.setGameState(2);
                   axios.post(
@@ -95,7 +105,16 @@ export default function HomePage() {
                       },
                     }
                   );
-                  setGameLost(true);
+                  axios
+                    .get("/api/endgame", {
+                      params: {
+                        whash: target,
+                      },
+                    })
+                    .then((response) => {
+                      setClearWord(response.data.target);
+                      setGameLost(true);
+                    });
                 }
                 _hints[currentIndex] = wordHints;
                 setHints(_hints);
@@ -189,7 +208,7 @@ export default function HomePage() {
           gameWon={gameWon}
           setGameWon={setGameWon}
           resetGame={resetGame}
-          hash={target}
+          clearWord={clearWord}
         />
       ) : (
         <></>
@@ -198,7 +217,7 @@ export default function HomePage() {
         <DefeatPopup
           gameLost={gameLost}
           setGameLost={setGameLost}
-          hash={target}
+          clearWord={clearWord}
           resetGame={resetGame}
         />
       ) : (
