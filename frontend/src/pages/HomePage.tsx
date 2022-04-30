@@ -182,18 +182,26 @@ export default function HomePage() {
   return (
     <>
       <Navbar setPopupOpen={setPopupOpen} />
-      <VictoryPopup
-        gameWon={gameWon}
-        setGameWon={setGameWon}
-        resetGame={resetGame}
-        hash={target}
-      />
-      <DefeatPopup
-        gameLost={gameLost}
-        setGameLost={setGameLost}
-        hash={target}
-        resetGame={resetGame}
-      />
+      {gameWon ? (
+        <VictoryPopup
+          gameWon={gameWon}
+          setGameWon={setGameWon}
+          resetGame={resetGame}
+          hash={target}
+        />
+      ) : (
+        <></>
+      )}
+      {gameLost ? (
+        <DefeatPopup
+          gameLost={gameLost}
+          setGameLost={setGameLost}
+          hash={target}
+          resetGame={resetGame}
+        />
+      ) : (
+        <></>
+      )}
       <GameBoard words={words} hints={hints} />
       <InvalidWordPopup badWord={badWord} setBadWord={setBadWord} />
       <Keyboard
