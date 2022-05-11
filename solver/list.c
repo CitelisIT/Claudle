@@ -135,3 +135,15 @@ void list_remove_first(list_t *one_list)
     one_list->head = one_list->head->next;
     free(tmp);
 }
+
+char *list_get_key(element_t *one_element)
+{
+    assert(one_element != NULL);
+    return one_element->key;
+}
+
+char *list_get_value(element_t *one_element)
+{
+    assert(one_element != NULL);
+    return one_element->value;
+}

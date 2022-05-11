@@ -39,4 +39,8 @@ char **list_find(list_t *one_list, char *one_key);
 
 void list_remove_first(list_t *one_list);
 
+char *list_get_key(element_t *one_element);
+
+char *list_get_value(element_t *one_element);
+
 #endif /* __LIST_H__ */
