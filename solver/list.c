@@ -42,7 +42,7 @@ bool list_is_empty(list_t *one_list)
     return one_list->head == NULL;
 }
 
-void list_append(list_t *one_list, char *one_key, char *one_value)
+void list_append(list_t *one_list, char one_key, int one_value)
 {
     element_t *new_element = calloc(1, sizeof(element_t));
     new_element->key = one_key;
@@ -66,7 +66,7 @@ void list_append(list_t *one_list, char *one_key, char *one_value)
 void element_print(element_t *one_element)
 {
     assert(one_element != NULL);
-    printf("%s: %s\n", one_element->key, one_element->value);
+    printf("%c: %d\n", one_element->key, one_element->value);
 }
 
 void list_print(list_t *one_list)
@@ -95,7 +95,7 @@ void list_print(list_t *one_list)
     printf("]\n");
 }
 
-bool list_contains(list_t *one_list, char *one_key)
+bool list_contains(list_t *one_list, char one_key)
 {
     assert(one_list != NULL);
     assert(one_key != NULL);
@@ -113,14 +113,14 @@ bool list_contains(list_t *one_list, char *one_key)
     return false;
 }
 
-char **list_find(list_t *one_list, char *one_key)
+int list_find(list_t *one_list, char one_key)
 {
     element_t *tmp = one_list->head;
     while (tmp != NULL)
     {
         if (strcmp(tmp->key, one_key) == 0)
         {
-            return &(tmp->value);
+            return (tmp->value);
         }
         tmp = tmp->next;
     }
@@ -136,13 +136,13 @@ void list_remove_first(list_t *one_list)
     free(tmp);
 }
 
-char *list_get_key(element_t *one_element)
+char list_get_key(element_t *one_element)
 {
     assert(one_element != NULL);
     return one_element->key;
 }
 
-char *list_get_value(element_t *one_element)
+int list_get_value(element_t *one_element)
 {
     assert(one_element != NULL);
     return one_element->value;
