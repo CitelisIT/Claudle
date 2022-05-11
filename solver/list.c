@@ -147,3 +147,16 @@ int list_get_value(element_t *one_element)
     assert(one_element != NULL);
     return one_element->value;
 }
+
+int list_get_size(list_t *one_list)
+{
+    assert(one_list != NULL);
+    int size = 0;
+    element_t *tmp = one_list->head;
+    while (tmp != NULL)
+    {
+        size++;
+        tmp = tmp->next;
+    }
+    return size;
+}

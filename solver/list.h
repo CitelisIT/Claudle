@@ -41,4 +41,6 @@ char list_get_key(element_t *one_element);
 
 int list_get_value(element_t *one_element);
 
+int list_get_size(list_t *one_list);
+
 #endif /* __LIST_H__ */
