@@ -3,8 +3,6 @@
 #ifndef __LIST_H__
 #define __LIST_H__
 
-
-
 typedef char *key;
 typedef char *value;
 struct _element_t
@@ -38,5 +36,7 @@ void list_print(list_t *one_list);
 bool list_contains(list_t *one_list, char *one_key);
 
 char **list_find(list_t *one_list, char *one_key);
+
+void list_remove_first(list_t *one_list);
 
 #endif /* __LIST_H__ */

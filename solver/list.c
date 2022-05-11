@@ -126,3 +126,12 @@ char **list_find(list_t *one_list, char *one_key)
     }
     return NULL;
 }
+
+void list_remove_first(list_t *one_list)
+{
+    assert(one_list != NULL);
+
+    element_t *tmp = one_list->head;
+    one_list->head = one_list->head->next;
+    free(tmp);
+}
