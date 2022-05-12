@@ -29,13 +29,13 @@ Il a été réalisé par :
 
 ## Installation
 
-Pour installer les **dépendances**, rendez-vous dans le dossier, puis exécuter le script `setup.sh` dans un terminal.
+Pour installer les **dépendances**, rendez vous dans le dossier `game`, puis exécuter le script `setup.sh` dans un terminal.
 
 ## Utilisation
 
 ### Lancer le jeu
 
-Placez vous dans le fichier project2-E30, puis executez le script `launch.sh` dans un terminal pour lancer le jeu.
+Placez vous dans le dossier `game`, puis executez le script `launch.sh` dans un terminal pour lancer le jeu.
 
 ### Comment jouer?
 
