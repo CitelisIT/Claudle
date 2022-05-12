@@ -118,7 +118,7 @@ int list_find(list_t *one_list, char one_key)
     element_t *tmp = one_list->head;
     while (tmp != NULL)
     {
-        if (strcmp(tmp->key, one_key) == 0)
+        if (tmp->key == one_key)
         {
             return (tmp->value);
         }
