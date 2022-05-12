@@ -8,37 +8,48 @@ const char *ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
 char *getword(list_t *pattern, int size, char *notinword)
 {
-    char word[] = "test";
-    char pool[256] = "test"; // initialize the pool
-    int i = 0;               // index for the pattern
+    char word[256] = "";
+    char pool[256] = ""; // initialize the pool
+    int j = 0;           // index for the pattern
 
-    while (i < size)
+    while (j < size)
     {
         size_t pool_len = strlen(pool);
+        size_t notinword_len = strlen(notinword);
+        char newchar = pool[rand() % pool_len]; // Potential replacement
 
         switch (list_get_value(pattern->head))
         {
         case 2:
-            word[i] = list_get_key(pattern->head);
+            word[j] = list_get_key(pattern->head);
             break;
 
         case 1:
-            word[i] = pool[rand() % pool_len];
+
+            while (strchr(notinword, newchar)) // Checks if the new char is in notinword
+            {
+                newchar = pool[rand() % pool_len];
+            }
+            word[j] = newchar;
             pool[pool_len + 1] = list_get_key(pattern->head);
             pool[pool_len + 2] = '\0';
             break;
 
         case 0:
-            word[i] = pool[rand() % pool_len];
-            pool[pool_len + 1] = list_get_key(pattern->head);
-            pool[pool_len + 2] = '\0';
+            while (strchr(notinword, newchar)) // Checks if the new char is in notinword
+            {
+                newchar = pool[rand() % pool_len];
+            }
+            word[j] = newchar;
+            notinword[notinword_len + 1] = list_get_key(pattern->head);
+            notinword[notinword_len + 2] = '\0';
             break;
 
         default:
             break;
         }
         list_remove_first(pattern);
-        i++;
+        j++;
     }
     printf("%s\n", word);
 }
@@ -51,7 +62,7 @@ int main()
     list_append(pattern, 'v', 0);
     list_append(pattern, 'e', 2);
     int size = list_get_size(pattern);
-    char *notinword = ""; // Unused yet
+    char notinword[256] = "abcdefghijklmnopqrtuvwxyz";
     getword(pattern, size, notinword);
     list_destroy(pattern);
     return 0;
