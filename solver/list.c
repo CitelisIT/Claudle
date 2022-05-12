@@ -1,16 +1,40 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "list.h"
 #include <err.h>
 #include <errno.h>
-#include <stdbool.h>
 #include <assert.h>
+#include "list.h"
+
+element_t* element_create(char* key, char* value) 
+{
+    element_t* new = malloc(sizeof(element_t));
+
+    unsigned long len = strlen(key);
+    char* keyCopy = malloc(len + 1);
+    strcpy(keyCopy, key);
+
+    len = strlen(value);
+    char* valueCopy = malloc(len + 1);
+    strcpy(valueCopy, value);
+
+    new->key = keyCopy;
+    new->value = valueCopy;
+
+    return new;
+}
+
+node_t* node_create(element_t* value) 
+{
+    node_t* node = calloc(1, sizeof(node_t));
+    node->value = value;
+
+    return node;
+}
 
 list_t *list_create()
 {
-
-    list_t *new_list = calloc(1, sizeof(list_t));
+    list_t *new_list =  calloc(1, sizeof(list_t));
 
     if (new_list == NULL)
     {
@@ -22,18 +46,18 @@ list_t *list_create()
 
 void list_destroy(list_t *one_list)
 {
-
     assert(one_list != NULL);
 
-    element_t *current = one_list->head;
-    element_t *tmp;
-    while (current != NULL)
+    node_t *curr_node = one_list->head;
+    while(curr_node)
     {
-        tmp = current;
-        current = current->next;
-        free(tmp);
+        node_t* next_node_pt = curr_node->next;
+
+        free(curr_node->value);
+        free(curr_node);
+
+        curr_node = next_node_pt;
     }
-    free(one_list);
 }
 
 bool list_is_empty(list_t *one_list)
@@ -42,121 +66,79 @@ bool list_is_empty(list_t *one_list)
     return one_list->head == NULL;
 }
 
-void list_append(list_t *one_list, char one_key, int one_value)
+void list_append(list_t *one_list, char *one_key, int *one_value)
 {
-    element_t *new_element = calloc(1, sizeof(element_t));
-    new_element->key = one_key;
-    new_element->value = one_value;
-    new_element->next = NULL;
-    if (one_list->head == NULL)
+    node_t *new_node = node_create(element_create(one_key, one_value));
+
+    if(one_list->head == NULL)
     {
-        one_list->head = new_element;
+        one_list->head = new_node;
+        one_list->last = new_node;
     }
+
     else
     {
-        element_t *tmp = one_list->head;
-        while (tmp->next != NULL)
+        one_list->last->next = new_node;
+        one_list->last = new_node;
+    }
+}
+
+char* *list_find(list_t *one_list, char *one_key)
+{
+    node_t *one_node = one_list->head;
+
+    while(one_node->next != NULL)
+    {
+        if(strcmp(one_node->value->key, one_key) == 1)
         {
-            tmp = tmp->next;
+            return one_node->value->value;
         }
-        tmp->next = new_element;
-    }
-}
 
-void element_print(element_t *one_element)
-{
-    assert(one_element != NULL);
-    printf("%c: %d\n", one_element->key, one_element->value);
-}
-
-void list_print(list_t *one_list)
-{
-    assert(one_list != NULL);
-
-    bool first = true;
-
-    printf("[");
-    element_t *current = one_list->head;
-    while (current != NULL)
-    {
-        if (!first)
-        {
-            printf(",");
-        }
-        printf(" %s : %s", current->key, current->value);
-        first = false;
-        current = current->next;
+        one_node = one_node->next;
     }
 
-    if (!first)
+    // Compare last element
+    // Could have used list->last
+    if(strcmp(one_node->value->key, one_key) == 1)
     {
-        printf(" ");
+        return one_node->value->value;
     }
-    printf("]\n");
+
+    return NULL;
 }
 
-bool list_contains(list_t *one_list, char one_key)
+bool list_contains(list_t *one_list, char *one_key)
 {
-    assert(one_list != NULL);
-    assert(one_key != NULL);
+    node_t *one_node = one_list->head;
 
-    element_t *current = one_list->head;
-    while (current != NULL)
+    while(one_node->next != NULL)
     {
-        if (strcmp(current->key, one_key) == 0)
+        if(strcmp(one_node->value->key, one_key) == 1)
         {
             return true;
         }
-        current = current->next;
+
+        one_node = one_node->next;
+    }
+
+    // Compare last element
+    // Could have used list->last
+    if(strcmp(one_node->value->key, one_key) == 1)
+    {
+        return true;
     }
 
     return false;
 }
 
-int list_find(list_t *one_list, char one_key)
-{
-    element_t *tmp = one_list->head;
-    while (tmp != NULL)
-    {
-        if (strcmp(tmp->key, one_key) == 0)
-        {
-            return (tmp->value);
-        }
-        tmp = tmp->next;
-    }
-    return NULL;
-}
-
-void list_remove_first(list_t *one_list)
-{
-    assert(one_list != NULL);
-
-    element_t *tmp = one_list->head;
-    one_list->head = one_list->head->next;
-    free(tmp);
-}
-
-char list_get_key(element_t *one_element)
+char* list_get_key(element_t *one_element)
 {
     assert(one_element != NULL);
     return one_element->key;
 }
 
-int list_get_value(element_t *one_element)
+int* list_get_value(element_t *one_element)
 {
     assert(one_element != NULL);
     return one_element->value;
-}
-
-int list_get_size(list_t *one_list)
-{
-    assert(one_list != NULL);
-    int size = 0;
-    element_t *tmp = one_list->head;
-    while (tmp != NULL)
-    {
-        size++;
-        tmp = tmp->next;
-    }
-    return size;
 }
