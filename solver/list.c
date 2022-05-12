@@ -160,3 +160,16 @@ int list_get_size(list_t *one_list)
     }
     return size;
 }
+
+list_t *list_copy(list_t *one_list)
+{
+    assert(one_list != NULL);
+    list_t *new_list = list_create();
+    element_t *tmp = one_list->head;
+    while (tmp != NULL)
+    {
+        list_append(new_list, tmp->key, tmp->value);
+        tmp = tmp->next;
+    }
+    return new_list;
+}

@@ -43,4 +43,6 @@ int list_get_value(element_t *one_element);
 
 int list_get_size(list_t *one_list);
 
+list_t *list_copy(list_t *one_list);
+
 #endif /* __LIST_H__ */
