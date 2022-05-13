@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "table.h"
+#include "hashtable.h"
 
 int hash(char *some_value)
 {

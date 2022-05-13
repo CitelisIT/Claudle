@@ -1,8 +1,8 @@
 #include <stdbool.h>
-#include "list.h"
+#include "linked_list.h"
 
-#ifndef __TABLE_H__
-#define __TABLE_H__
+#ifndef __HASHTABLE_H__
+#define __HASHTABLE_H__
 
 typedef struct table_t
 {

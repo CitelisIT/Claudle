@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
-#ifndef __LIST_H__
-#define __LIST_H__
+#ifndef __LINKED_LIST_H__
+#define __LINKED_LIST_H__
 
 typedef struct element_t
 {
