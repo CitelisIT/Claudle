@@ -1,5 +1,4 @@
-#include "list.h"
-#include "table.h"
+#include "getwords.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
