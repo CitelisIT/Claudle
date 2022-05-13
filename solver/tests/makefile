@@ -16,7 +16,7 @@ getwords_tests.o: getwords_tests.c ../src/getwords.o
 
 
 clean:
-	rm -f *.o *_test
+	rm -f *.o *_tests
 
 test: getwords_tests
 	$(RUN_ENV) ./getwords_tests

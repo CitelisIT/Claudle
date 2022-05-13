@@ -15,6 +15,6 @@ getwords.o: getwords.h getwords.c
 list.o: list.h list.c
 
 clean:
-	rm -f *.o *_test
+	rm -f *.o *_tests
 
 .SILENT: clean
