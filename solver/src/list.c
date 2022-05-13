@@ -20,7 +20,8 @@ word_t *word_create()
     return new_word;
 }
 
-list_t* list_create(){
+list_t *list_create()
+{
     list_t *new_list = calloc(1, sizeof(list_t));
 
     if (new_list == NULL)
@@ -96,7 +97,7 @@ void word_append(word_t *one_word, char one_key, int one_value)
     }
 }
 
-void list_append(list_t *one_list, word_t* one_word)
+void list_append(list_t *one_list, word_t *one_word)
 {
     if (one_list->sublist == NULL)
     {
@@ -118,7 +119,6 @@ void element_print(element_t *one_element)
     assert(one_element != NULL);
     printf("%c: %d\n", one_element->key, one_element->value);
 }
-
 
 void word_print(word_t *one_word)
 {
@@ -175,7 +175,6 @@ void list_print(list_t *one_list)
 bool word_contains(word_t *one_word, char one_key)
 {
     assert(one_word != NULL);
-    assert(one_key != NULL);
 
     element_t *current = one_word->head;
     while (current != NULL)
@@ -190,7 +189,7 @@ bool word_contains(word_t *one_word, char one_key)
     return false;
 }
 
-bool list_contains(list_t *one_list, word_t* one_word)
+bool list_contains(list_t *one_list, word_t *one_word)
 {
     element_t *letter;
     assert(one_list != NULL);
@@ -198,18 +197,18 @@ bool list_contains(list_t *one_list, word_t* one_word)
     bool contain = false;
     word_t *current = one_list->sublist;
     while (current != NULL)
-    {   
-        for (size_t i = 0; i < word_get_size(current); i++)
+    {
+        for (int i = 0; i < word_get_size(current); i++)
         {
             letter = current->head;
-            if (word_contains(current,letter->key))
+            if (word_contains(current, letter->key))
             {
                 contain = true;
             }
-            else{
+            else
+            {
                 contain = false;
             }
-
         }
         current = current->next;
     }
@@ -217,7 +216,8 @@ bool list_contains(list_t *one_list, word_t* one_word)
     return contain;
 }
 
-int list_get_size(list_t *one_list){
+int list_get_size(list_t *one_list)
+{
     assert(one_list != NULL);
     int size = 0;
     word_t *tmp = one_list->sublist;
@@ -228,7 +228,6 @@ int list_get_size(list_t *one_list){
     }
     return size;
 }
-
 
 int word_find(word_t *one_word, char one_key)
 {
@@ -304,16 +303,17 @@ list_t *list_copy(list_t *one_list)
     return new_list;
 }
 
-char* word_to_char(word_t *one_word){
+char *word_to_char(word_t *one_word)
+{
     assert(one_word != NULL);
 
     bool first = true;
-    char* mot = "";
+    char *mot = "";
     element_t *current = one_word->head;
     while (current != NULL)
     {
         if (!first)
-        mot = mot + current->key;
+            mot = mot + current->key;
         first = false;
         current = current->next;
     }
@@ -321,12 +321,13 @@ char* word_to_char(word_t *one_word){
     return mot;
 }
 
-word_t* char_to_word(char *one_word){
+word_t *char_to_word(char *one_word)
+{
     assert(one_word != NULL);
-    word_t* w = word_create();
+    word_t *w = word_create();
     for (size_t i = 0; i < strlen(one_word); i++)
     {
-        word_append(w,one_word[i],0);
+        word_append(w, one_word[i], 0);
     }
     return w;
 }
