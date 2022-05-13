@@ -37,12 +37,12 @@ void table_destroy(table_t *one_table)
     free(one_table);
 }
 
-int table_indexof(table_t *one_table, char *one_key)
+int table_indexof(table_t *one_table, char one_key)
 {
     return hash(one_key) % one_table->size;
 }
 
-bool table_add(table_t *one_table, char *one_key, char *one_value)
+bool table_add(table_t *one_table, char one_key, int one_value)
 {
     int index = table_indexof(one_table, one_key);
     if (list_contains(one_table->sublist[index], one_key))
@@ -56,15 +56,15 @@ bool table_add(table_t *one_table, char *one_key, char *one_value)
     }
 }
 
-bool table_contains(table_t *one_table, char *one_key)
+bool table_contains(table_t *one_table, char one_key)
 {
     int index = table_indexof(one_table, one_key);
     return list_contains(one_table->sublist[index], one_key);
 }
 
-char *table_get(table_t *one_table, char *one_key)
+int table_get(table_t *one_table, char one_key)
 {
     int index = table_indexof(one_table, one_key);
-    char *val = *(list_find(one_table->sublist[index], one_key));
+    int val = (list_find(one_table->sublist[index], one_key));
     return val;
 }

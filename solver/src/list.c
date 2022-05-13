@@ -83,7 +83,7 @@ void list_print(list_t *one_list)
         {
             printf(",");
         }
-        printf(" %s : %s", current->key, current->value);
+        printf(" %c : %d", current->key, current->value);
         first = false;
         current = current->next;
     }
@@ -103,7 +103,7 @@ bool list_contains(list_t *one_list, char one_key)
     element_t *current = one_list->head;
     while (current != NULL)
     {
-        if (strcmp(current->key, one_key) == 0)
+        if (current->key == one_key)
         {
             return true;
         }
