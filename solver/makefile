@@ -20,8 +20,8 @@ clean:
 test_getword: ./tests/getwords_tests 
 	$(RUN_ENV) ./tests/getwords_tests
 
-test_list: list_tests
-	$(RUN_ENV) ./list_tests
+test_list: ./tests/list_tests
+	$(RUN_ENV) ./tests/list_tests
 
 
 
