@@ -1,4 +1,6 @@
 #include "list.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 #ifndef __GETWORDS_H__
 #define __GETWORDS_H__
