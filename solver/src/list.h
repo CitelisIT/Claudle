@@ -22,12 +22,12 @@ typedef struct _word_t word_t;
 
 struct _list_t
 {
-    word_t* sublist;
+    word_t *sublist;
 };
 
 typedef struct _list_t list_t;
 
-
+// LIST_T FUNCTIONS
 
 list_t *list_create();
 
@@ -35,15 +35,17 @@ void list_destroy(list_t *one_list);
 
 bool list_is_empty(list_t *one_list);
 
-void list_append(list_t *one_list, word_t* one_word);
+void list_append(list_t *one_list, word_t *one_word);
 
 void list_print(list_t *one_list);
 
-bool list_contains(list_t *one_list, word_t* one_word);
+bool list_contains(list_t *one_list, word_t *one_word);
 
 int list_get_size(list_t *one_list);
 
 list_t *list_copy(list_t *one_list);
+
+// WORD_T FUNCTIONS
 
 word_t *word_create();
 
@@ -71,8 +73,8 @@ int word_get_size(word_t *one_word);
 
 word_t *word_copy(word_t *one_word);
 
-char* word_to_char(word_t *one_word);
+char *word_to_char(word_t *one_word);
 
-word_t* char_to_word(char *one_word);
+word_t *char_to_word(char *one_word);
 
 #endif /* __LIST_H__ */
