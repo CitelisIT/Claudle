@@ -13,12 +13,19 @@ getwords_tests: getwords_tests.o ../src/getwords.o ../src/list.o
 
 getwords_tests.o: getwords_tests.c ../src/getwords.o
 
+list_tests : list_tests.o ../src/list.o
+
+list_tests.o : list_tests.c ../src/list.o
+
 
 
 clean:
 	rm -f *.o *_tests
 
-test: getwords_tests
+test_getword: getwords_tests
 	$(RUN_ENV) ./getwords_tests
+
+test_list: list_tests
+	$(RUN_ENV) ./list_tests
 
 .SILENT: clean
