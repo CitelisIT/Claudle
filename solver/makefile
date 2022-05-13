@@ -17,8 +17,9 @@ all:
 clean:
 	rm -f ./*/*.o ./*/*_tests
 
-test: getwords_tests
-	$(RUN_ENV) /tests/getwords_tests
+test: ./tests/getwords_tests 
+	$(RUN_ENV) ./tests/getwords_tests
+
 
 
 .SILENT: clean
