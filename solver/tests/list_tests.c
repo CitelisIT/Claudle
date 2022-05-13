@@ -1,4 +1,4 @@
-#include "list.h"
+#include "../src/list.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "assert.h"
