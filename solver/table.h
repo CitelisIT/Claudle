@@ -16,6 +16,9 @@ int hash(char *some_value);
 
 table_t *table_create(int size);
 
+// Double the size of one_table
+void *table_resize(table_t *one_table);
+
 void table_destroy(table_t *one_table);
 
 int table_indexof(table_t *one_table, char *one_key);

@@ -25,6 +25,37 @@ table_t *table_create(int size)
     return table;
 }
 
+void *table_resize(table_t *one_table)
+{
+    int newSize = 2 * one_table->size;
+
+    list_t *buckets = calloc(newSize, sizeof(list_t));
+
+    for(int i = 0; i < one_table->size; i++)
+    {
+        list_t *bucket = &one_table->buckets[i];
+        node_t *current = bucket->head;
+
+        // Get new index for current bucket
+        while(current != NULL)
+        {
+            element_t *element = current->value;
+            int newIndex = hash(element->key) % newSize;
+
+            list_append(&buckets[newIndex], element->key, element->value);
+
+            current = current->next;
+        }
+
+        free(&bucket);
+    }
+
+    free(one_table->buckets);
+
+    one_table->buckets = buckets;
+    one_table->size = newSize;
+}
+
 void table_destroy(table_t *one_table)
 {
     if(one_table == NULL)
