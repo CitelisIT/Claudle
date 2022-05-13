@@ -142,3 +142,32 @@ int* list_get_value(element_t *one_element)
     assert(one_element != NULL);
     return one_element->value;
 }
+
+void list_remove_key(list_t *one_list, char *one_key)
+{
+    node_t *previous = NULL;
+    node_t *current = one_list->head;
+    
+    while(current->next != NULL)
+    {
+        if(strcmp(current->value->key, one_key) == 1)
+        {
+            if(current == one_list->head)
+            {
+                one_list->head = one_list->head->next;
+            }
+            else
+            {
+                previous->next = current->next;
+            }
+            
+            free(current->value);
+            free(current);
+
+            break;
+        }
+        
+        previous = current;
+        current = current->next;
+    }
+}
