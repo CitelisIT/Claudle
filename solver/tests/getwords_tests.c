@@ -1,4 +1,4 @@
-#include "getwords.h"
+#include "../src/getwords.h"
 
 const char *ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 
