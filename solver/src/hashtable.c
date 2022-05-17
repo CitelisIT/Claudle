@@ -1,18 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "hashtable.h"
+#include "halfsiphash.h"
 
-int hash(char *some_value)
-{
-    int res = 0;
-    int i = 0;
-
-    for (i = 0; some_value[i] != '\0'; i++)
-    {
-        res = res + some_value[i];
-    }
-    return res;
-}
 
 table_t *table_create(int size)
 {
