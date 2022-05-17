@@ -19,11 +19,11 @@ void *table_resize(table_t *one_table)
 {
     int newSize = 2 * one_table->size;
 
-    list_t *buckets = calloc(newSize, sizeof(list_t));
+    list_t **buckets = calloc(newSize, sizeof(list_t*));
 
     for (int i = 0; i < one_table->size; i++)
     {
-        list_t *bucket = &one_table->buckets[i];
+        list_t *bucket = one_table->buckets[i];
         node_t *current = bucket->head;
 
         // Get new index for current bucket
@@ -32,12 +32,12 @@ void *table_resize(table_t *one_table)
             element_t *element = current->value;
             int newIndex = hash(element->key) % newSize;
 
-            list_append(&buckets[newIndex], element->key, element->value);
+            list_append(buckets[newIndex], element->key, element->value);
 
             current = current->next;
         }
 
-        free(&bucket);
+        free(bucket);
     }
 
     free(one_table->buckets);
@@ -55,7 +55,7 @@ void table_destroy(table_t *one_table)
 
     for (int i = 0; i < one_table->size; i++)
     {
-        list_destroy(&one_table->buckets[i]);
+        list_destroy(one_table->buckets[i]);
     }
     free(one_table->buckets);
 }
@@ -75,13 +75,13 @@ bool table_add(table_t *one_table, char *one_key, char *one_value)
 
     int index = table_indexof(one_table, one_key);
 
-    if (list_contains(&one_table->buckets[index], one_key))
+    if (list_contains(one_table->buckets[index], one_key))
     {
         return false;
     }
     else
     {
-        list_append(&one_table->buckets[index], one_key, one_value);
+        list_append(one_table->buckets[index], one_key, one_value);
         one_table->count++;
         return true;
     }
@@ -91,14 +91,14 @@ bool table_contains(table_t *one_table, char *one_key)
 {
     int index = table_indexof(one_table, one_key);
 
-    return list_contains(&one_table->buckets[index], one_key);
+    return list_contains(one_table->buckets[index], one_key);
 }
 
 char *table_get(table_t *one_table, char *one_key)
 {
     int index = table_indexof(one_table, one_key);
 
-    char *val = *(list_find(&one_table->buckets[index], one_key));
+    char *val = *(list_find(one_table->buckets[index], one_key));
 
     return val;
 }
