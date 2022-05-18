@@ -60,9 +60,9 @@ void table_destroy(table_t *one_table)
     free(one_table->buckets);
 }
 
-int table_indexof(table_t *one_table, char *one_key)
+int table_indexof(table_t *one_table, int *one_key)
 {
-    return hash(one_key) % one_table->size;
+    return one_key % one_table->size;
 }
 
 bool table_add(table_t *one_table, char *one_key, char *one_value)
@@ -85,6 +85,28 @@ bool table_add(table_t *one_table, char *one_key, char *one_value)
         one_table->count++;
         return true;
     }
+}
+
+void table_add_txt(table_t *one_table, char *path)
+{
+    FILE *file = fopen(path, "r");
+    element_t *pair = calloc(1, sizeof(element_t));
+
+    if(file != NULL)
+    {
+        while(word = fgetc(file))
+        {
+            if(word == EOF)
+            {
+                break;
+            }
+            // The 5 is a temp value, in the final implementation
+            // it'll take the word list word length
+            halfsiphash(word, 5, hash_key, hashCode, 4);
+            table_add(one_table, hashCode, word);
+        }
+    }
+    return;
 }
 
 bool table_contains(table_t *one_table, char *one_key)
