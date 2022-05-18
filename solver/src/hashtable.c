@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include "hashtable.h"
@@ -105,25 +106,34 @@ bool table_add(table_t *one_table, element_t *element)
 
 void table_add_txt(table_t *one_table, char *path)
 {
-    FILE *file = fopen(path, "r");
+    FILE *file;
     element_t *element = calloc(1, sizeof(element_t));
-    int tempKey = 0;
+    char *word;
+    size_t length = 0;
+    ssize_t read;
 
-    if(file != NULL)
+    file = fopen(path, "r");
+
+    if(file == NULL)
     {
-        while(!feof(file))
-        {
-            element->key = &tempKey;
-
-            // The 5 is a temp value, in the final implementation
-            // it'll take the word list word length
-            element->value = fgetc(file);
-
-            table_add(one_table, element);
-
-            tempKey++;
-        }
+        // Might want to add an error message
+        return;
     }
+
+    while((read = getline(&word, &length, file)) != -1)
+    {
+        element->key = word;
+        element->score = calloc(1, sizeof(int));
+        element->value = 0;
+        table_add(one_table, element);
+    }
+
+    fclose(file);
+    if(word)
+    {
+        free(word);
+    }
+
     return;
 }
 
