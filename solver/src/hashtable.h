@@ -13,7 +13,7 @@ typedef struct table_t
     int size;
     int count;
 
-    list_t* buckets;
+    list_t** buckets;
 } table_t;
 
 int hash(char *some_value);

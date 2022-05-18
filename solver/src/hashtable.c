@@ -19,13 +19,13 @@ void *table_resize(table_t *one_table)
 {
     int newSize = 2 * one_table->size;
 
-    list_t *buckets = calloc(newSize, sizeof(list_t));
+    list_t **buckets = calloc(newSize, sizeof(list_t*));
 
     uint8_t bytesHash[hashOutputSize];
 
     for (int i = 0; i < one_table->size; i++)
     {
-        list_t *bucket = &one_table->buckets[i];
+        list_t *bucket = one_table->buckets[i];
         node_t *current = bucket->head;
 
         // Get new index for current bucket
@@ -38,12 +38,12 @@ void *table_resize(table_t *one_table)
             halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
             int newIndex = *(uint32_t *)(bytesHash) % newSize;
 
-            list_append(&buckets[newIndex], element->key, element->value);
+            list_append(buckets[newIndex], element->key, element->value);
 
             current = current->next;
         }
 
-        free(&bucket);
+        free(bucket);
     }
 
     free(one_table->buckets);
@@ -61,7 +61,7 @@ void table_destroy(table_t *one_table)
 
     for (int i = 0; i < one_table->size; i++)
     {
-        list_destroy(&one_table->buckets[i]);
+        list_destroy(one_table->buckets[i]);
     }
     free(one_table->buckets);
 }
@@ -91,13 +91,21 @@ bool table_add(table_t *one_table, element_t *element)
     halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
     int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
+<<<<<<< HEAD
     if (list_contains(&one_table->buckets[index], *element->key))
+=======
+    if (list_contains(one_table->buckets[index], one_key))
+>>>>>>> 692779aac6f7a892a90c3d1ec87f0d65e011c92c
     {
         return false;
     }
     else
     {
+<<<<<<< HEAD
         list_append(&one_table->buckets[index], element->key, element->value);
+=======
+        list_append(one_table->buckets[index], one_key, one_value);
+>>>>>>> 692779aac6f7a892a90c3d1ec87f0d65e011c92c
         one_table->count++;
         return true;
     }
@@ -131,14 +139,14 @@ bool table_contains(table_t *one_table, int one_key)
 {
     int index = table_indexof(one_table, one_key);
 
-    return list_contains(&one_table->buckets[index], one_key);
+    return list_contains(one_table->buckets[index], one_key);
 }
 
 char *table_get(table_t *one_table, int one_key)
 {
     int index = table_indexof(one_table, one_key);
 
-    char *val = *(list_find(&one_table->buckets[index], one_key));
+    char *val = *(list_find(one_table->buckets[index], one_key));
 
     return val;
 }
