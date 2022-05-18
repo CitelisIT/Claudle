@@ -4,6 +4,8 @@
 #include "hashtable.h"
 #include "halfsiphash.h"
 
+const char *hash_key = "8e7766f113d6818faafa2241e85295746ddfedc1463c435b52895683d6974ca8";
+const int hashOutputSize = 4;
 
 table_t *table_create(int size)
 {
@@ -84,7 +86,7 @@ bool table_add(table_t *one_table, element_t *element)
         halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
         int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
-        list_append(&one_table->buckets[index], element->key, element->value, element->score);
+        list_append(one_table->buckets[index], element->key, element->value, element->score);
         one_table->count++;
         return true;
     }
@@ -92,13 +94,13 @@ bool table_add(table_t *one_table, element_t *element)
     halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
     int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
-    if (list_contains(&one_table->buckets[index], *element->key))
+    if (list_contains(one_table->buckets[index], element->key))
     {
         return false;
     }
     else
     {
-        list_append(&one_table->buckets[index], element->key, element->value, element->score);
+        list_append(one_table->buckets[index], element->key, element->value, element->score);
         one_table->count++;
         return true;
     }
@@ -139,16 +141,24 @@ void table_add_txt(table_t *one_table, char *path)
 
 bool table_contains(table_t *one_table, char *one_key)
 {
-    int index = table_indexof(one_table, one_key);
+    uint8_t bytesHash[hashOutputSize];
+    // 5 IS TEMPORARY
+    halfsiphash(one_key, 5, hash_key, bytesHash, hashOutputSize);
+
+    int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
     return list_contains(one_table->buckets[index], one_key);
 }
 
 char *table_get(table_t *one_table, char *one_key)
 {
-    int index = table_indexof(one_table, one_key);
+    uint8_t bytesHash[hashOutputSize];
+    // 5 IS TEMPORARY
+    halfsiphash(one_key, 5, hash_key, bytesHash, hashOutputSize);
 
-    char *val = *(list_find(one_table->buckets[index], one_key));
+    int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
-    return val;
+    char val = *(list_find(one_table->buckets[index], one_key));
+
+    return &val;
 }

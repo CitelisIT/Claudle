@@ -5,9 +5,6 @@
 #ifndef __HASHTABLE_H__
 #define __HASHTABLE_H__
 
-const char *hash_key = "8e7766f113d6818faafa2241e85295746ddfedc1463c435b52895683d6974ca8";
-const int hashOutputSize = 4;
-
 typedef struct table_t
 {
     int size;
