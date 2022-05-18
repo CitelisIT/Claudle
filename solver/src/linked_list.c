@@ -10,14 +10,16 @@ element_t *element_create(char *key, char *value, int *score)
 {
     element_t *new = malloc(sizeof(element_t));
 
-    unsigned long len = strlen(key);
+    int len = strlen(key);
     char *keyCopy = calloc(len+1, sizeof(char));
     strcpy(keyCopy, key);
 
     len = strlen(value);
     char *valueCopy = calloc(len+1,sizeof(char));
+    
     strcpy(valueCopy, value);
     int *scoreCopy = calloc(len, sizeof(int));
+
     for (int i = 0; i < len; i++)
     {
         scoreCopy[i] = score[i];
@@ -30,12 +32,18 @@ element_t *element_create(char *key, char *value, int *score)
     return new;
 }
 
+
 node_t *node_create(element_t *value)
 {
     node_t *node = calloc(1, sizeof(node_t));
     node->value = value;
 
     return node;
+}
+
+void node_destroy(node_t *one_node)
+{
+    free(one_node);
 }
 
 list_t *list_create()
@@ -49,10 +57,11 @@ list_t *list_create()
 }
 
 void element_destroy(element_t * one_el){
-        free(one_el->score);
-        free(one_el->key);
-        free(one_el->value);
-        free(one_el);
+
+    free(one_el->score);
+    free(one_el->key);
+    free(one_el->value);
+    free(one_el);
 }
 
 void list_destroy(list_t *one_list)
@@ -93,7 +102,7 @@ void list_append(list_t *one_list, char *one_key, char *one_value, int* one_scor
     }
 }
 
-char **list_find(list_t *one_list, char *one_key)
+char *list_find(list_t *one_list, char *one_key)
 {
     node_t *one_node = one_list->head;
 
@@ -152,7 +161,7 @@ char *list_get_key(element_t *one_element)
     return one_element->key;
 }
 
-int *list_get_value(element_t *one_element)
+char *list_get_value(element_t *one_element)
 {
     assert(one_element != NULL);
     return one_element->value;
