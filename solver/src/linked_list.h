@@ -5,7 +5,7 @@
 
 typedef struct element_t
 {
-    int *key;
+    char *key;
     char *value;
     int *score;
 } element_t;

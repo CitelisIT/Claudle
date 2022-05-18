@@ -127,14 +127,14 @@ void table_add_txt(table_t *one_table, char *path)
     return;
 }
 
-bool table_contains(table_t *one_table, int one_key)
+bool table_contains(table_t *one_table, char *one_key)
 {
     int index = table_indexof(one_table, one_key);
 
     return list_contains(one_table->buckets[index], one_key);
 }
 
-char *table_get(table_t *one_table, int one_key)
+char *table_get(table_t *one_table, char *one_key)
 {
     int index = table_indexof(one_table, one_key);
 
