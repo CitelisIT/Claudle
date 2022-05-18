@@ -51,7 +51,7 @@ void list_remove_key(list_t *one_list, char *one_key);
 // Might not need these for the solver
 // void element_print(element_t *one_element);
 //
-// void list_print(list_t *one_list);
+void list_print(list_t *one_list);
 //
 // void list_remove_first(list_t *one_list);
 //

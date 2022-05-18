@@ -195,3 +195,30 @@ void list_remove_key(list_t *one_list, char *one_key)
         current = current->next;
     }
 }
+
+
+void list_print(list_t *one_list)
+{
+    assert(one_list != NULL);
+
+    bool first = true;
+
+    printf("[");
+    node_t *current = one_list->head;
+    while (current != NULL)
+    {
+        if (!first)
+        {
+            printf(",");
+        }
+        printf(" %s", current->value->key);
+        first = false;
+        current = current->next;
+    }
+
+    if (!first)
+    {
+        printf(" ");
+    }
+    printf("]\n");
+}
