@@ -38,7 +38,7 @@ void *table_resize(table_t *one_table)
             halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
             int newIndex = *(uint32_t *)(bytesHash) % newSize;
 
-            list_append(buckets[newIndex], element->key, element->value);
+            list_append(buckets[newIndex], element->key, element->value, element->score);
 
             current = current->next;
         }
@@ -68,7 +68,7 @@ void table_destroy(table_t *one_table)
 
 int table_indexof(table_t *one_table, uint32_t hashCode)
 {
-    return *hashCode % one_table->size;
+    return hashCode % one_table->size;
 }
 
 bool table_add(table_t *one_table, element_t *element)
@@ -83,7 +83,7 @@ bool table_add(table_t *one_table, element_t *element)
         halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
         int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
-        list_append(&one_table->buckets[index], element->key, element->value);
+        list_append(&one_table->buckets[index], element->key, element->value, element->score);
         one_table->count++;
         return true;
     }
@@ -91,21 +91,13 @@ bool table_add(table_t *one_table, element_t *element)
     halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
     int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
-<<<<<<< HEAD
     if (list_contains(&one_table->buckets[index], *element->key))
-=======
-    if (list_contains(one_table->buckets[index], one_key))
->>>>>>> 692779aac6f7a892a90c3d1ec87f0d65e011c92c
     {
         return false;
     }
     else
     {
-<<<<<<< HEAD
-        list_append(&one_table->buckets[index], element->key, element->value);
-=======
-        list_append(one_table->buckets[index], one_key, one_value);
->>>>>>> 692779aac6f7a892a90c3d1ec87f0d65e011c92c
+        list_append(&one_table->buckets[index], element->key, element->value, element->score);
         one_table->count++;
         return true;
     }
