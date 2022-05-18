@@ -7,9 +7,10 @@ typedef struct element_t
 {
     char *key;
     char *value;
+    int *score;
 } element_t;
 
-element_t *element_create(char *key, char *value);
+element_t *element_create(char *key, char *value,int * score);
 
 typedef struct node_t
 {
@@ -27,11 +28,13 @@ typedef struct list_t
 
 list_t *list_create();
 
+void element_destroy(element_t * one_el);
+
 void list_destroy(list_t *one_list);
 
 bool list_is_empty(list_t *one_list);
 
-void list_append(list_t *one_list, char *one_key, int *one_value);
+void list_append(list_t *one_list, char *one_key, char *one_value, int * one_score);
 
 char **list_find(list_t *one_list, char *one_key);
 
