@@ -21,6 +21,8 @@ void *table_resize(table_t *one_table)
 
     list_t *buckets = calloc(newSize, sizeof(list_t));
 
+    uint8_t bytesHash[hashOutputSize];
+
     for (int i = 0; i < one_table->size; i++)
     {
         list_t *bucket = &one_table->buckets[i];
@@ -30,7 +32,11 @@ void *table_resize(table_t *one_table)
         while (current != NULL)
         {
             element_t *element = current->value;
-            int newIndex = hash(element->key) % newSize;
+
+            // Get new index of the word
+            // 5 IS TEMPORARY -- CHANGE IN FINAL IMPLEMENTATION
+            halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
+            int newIndex = *(uint32_t *)(bytesHash) % newSize;
 
             list_append(&buckets[newIndex], element->key, element->value);
 
@@ -60,32 +66,32 @@ void table_destroy(table_t *one_table)
     free(one_table->buckets);
 }
 
-int table_indexof(table_t *one_table, int *hashCode)
+int table_indexof(table_t *one_table, uint32_t hashCode)
 {
     return *hashCode % one_table->size;
 }
 
 bool table_add(table_t *one_table, element_t *element)
 {
-    int *hashCode;
+    uint8_t bytesHash[hashOutputSize];
 
     if (one_table->count == one_table->size)
     {
         table_resize(one_table);
 
         // 5 IS TEMPORARY -- CHANGE IN THE FINAL IMPLEMENTATION
-        halfsiphash(element->value, 5, hash_key, hashCode, 4);
-        int index = table_indexof(one_table, hashCode);
+        halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
+        int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
         list_append(&one_table->buckets[index], element->key, element->value);
         one_table->count++;
         return true;
     }
 
-    halfsiphash(element->value, 5, hash_key, hashCode, 4);
-    int index = table_indexof(one_table, hashCode);
+    halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
+    int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
 
-    if (list_contains(&one_table->buckets[index], element->key))
+    if (list_contains(&one_table->buckets[index], *element->key))
     {
         return false;
     }
@@ -100,33 +106,35 @@ bool table_add(table_t *one_table, element_t *element)
 void table_add_txt(table_t *one_table, char *path)
 {
     FILE *file = fopen(path, "r");
-    element_t *pair = calloc(1, sizeof(element_t));
+    element_t *element = calloc(1, sizeof(element_t));
+    int tempKey = 0;
 
     if(file != NULL)
     {
-        while(word = fgetc(file))
+        while(!feof(file))
         {
-            if(word == EOF)
-            {
-                break;
-            }
+            element->key = &tempKey;
+
             // The 5 is a temp value, in the final implementation
             // it'll take the word list word length
-            halfsiphash(word, 5, hash_key, hashCode, 4);
-            table_add(one_table, hashCode, word);
+            element->value = fgetc(file);
+
+            table_add(one_table, element);
+
+            tempKey++;
         }
     }
     return;
 }
 
-bool table_contains(table_t *one_table, int *one_key)
+bool table_contains(table_t *one_table, int one_key)
 {
     int index = table_indexof(one_table, one_key);
 
     return list_contains(&one_table->buckets[index], one_key);
 }
 
-char *table_get(table_t *one_table, int *one_key)
+char *table_get(table_t *one_table, int one_key)
 {
     int index = table_indexof(one_table, one_key);
 

@@ -6,7 +6,7 @@
 #include <assert.h>
 #include "linked_list.h"
 
-element_t *element_create(char *key, char *value)
+element_t *element_create(int key, char *value)
 {
     element_t *new = malloc(sizeof(element_t));
 
@@ -66,7 +66,7 @@ bool list_is_empty(list_t *one_list)
     return one_list->head == NULL;
 }
 
-void list_append(list_t *one_list, char *one_key, int *one_value)
+void list_append(list_t *one_list, int *one_key, int *one_value)
 {
     node_t *new_node = node_create(element_create(one_key, one_value));
 
@@ -83,7 +83,7 @@ void list_append(list_t *one_list, char *one_key, int *one_value)
     }
 }
 
-char **list_find(list_t *one_list, char *one_key)
+char **list_find(list_t *one_list, int *one_key)
 {
     node_t *one_node = one_list->head;
 
@@ -107,7 +107,7 @@ char **list_find(list_t *one_list, char *one_key)
     return NULL;
 }
 
-bool list_contains(list_t *one_list, char *one_key)
+bool list_contains(list_t *one_list, int *one_key)
 {
     node_t *one_node = one_list->head;
 
@@ -143,7 +143,7 @@ int *list_get_value(element_t *one_element)
     return one_element->value;
 }
 
-void list_remove_key(list_t *one_list, char *one_key)
+void list_remove_key(list_t *one_list, int *one_key)
 {
     node_t *previous = NULL;
     node_t *current = one_list->head;
