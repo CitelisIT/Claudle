@@ -60,31 +60,38 @@ void table_destroy(table_t *one_table)
     free(one_table->buckets);
 }
 
-int table_indexof(table_t *one_table, int *one_key)
+int table_indexof(table_t *one_table, int *hashCode)
 {
-    return one_key % one_table->size;
+    return *hashCode % one_table->size;
 }
 
-bool table_add(table_t *one_table, char *one_key, char *one_value)
+bool table_add(table_t *one_table, element_t *element)
 {
+    int *hashCode;
+
     if (one_table->count == one_table->size)
     {
         table_resize(one_table);
 
-        list_append(&one_table->buckets[index], one_key, one_value);
+        // 5 IS TEMPORARY -- CHANGE IN THE FINAL IMPLEMENTATION
+        halfsiphash(element->value, 5, hash_key, hashCode, 4);
+        int index = table_indexof(one_table, hashCode);
+
+        list_append(&one_table->buckets[index], element->key, element->value);
         one_table->count++;
         return true;
     }
 
-    int index = table_indexof(one_table, one_key);
+    halfsiphash(element->value, 5, hash_key, hashCode, 4);
+    int index = table_indexof(one_table, hashCode);
 
-    if (list_contains(&one_table->buckets[index], one_key))
+    if (list_contains(&one_table->buckets[index], element->key))
     {
         return false;
     }
     else
     {
-        list_append(&one_table->buckets[index], one_key, one_value);
+        list_append(&one_table->buckets[index], element->key, element->value);
         one_table->count++;
         return true;
     }
@@ -112,14 +119,14 @@ void table_add_txt(table_t *one_table, char *path)
     return;
 }
 
-bool table_contains(table_t *one_table, char *one_key)
+bool table_contains(table_t *one_table, int *one_key)
 {
     int index = table_indexof(one_table, one_key);
 
     return list_contains(&one_table->buckets[index], one_key);
 }
 
-char *table_get(table_t *one_table, char *one_key)
+char *table_get(table_t *one_table, int *one_key)
 {
     int index = table_indexof(one_table, one_key);
 
