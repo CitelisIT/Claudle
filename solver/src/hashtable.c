@@ -69,8 +69,11 @@ bool table_add(table_t *one_table, char *one_key, char *one_value)
 {
     if (one_table->count == one_table->size)
     {
-        // TODO: resize table
-        return false;
+        table_resize(one_table);
+
+        list_append(&one_table->buckets[index], one_key, one_value);
+        one_table->count++;
+        return true;
     }
 
     int index = table_indexof(one_table, one_key);
