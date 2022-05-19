@@ -9,6 +9,7 @@ RUN_ENV=LSAN_OPTIONS=suppressions=lsan.ignore:print_suppressions=0 ASAN_OPTIONS=
 #RUN_ENV=ASAN_OPTIONS=detect_leaks=1:symbolize=1
 #RUN_ENV=
 
+strat_in_6.o: strat_in_6.h strat_in_6.c
 
 getwords.o: getwords.h getwords.c
 
