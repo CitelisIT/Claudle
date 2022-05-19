@@ -121,14 +121,14 @@ char *list_find(list_t *one_list, char *one_key)
 
 bool list_contains(list_t *one_list, char *one_key)
 {
-    if (!one_list)
+    if(!one_list)
     {
         return false;
     }
     
     node_t *one_node = one_list->head;
 
-    while (one_node->next != NULL)
+    while(one_node->next != NULL)
     {
         if (strcmp(one_node->value->key, one_key) == 1)
         {
