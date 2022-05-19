@@ -106,21 +106,14 @@ char *list_find(list_t *one_list, char *one_key)
 {
     node_t *one_node = one_list->head;
 
-    while (one_node->next != NULL)
+    while(one_node)
     {
-        if (strcmp(one_node->value->key, one_key) == 1)
+        if(strcmp(one_node->value->key, one_key) == 0)
         {
             return one_node->value->value;
         }
 
         one_node = one_node->next;
-    }
-
-    // Compare last element
-    // Could have used list->last
-    if (strcmp(one_node->value->key, one_key) == 1)
-    {
-        return one_node->value->value;
     }
 
     return NULL;
