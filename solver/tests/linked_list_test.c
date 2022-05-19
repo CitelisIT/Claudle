@@ -48,8 +48,13 @@ int main()
     char *getEntropy2 = list_find(one_list, word2);
     char *getEntropy4 = list_find(one_list, word4);
 
-    printf("The entropy of word1, 2 and 4 are: %s, %s, %s, respectively", 
+    printf("The entropy of word1, 2 and 4 are: %s, %s, %s, respectively\n", 
     getEntropy1, getEntropy2, getEntropy4); 
+
+    char *wrongWord = "loa";
+
+    printf("%s is in the list: %d\n", wrongWord, list_contains(one_list, wrongWord));
+    printf("%s is in the list: %d\n", word1, list_contains(one_list, word1));
 
     // First in last out
     list_destroy(one_list);
