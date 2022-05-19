@@ -13,13 +13,13 @@ int main()
     int score2[3] = {1, 0, 0};
     int *score2_pt = score2;
 
-    char *word3 = "c";
+    char *word3 = "ccc";
     char *value3 = "c";
     int score3[3] = {2, 2, 0};
     int *score3_pt = score3;
 
-    char *word4 = "c";
-    char *value4 = "c";
+    char *word4 = "ddd";
+    char *value4 = "d";
     int score4[3] = {2, 2, 0};
     int *score4_pt = score4;
 
@@ -43,6 +43,13 @@ int main()
     list_append(one_list, element4->key, element4->value, element4->score);
 
     list_print(one_list);
+
+    char *getEntropy1 = list_find(one_list, word1);
+    char *getEntropy2 = list_find(one_list, word2);
+    char *getEntropy4 = list_find(one_list, word4);
+
+    printf("The entropy of word1, 2 and 4 are: %s, %s, %s, respectively", 
+    getEntropy1, getEntropy2, getEntropy4); 
 
     // First in last out
     list_destroy(one_list);
