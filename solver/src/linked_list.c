@@ -67,14 +67,14 @@ void element_destroy(element_t * one_el){
 void list_destroy(list_t *one_list)
 {
     node_t *curr_node = one_list->head;
-    node_t * tmp;
-    while (curr_node)
+    node_t *tmp = NULL;
+    while(curr_node)
     {
         tmp = curr_node;
         curr_node = curr_node->next;
 
         element_destroy(tmp->value);
-        free(tmp);
+        node_destroy(tmp);
     }
     free(one_list);
 }
@@ -128,21 +128,14 @@ bool list_contains(list_t *one_list, char *one_key)
     
     node_t *one_node = one_list->head;
 
-    while(one_node->next != NULL)
+    while(one_node)
     {
-        if (strcmp(one_node->value->key, one_key) == 1)
+        if(strcmp(one_node->value->key, one_key) == 0)
         {
             return true;
         }
 
         one_node = one_node->next;
-    }
-
-    // Compare last element
-    // Could have used list->last
-    if (strcmp(one_node->value->key, one_key) == 1)
-    {
-        return true;
     }
 
     return false;
@@ -165,28 +158,28 @@ void list_remove_key(list_t *one_list, char *one_key)
     node_t *previous = NULL;
     node_t *current = one_list->head;
 
-    while (current->next != NULL)
+    // if it's the first element
+    if(current != NULL && strcmp(current->value->key, one_key) == 0)
     {
-        if (strcmp(current->value->key, one_key) == 1)
-        {
-            if (current == one_list->head)
-            {
-                one_list->head = one_list->head->next;
-            }
-            else
-            {
-                previous->next = current->next;
-            }
+        one_list->head = one_list->head->next;
+        node_destroy(current);
+        return;
+    }
 
-            free(current->value);
-            free(current);
-
-            break;
-        }
-
+    while(current != NULL && strcmp(current->value->key, one_key) != 0)
+    {
         previous = current;
         current = current->next;
     }
+
+    if(current == NULL)
+    {
+        return;
+    }
+
+    previous->next = current->next;
+
+    node_destroy(current);
 }
 
 
