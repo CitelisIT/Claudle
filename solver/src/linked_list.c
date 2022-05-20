@@ -19,10 +19,18 @@ element_t *element_create(char *key, char *value, int *score)
     
     strcpy(valueCopy, value);
     int *scoreCopy = calloc(len, sizeof(int));
-
-    for (int i = 0; i < len; i++)
+    if (!score)
     {
-        scoreCopy[i] = score[i];
+        for (int i = 0; i < len; i++)
+        {
+            scoreCopy[i] = 0;
+        }
+    }
+    else{
+        for (int i = 0; i < len; i++)
+        {
+            scoreCopy[i] = score[i];
+        }
     }
     
     new->key = keyCopy;
