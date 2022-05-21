@@ -23,24 +23,15 @@ int main()
     int score4[3] = {2, 2, 0};
     int *score4_pt = score4;
 
-    element_t *element1 = element_create(word1, value1, score1_pt);
-    node_t *node1 = node_create(element1);
 
-    element_t *element2 = element_create(word2, value2, score2_pt);
-    node_t *node2 = node_create(element2);
-
-    element_t *element3 = element_create(word3, value3, score3_pt);
-    node_t *node3 = node_create(element3);
-
-    element_t *element4 = element_create(word4, value4, score4_pt);
-    node_t *node4 = node_create(element4);
 
     list_t *one_list = list_create();
 
-    list_append(one_list, element1->key, element1->value, element1->score);
-    list_append(one_list, element2->key, element2->value, element2->score);
-    list_append(one_list, element3->key, element3->value, element3->score);
-    list_append(one_list, element4->key, element4->value, element4->score);
+    list_append(one_list, word1, value1, score1);
+    list_append(one_list, word2, value2, score2);
+    list_append(one_list, word3, value3, score3);
+    list_append(one_list, word4, value4, score4);    
+    list_remove_key(one_list,word4);
 
     list_print(one_list);
 
@@ -58,14 +49,4 @@ int main()
 
     // First in last out
     list_destroy(one_list);
-
-    node_destroy(node1);
-    node_destroy(node2);
-    node_destroy(node3);
-    node_destroy(node4);
-
-    element_destroy(element1);
-    element_destroy(element2);
-    element_destroy(element3);
-    element_destroy(element4);
 }

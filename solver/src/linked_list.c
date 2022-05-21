@@ -51,6 +51,7 @@ node_t *node_create(element_t *value)
 
 void node_destroy(node_t *one_node)
 {
+    element_destroy(one_node->value);
     free(one_node);
 }
 
@@ -81,7 +82,6 @@ void list_destroy(list_t *one_list)
         tmp = curr_node;
         curr_node = curr_node->next;
 
-        element_destroy(tmp->value);
         node_destroy(tmp);
     }
     free(one_list);
