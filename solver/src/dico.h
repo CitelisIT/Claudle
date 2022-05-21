@@ -8,7 +8,7 @@
 #define __DICO_H__
 
 
-table_t* dico_load(char* filename);
+table_t* dico_load(char* filename,int n);
 
 
 
