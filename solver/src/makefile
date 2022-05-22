@@ -11,9 +11,9 @@ RUN_ENV=LSAN_OPTIONS=suppressions=lsan.ignore:print_suppressions=0 ASAN_OPTIONS=
 
 strat_in_6.o: strat_in_6.h strat_in_6.c
 
-getwords.o: getwords.h getwords.c
+linked_list.o: linked_list.h linked_list.c
 
-list.o: list.h list.c
+entropy.o: entropy.h entropy.c 
 
 clean:
 	rm -f *.o *_tests

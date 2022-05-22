@@ -1,8 +1,8 @@
 #include "dico.h"
 
-table_t *dico_load(char *filename)
+table_t *dico_load(char *filename, int n)
 {
-    table_t *table = table_create(133764);
+    table_t *table = table_create(1000);
     FILE *ptr = fopen(filename, "r");
     char ch[30] = "";
     if (ptr == NULL)
@@ -20,7 +20,10 @@ table_t *dico_load(char *filename)
                 ch[i] = '\0';
             }
         }
-        bool added = table_add(table, ch);
+        if (strlen(ch) == n)
+        {
+            bool added = table_add(table, ch);
+        }
     }
     fclose(ptr);
     return table;

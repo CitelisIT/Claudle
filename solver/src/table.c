@@ -52,7 +52,7 @@ bool table_add(table_t *one_table, char *one_key)
     if (list_contains(one_table->bucket[ind], one_key)){
         return false;
     }
-    list_append(one_table->bucket[ind], one_key,"appended",s);
+    list_append(one_table->bucket[ind], one_key,0,s);
     return true;   
     
 }
