@@ -15,6 +15,8 @@ linked_list.o: linked_list.h linked_list.c
 
 entropy.o: entropy.h entropy.c 
 
+io.o: io.h io.c
+
 clean:
 	rm -f *.o *_tests
 

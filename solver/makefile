@@ -23,6 +23,8 @@ test_getword: ./tests/getwords_tests
 test_list: ./tests/list_tests
 	$(RUN_ENV) ./tests/list_tests
 
+test_io: ./tests/io_tests
+	$(RUN_ENV) ./tests/io_tests
 
 
 .SILENT: clean

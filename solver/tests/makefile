@@ -22,6 +22,10 @@ entropy_tests : entropy_tests.o ../src/entropy.o ../src/dico.o ../src/linked_lis
 
 entropy_tests.o : entropy_tests.c ../src/entropy.o 
 
+io_tests : io_tests.o ../src/io.o ../src/dico.o ../src/linked_list.o ../src/table.o
+
+io_tests.o : io_tests.c ../src/io.o
+
 
 
 
@@ -39,5 +43,8 @@ test_linked_list: linked_list_test
 
 test_entropy: entropy_tests
 	$(RUN_ENV) ./entropy_tests
+
+test_io: io_tests
+	$(RUN_ENV) ./io_tests
 
 .SILENT: clean
