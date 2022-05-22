@@ -18,7 +18,7 @@ linked_list_test : linked_list_test.o ../src/linked_list.o
 
 linked_list_test.o : linked_list_test.c ../src/linked_list.o
 
-entropy_tests : entropy_tests.o ../src/entropy.o ../src/dico.o ../src/linked_list.o ../src/table.o
+entropy_tests : entropy_tests.o ../src/entropy.o ../src/dico.o ../src/linked_list.o ../src/table.o ../src/strat_in_6.o
 
 entropy_tests.o : entropy_tests.c ../src/entropy.o 
 

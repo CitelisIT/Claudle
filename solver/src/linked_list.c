@@ -57,6 +57,7 @@ list_t *list_create()
     list_t *new_list = calloc(1, sizeof(list_t));
 
     new_list->head = NULL;
+    new_list->size = 0;
     new_list->last = NULL;
 
     return new_list;
@@ -111,12 +112,14 @@ void list_append(list_t *one_list, char *one_key, long entropy, int *one_score)
     if (one_list->head == NULL)
     {
         one_list->head = new_node;
+        one_list->size++;
         one_list->last = new_node;
     }
 
     else
     {
         one_list->last->next = new_node;
+        one_list->size++;
         one_list->last = new_node;
     }
 }
@@ -253,15 +256,4 @@ void list_print(list_t *one_list)
         printf(" ");
     }
     printf("]\n");
-}
-
-int list_get_size(list_t *one_list)
-{
-    node_t *curr = one_list->head;
-    int count = 0;
-    while (curr != NULL)
-    {
-        count++;
-    }
-    return count;
 }

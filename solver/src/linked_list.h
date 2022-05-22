@@ -28,6 +28,7 @@ typedef struct list_t
 {
     node_t *head;
     node_t *last;
+    int size;
 } list_t;
 
 list_t *list_create();
@@ -63,6 +64,5 @@ void list_print(list_t *one_list);
 //
 // void list_remove_first(list_t *one_list);
 
-int list_get_size(list_t *one_list);
 
 #endif /* __LINKED_LIST_H__ */
