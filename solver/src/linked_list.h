@@ -32,6 +32,8 @@ typedef struct list_t
 
 list_t *list_create();
 
+list_t *list_copy();
+
 void list_destroy(list_t *one_list);
 
 bool list_is_empty(list_t *one_list);
@@ -46,7 +48,13 @@ char *list_get_key(element_t *one_element);
 
 char *list_get_value(element_t *one_element);
 
+int list_get_score(element_t *one_element);
+
 void list_remove_key(list_t *one_list, char *one_key);
+
+void list_remove_fisrt(list_t *one_list);
+
+int list_get_size(list_t *one_list);
 
 // Might not need these for the solver
 // void element_print(element_t *one_element);

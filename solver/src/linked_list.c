@@ -11,12 +11,12 @@ element_t *element_create(char *key, char *value, int *score)
     element_t *new = malloc(sizeof(element_t));
 
     int len = strlen(key);
-    char *keyCopy = calloc(len+1, sizeof(char));
+    char *keyCopy = calloc(len + 1, sizeof(char));
     strcpy(keyCopy, key);
 
     len = strlen(value);
-    char *valueCopy = calloc(len+1,sizeof(char));
-    
+    char *valueCopy = calloc(len + 1, sizeof(char));
+
     strcpy(valueCopy, value);
     int *scoreCopy = calloc(len, sizeof(int));
     if (!score)
@@ -26,20 +26,20 @@ element_t *element_create(char *key, char *value, int *score)
             scoreCopy[i] = 0;
         }
     }
-    else{
+    else
+    {
         for (int i = 0; i < len; i++)
         {
             scoreCopy[i] = score[i];
         }
     }
-    
+
     new->key = keyCopy;
     new->value = valueCopy;
     new->score = scoreCopy;
 
     return new;
 }
-
 
 node_t *node_create(element_t *value)
 {
@@ -65,7 +65,22 @@ list_t *list_create()
     return new_list;
 }
 
-void element_destroy(element_t * one_el){
+list_t *list_copy(list_t *one_list)
+{
+    list_t *new_list = list_create();
+
+    node_t *curr = one_list->head;
+    while (curr)
+    {
+        list_append(new_list, curr->value->key, curr->value->value, curr->value->score);
+        curr = curr->next;
+    }
+
+    return new_list;
+}
+
+void element_destroy(element_t *one_el)
+{
 
     free(one_el->score);
     free(one_el->key);
@@ -77,7 +92,7 @@ void list_destroy(list_t *one_list)
 {
     node_t *curr_node = one_list->head;
     node_t *tmp = NULL;
-    while(curr_node)
+    while (curr_node)
     {
         tmp = curr_node;
         curr_node = curr_node->next;
@@ -93,9 +108,9 @@ bool list_is_empty(list_t *one_list)
     return one_list->head == NULL;
 }
 
-void list_append(list_t *one_list, char *one_key, char *one_value, int* one_score)
+void list_append(list_t *one_list, char *one_key, char *one_value, int *one_score)
 {
-    node_t *new_node = node_create(element_create(one_key, one_value , one_score));
+    node_t *new_node = node_create(element_create(one_key, one_value, one_score));
 
     if (one_list->head == NULL)
     {
@@ -114,9 +129,9 @@ char *list_find(list_t *one_list, char *one_key)
 {
     node_t *one_node = one_list->head;
 
-    while(one_node)
+    while (one_node)
     {
-        if(strcmp(one_node->value->key, one_key) == 0)
+        if (strcmp(one_node->value->key, one_key) == 0)
         {
             return one_node->value->value;
         }
@@ -129,16 +144,16 @@ char *list_find(list_t *one_list, char *one_key)
 
 bool list_contains(list_t *one_list, char *one_key)
 {
-    if(!one_list)
+    if (!one_list)
     {
         return false;
     }
-    
+
     node_t *one_node = one_list->head;
 
-    while(one_node)
+    while (one_node)
     {
-        if(strcmp(one_node->value->key, one_key) == 0)
+        if (strcmp(one_node->value->key, one_key) == 0)
         {
             return true;
         }
@@ -161,26 +176,47 @@ char *list_get_value(element_t *one_element)
     return one_element->value;
 }
 
+int list_get_score(element_t *one_element)
+{
+    assert(one_element != NULL);
+    return one_element->score;
+}
+
+int list_get_size(list_t *one_list)
+{
+    assert(one_list != NULL);
+    int size = 0;
+    node_t *one_node = one_list->head;
+
+    while (one_node)
+    {
+        size++;
+        one_node = one_node->next;
+    }
+
+    return size;
+}
+
 void list_remove_key(list_t *one_list, char *one_key)
 {
     node_t *previous = NULL;
     node_t *current = one_list->head;
 
     // if it's the first element
-    if(current != NULL && strcmp(current->value->key, one_key) == 0)
+    if (current != NULL && strcmp(current->value->key, one_key) == 0)
     {
         one_list->head = one_list->head->next;
         node_destroy(current);
         return;
     }
 
-    while(current != NULL && strcmp(current->value->key, one_key) != 0)
+    while (current != NULL && strcmp(current->value->key, one_key) != 0)
     {
         previous = current;
         current = current->next;
     }
 
-    if(current == NULL)
+    if (current == NULL)
     {
         return;
     }
@@ -190,6 +226,12 @@ void list_remove_key(list_t *one_list, char *one_key)
     node_destroy(current);
 }
 
+void list_remove_first(list_t *one_list)
+{
+    node_t *tmp = one_list->head;
+    one_list->head = one_list->head->next;
+    node_destroy(tmp);
+}
 
 void list_print(list_t *one_list)
 {
