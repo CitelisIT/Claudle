@@ -32,7 +32,6 @@ int main()
 
     // printf("%d",compare_patern(s3,"crane","couin"));
     update_entropy(liste_patern,pat);
-
     destroy_patern(pat);
     list_destroy(liste_patern);
     table_destroy(dico);

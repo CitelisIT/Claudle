@@ -91,10 +91,14 @@ int count_same_patern(list_t* dico,int* patern, char* word){
 
 double calc_prob_patern(list_t* dico, int* patern, char* word, paterns* pat){
     int posibilities = count_same_patern(dico,patern,word);
-    return posibilities/dico->size;
+    return ((double)posibilities)/((double)dico->size);
 }
 
 double calc_bit_patern(list_t* dico,int* patern, double proba_patern, char* word){
+    if (proba_patern==0)
+    {
+        return 0;
+    }
     return log2(1/proba_patern);
 
 }
@@ -115,7 +119,7 @@ void update_entropy(list_t* dico,paterns* pat){
     while (curr!=NULL)
     {
         curr->value->entropy = calc_entropy(dico,curr->value->key,pat);
-        printf("prog : %f \n",curr->value->entropy);
+        printf("%f, %s\n",curr->value->entropy,curr->value->key);
         curr = curr->next;
     }
 }

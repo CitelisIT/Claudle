@@ -6,7 +6,7 @@
 typedef struct element_t
 {
     char *key;
-    long entropy;
+    double entropy;
     int *score;
 } element_t;
 
