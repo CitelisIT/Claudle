@@ -6,11 +6,11 @@
 typedef struct element_t
 {
     char *key;
-    char *value;
+    long entropy;
     int *score;
 } element_t;
 
-element_t *element_create(char *key, char *value, int *score);
+element_t *element_create(char *key, long entropy, int *score);
 
 void element_destroy(element_t *one_el);
 
@@ -36,15 +36,15 @@ void list_destroy(list_t *one_list);
 
 bool list_is_empty(list_t *one_list);
 
-void list_append(list_t *one_list, char *one_key, char *one_value, int *one_score);
+void list_append(list_t *one_list, char *one_key, long entropy, int *one_score);
 
-char *list_find(list_t *one_list, char *one_key);
+long list_find(list_t *one_list, char *one_key);
 
 bool list_contains(list_t *one_list, char *one_key);
 
 char *list_get_key(element_t *one_element);
 
-char *list_get_value(element_t *one_element);
+long list_get_entropy(element_t *one_element);
 
 void list_remove_key(list_t *one_list, char *one_key);
 
@@ -54,7 +54,7 @@ void list_remove_key(list_t *one_list, char *one_key);
 void list_print(list_t *one_list);
 //
 // void list_remove_first(list_t *one_list);
-//
-// int list_get_size(list_t *one_list);
+
+int list_get_size(list_t *one_list);
 
 #endif /* __LINKED_LIST_H__ */

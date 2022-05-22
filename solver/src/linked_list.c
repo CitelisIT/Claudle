@@ -6,7 +6,7 @@
 #include <assert.h>
 #include "linked_list.h"
 
-element_t *element_create(char *key, char *value, int *score)
+element_t *element_create(char *key, long entropy, int *score)
 {
     element_t *new = malloc(sizeof(element_t));
 
@@ -14,10 +14,8 @@ element_t *element_create(char *key, char *value, int *score)
     char *keyCopy = calloc(len+1, sizeof(char));
     strcpy(keyCopy, key);
 
-    len = strlen(value);
-    char *valueCopy = calloc(len+1,sizeof(char));
+    new->entropy = entropy;    
     
-    strcpy(valueCopy, value);
     int *scoreCopy = calloc(len, sizeof(int));
     if (!score)
     {
@@ -34,7 +32,6 @@ element_t *element_create(char *key, char *value, int *score)
     }
     
     new->key = keyCopy;
-    new->value = valueCopy;
     new->score = scoreCopy;
 
     return new;
@@ -69,7 +66,6 @@ void element_destroy(element_t * one_el){
 
     free(one_el->score);
     free(one_el->key);
-    free(one_el->value);
     free(one_el);
 }
 
@@ -93,9 +89,9 @@ bool list_is_empty(list_t *one_list)
     return one_list->head == NULL;
 }
 
-void list_append(list_t *one_list, char *one_key, char *one_value, int* one_score)
+void list_append(list_t *one_list, char *one_key, long entropy, int* one_score)
 {
-    node_t *new_node = node_create(element_create(one_key, one_value , one_score));
+    node_t *new_node = node_create(element_create(one_key, entropy , one_score));
 
     if (one_list->head == NULL)
     {
@@ -110,7 +106,7 @@ void list_append(list_t *one_list, char *one_key, char *one_value, int* one_scor
     }
 }
 
-char *list_find(list_t *one_list, char *one_key)
+long list_find(list_t *one_list, char *one_key)
 {
     node_t *one_node = one_list->head;
 
@@ -118,7 +114,7 @@ char *list_find(list_t *one_list, char *one_key)
     {
         if(strcmp(one_node->value->key, one_key) == 0)
         {
-            return one_node->value->value;
+            return one_node->value->entropy;
         }
 
         one_node = one_node->next;
@@ -155,10 +151,10 @@ char *list_get_key(element_t *one_element)
     return one_element->key;
 }
 
-char *list_get_value(element_t *one_element)
+long list_get_entropy(element_t *one_element)
 {
     assert(one_element != NULL);
-    return one_element->value;
+    return one_element->entropy;
 }
 
 void list_remove_key(list_t *one_list, char *one_key)
@@ -215,4 +211,14 @@ void list_print(list_t *one_list)
         printf(" ");
     }
     printf("]\n");
+}
+
+int list_get_size(list_t *one_list){
+    node_t* curr = one_list->head;
+    int count = 0; 
+    while (curr!=NULL)
+    {
+        count++;
+    }
+    return count;
 }
