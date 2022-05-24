@@ -17,14 +17,21 @@ int *get_hints(size_t word_size)
         printf("Entrez les indices donnés par le jeu : ");
         fgets(input, word_size + 1, stdin);
         valid = validate_input(input, word_size, error);
-        while ((c = getchar()) != '\n' && c != EOF)
-        {
-            error->invalid_size = true;
-            valid = false;
-        }
         if (!valid)
         {
-            if (error->invalid_char)
+            if (error->exited)
+            {
+                printf("\x1b[1mJeu terminé, à bientôt :)\x1b[0m\n");
+                int *res = calloc(word_size, sizeof(int));
+                for (size_t i = 0; i < word_size; i++)
+                {
+                    res[i] = -1;
+                }
+                free(input);
+                free(error);
+                return res;
+            }
+            else if (error->invalid_char)
             {
                 printf("\x1b[1m\x1b[31mEntrez uniquement des 0, 1 et 2\x1b[0m\n");
             }
@@ -32,6 +39,11 @@ int *get_hints(size_t word_size)
             {
                 printf("\x1b[1m\x1b[31mEntrez exactement %zu chiffres\x1b[0m\n", word_size);
             };
+        }
+        while ((c = getchar()) != '\n' && c != EOF)
+        {
+            error->invalid_size = true;
+            valid = false;
         }
         error->invalid_char = false;
         error->invalid_size = false;
@@ -54,6 +66,12 @@ bool validate_input(char *input, size_t word_size, error_t *error)
     // ensure input is a string of 0, 1 and 2
     // ensure input is of length word_size
     // return true if input is valid
+
+    if (strcmp(input, "-1\n") == 0)
+    {
+        error->exited = true;
+        return false;
+    }
 
     for (size_t i = 0; i < word_size; i++)
     {
