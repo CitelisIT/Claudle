@@ -8,6 +8,7 @@ struct _error_t
 {
     bool invalid_size;
     bool invalid_char;
+    bool exited;
 };
 
 typedef struct _error_t error_t;
