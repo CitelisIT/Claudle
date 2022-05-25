@@ -39,10 +39,18 @@ void table_destroy(table_t *one_table)
     free(one_table);
 }
 
+const char *hash_key = "8e7766f113d6818faafa2241e85295746ddfedc1463c435b52895683d6974ca8";
+const int hashOutputSize = 4;
 int table_indexof(table_t *one_table, char *one_key)
 {
-    int ind = hash(one_key) % (one_table->size);
-    return ind < 0 ? ind + one_table->size : ind;
+
+    uint8_t bytesHash[hashOutputSize];
+
+    int wordLength = strlen(one_key);
+
+    halfsiphash(one_key, wordLength, hash_key, bytesHash, hashOutputSize);
+
+    return *(uint32_t *)(bytesHash) % one_table->size;
 }
 
 bool table_add(table_t *one_table, char *one_key)

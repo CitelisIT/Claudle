@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "halfsiphash.h"
 #include "linked_list.h"
 
 #ifndef __TABLE__H__

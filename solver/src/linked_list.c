@@ -137,17 +137,16 @@ double list_find(list_t *one_list, char *one_key)
 
         one_node = one_node->next;
     }
-
-<<<<<<< HEAD
     return 0.;
-=======
-    return 0;
->>>>>>> 8209288bf73c26be2c635517560c028b97d95111
 }
 
 bool list_contains(list_t *one_list, char *one_key)
 {
     if (!one_list)
+    {
+        return false;
+    }
+    if (one_list->size == 0)
     {
         return false;
     }
@@ -179,10 +178,10 @@ double list_get_entropy(element_t *one_element)
     return one_element->entropy;
 }
 
-int* list_get_score(element_t *one_element)
+int *list_get_score(element_t *one_element)
 {
     assert(one_element != NULL);
-    return *one_element->score;
+    return one_element->score;
 }
 
 int list_get_size(list_t *one_list)
