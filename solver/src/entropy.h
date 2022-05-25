@@ -20,17 +20,17 @@ paterns* init_patern(int n);
 
 void calc_patern(paterns* pat);
 
-int count_same_patern(list_t* dico,int* patern, char* word);
+int count_same_patern(table_t* dico,int* patern, char* word);
 
 bool compare_patern(int* patern,char* word,char* word_to_test);
 
-double calc_prob_patern(list_t* dico, int* patern, char* word, paterns* pat);
+double calc_prob_patern(table_t* dico, int* patern, char* word, paterns* pat);
 
-double calc_bit_patern(list_t* dico, int* patern, double proba_patern, char* word);
+double calc_bit_patern(table_t* dico, int* patern, double proba_patern, char* word);
 
-double calc_entropy(list_t* dico, char* word, paterns* pat);
+double calc_entropy(table_t* dico, char* word, paterns* pat);
 
-void update_entropy(list_t* dico,paterns* pat);
+void update_entropy(table_t* dico,paterns* pat);
 
 
 

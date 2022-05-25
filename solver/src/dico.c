@@ -23,6 +23,11 @@ table_t *dico_load(char *filename, int n)
         if (strlen(ch) == n)
         {
             bool added = table_add(table, ch);
+            if (added)
+            {
+                table->nb_word++;
+            }
+            
         }
     }
     fclose(ptr);

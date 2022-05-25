@@ -6,7 +6,7 @@
 #include <assert.h>
 #include "linked_list.h"
 
-element_t *element_create(char *key, long entropy, int *score)
+element_t *element_create(char *key, double entropy, int *score)
 {
     element_t *new = malloc(sizeof(element_t));
 
@@ -124,7 +124,7 @@ void list_append(list_t *one_list, char *one_key, long entropy, int *one_score)
     }
 }
 
-long list_find(list_t *one_list, char *one_key)
+double list_find(list_t *one_list, char *one_key)
 {
     node_t *one_node = one_list->head;
 
@@ -138,7 +138,7 @@ long list_find(list_t *one_list, char *one_key)
         one_node = one_node->next;
     }
 
-    return NULL;
+    return 0;
 }
 
 bool list_contains(list_t *one_list, char *one_key)
@@ -169,13 +169,13 @@ char *list_get_key(element_t *one_element)
     return one_element->key;
 }
 
-long list_get_entropy(element_t *one_element)
+double list_get_entropy(element_t *one_element)
 {
     assert(one_element != NULL);
     return one_element->entropy;
 }
 
-int list_get_score(element_t *one_element)
+int* list_get_score(element_t *one_element)
 {
     assert(one_element != NULL);
     return one_element->score;
