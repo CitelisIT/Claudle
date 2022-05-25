@@ -13,12 +13,17 @@ table_t *table_create(int size)
 
     table->size = size;
 
-    table->buckets = calloc(size, sizeof(list_t));
+    table->buckets = calloc(size, sizeof(list_t*));
+
+    for (int i = 0; i < size; i++)
+    {
+        table->buckets[i] = list_create();
+    }
 
     return table;
 }
 
-void *table_resize(table_t *one_table)
+void table_resize(table_t *one_table)
 {
     int newSize = 2 * one_table->size;
 
@@ -38,10 +43,10 @@ void *table_resize(table_t *one_table)
 
             // Get new index of the word
             // 5 IS TEMPORARY -- CHANGE IN FINAL IMPLEMENTATION
-            halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
+            halfsiphash(element->key, 5 , hash_key, bytesHash, hashOutputSize);
             int newIndex = *(uint32_t *)(bytesHash) % newSize;
 
-            list_append(buckets[newIndex], element->key, element->value, element->score);
+            list_append(buckets[newIndex], element->key, element->entropy, element->score);
 
             current = current->next;
         }
@@ -55,6 +60,7 @@ void *table_resize(table_t *one_table)
     one_table->size = newSize;
 }
 
+// Given a table, destroy its buckets and the table
 void table_destroy(table_t *one_table)
 {
     if (one_table == NULL)
@@ -67,32 +73,37 @@ void table_destroy(table_t *one_table)
         list_destroy(one_table->buckets[i]);
     }
     free(one_table->buckets);
+    free(one_table);
 }
 
-int table_indexof(table_t *one_table, uint32_t hashCode)
-{
-    return hashCode % one_table->size;
-}
-
-bool table_add(table_t *one_table, element_t *element)
+int table_indexof(table_t *one_table, char *one_key)
 {
     uint8_t bytesHash[hashOutputSize];
 
+    int wordLength = 5;
+
+    // MIGHT WANT TO CHANGE "5" FOR THE FINAL CODE
+    halfsiphash(one_key, wordLength, hash_key, bytesHash, hashOutputSize);
+
+    return *(uint32_t *)(bytesHash) % one_table->size;
+}
+
+// Add an element to the table
+bool table_add(table_t *one_table, element_t *element)
+{
+    // If the table is not big enough -- double its size
     if (one_table->count == one_table->size)
     {
         table_resize(one_table);
 
-        // 5 IS TEMPORARY -- CHANGE IN THE FINAL IMPLEMENTATION
-        halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
-        int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
+        int index = table_indexof(one_table, element->key);
 
-        list_append(one_table->buckets[index], element->key, element->value, element->score);
+        list_append(one_table->buckets[index], element->key, element->entropy, element->score);
         one_table->count++;
         return true;
     }
 
-    halfsiphash(element->value, 5, hash_key, bytesHash, hashOutputSize);
-    int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
+    int index = table_indexof(one_table, element->key);
 
     if (list_contains(one_table->buckets[index], element->key))
     {
@@ -100,12 +111,13 @@ bool table_add(table_t *one_table, element_t *element)
     }
     else
     {
-        list_append(one_table->buckets[index], element->key, element->value, element->score);
+        list_append(one_table->buckets[index], element->key, element->entropy, element->score);
         one_table->count++;
         return true;
     }
 }
 
+// Add all the words from the .txt file to the table
 void table_add_txt(table_t *one_table, char *path)
 {
     FILE *file;
@@ -126,7 +138,7 @@ void table_add_txt(table_t *one_table, char *path)
     {
         element->key = word;
         element->score = calloc(1, sizeof(int));
-        element->value = 0;
+        element->entropy = 0;
         table_add(one_table, element);
     }
 
@@ -139,26 +151,20 @@ void table_add_txt(table_t *one_table, char *path)
     return;
 }
 
+// Check if a word is in the table
 bool table_contains(table_t *one_table, char *one_key)
 {
-    uint8_t bytesHash[hashOutputSize];
-    // 5 IS TEMPORARY
-    halfsiphash(one_key, 5, hash_key, bytesHash, hashOutputSize);
-
-    int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
+    int index = table_indexof(one_table, one_key);
 
     return list_contains(one_table->buckets[index], one_key);
 }
 
-char *table_get(table_t *one_table, char *one_key)
+// Get the entropy of a word
+long table_get(table_t *one_table, char *one_key)
 {
-    uint8_t bytesHash[hashOutputSize];
-    // 5 IS TEMPORARY
-    halfsiphash(one_key, 5, hash_key, bytesHash, hashOutputSize);
+    int index = table_indexof(one_table, one_key);
 
-    int index = table_indexof(one_table, *(uint32_t *)(bytesHash));
+    long val = (list_find(one_table->buckets[index], one_key));
 
-    char val = *(list_find(one_table->buckets[index], one_key));
-
-    return &val;
+    return val;
 }
