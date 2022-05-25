@@ -138,7 +138,7 @@ long list_find(list_t *one_list, char *one_key)
         one_node = one_node->next;
     }
 
-    return NULL;
+    return 0.;
 }
 
 bool list_contains(list_t *one_list, char *one_key)
@@ -178,7 +178,7 @@ long list_get_entropy(element_t *one_element)
 int list_get_score(element_t *one_element)
 {
     assert(one_element != NULL);
-    return one_element->score;
+    return *one_element->score;
 }
 
 int list_get_size(list_t *one_list)
