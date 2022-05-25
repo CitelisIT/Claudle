@@ -7,6 +7,7 @@
 typedef struct _table_t
 {
     list_t **bucket;
+    int nb_word;
     int size;
 } _table_t;
 
