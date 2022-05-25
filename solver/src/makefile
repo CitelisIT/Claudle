@@ -13,7 +13,7 @@ strat_in_6.o: strat_in_6.h strat_in_6.c
 
 linked_list.o: linked_list.h linked_list.c
 
-entropy.o: entropy.h entropy.c 
+entropy.o: table.h table.o entropy.h entropy.c 
 
 io.o: io.h io.c
 
