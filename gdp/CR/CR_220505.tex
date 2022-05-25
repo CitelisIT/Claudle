@@ -1,0 +1,81 @@
+\documentclass[12pt,a4paper,final]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\begin{document}
+
+
+\begin{center}
+\Large \textbf{Compte-rendu de la réunion du 5 mai 2022}
+\end{center}
+\textbf{9h00 -- Salle 1.19}
+\vskip 0,5cm
+
+\begin{center}
+\begin{tabular}{|l|r|}
+    \hline
+    Présent & Absent \\
+    \hline
+    Tom BENE & Personne \\
+    Alexandre LI & \\
+    Camille MOUSSU & \\
+    Guillaume RICARD  & \\
+    \hline
+\end{tabular}
+\end{center}
+
+\begin{flushleft}
+    \textbf{Ordre du jour}
+\end{flushleft}
+
+\begin{enumerate}
+	\item Retour sur la soutenance concernant l'application 
+	\item Le solveur
+\end{enumerate}
+
+\begin{flushleft}
+    \textbf{Retour sur la soutenance concernant l'application}
+\end{flushleft}
+
+Le groupe est satisfait de la soutenance, et est prêt à se lancer dans la grande aventure qu'est le solveur. 
+
+\begin{flushleft}
+    \textbf{Solveur}
+\end{flushleft}
+
+\begin{itemize}
+    \item \textit{Implementation de la structure de donnée pour le dictionnaire} \\
+    Une première solution proposée pour stocker nos dictionnaires en C est de réaliser une table de hash. Cela a été vu en TP ce qui facilitera son implémentation pour le projet.
+    \item \textit{Affichage et récupération des entrées utilisateurs} \\
+    Cette partie relativement simple et rapide à concevoir sera réalisée par Tom en suivant les consignes du sujet.
+    \item \textit{Stratégie} \\
+    Pour "s'échauffer" le groupe va réaliser une première version de solveur où l'on propose à chaque fois les 5 mêmes mots au jeu, et selon les résultats, le 6ème mot doit être le bon. 
+    Dès que des résultats satisfaisants arriveront sur cette solution. Le groupe travaillera sur un solveur faisant appel à la théorie de l'information.
+\end{itemize}
+
+
+
+\begin{flushleft}
+    \textbf{Répartition des taches:}
+\end{flushleft}
+\begin{itemize}
+    \item Guillaume : Récupération du mot dans le dictionnaire
+    \item Alexandre : Définition de la structure de données pour le dictionnaire
+    \item Camille : Stratégie en 6 mots
+    \item Tous : Réfléchir à la stratégie "théorie de l'information" et commencer à implémenter les fonctions de base (entropie, etc...) 
+\end{itemize}
+
+\begin{flushleft}
+    \textbf{Réunion suivante :} vendredi 13/05/2022 à 14h
+\end{flushleft}
+
+\textit{Fin de réunion à 9h30}
+
+\end{document}
+

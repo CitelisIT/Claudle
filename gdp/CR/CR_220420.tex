@@ -1,0 +1,80 @@
+\documentclass[12pt,a4paper,final]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\begin{document}
+
+
+\begin{center}
+\Large \textbf{Compte-rendu de la réunion du 20 avril 2022}
+\end{center}
+
+\textbf{14h10 -- Discord}
+\vskip 0,5cm
+
+\begin{center}
+\begin{tabular}{|l|r|}
+    \hline
+    Présent & Absent \\
+    \hline
+    Tom BENE & Personne \\
+    Alexandre LI & \\
+    Camille MOUSSU & \\
+    Guillaume RICARD  & \\
+    \hline
+\end{tabular}
+\end{center}
+
+\begin{flushleft}
+    \textbf{Ordre du jour}
+\end{flushleft}
+
+\begin{enumerate}
+	\item Avancement sur l'application 
+\end{enumerate}
+
+\begin{flushleft}
+    \textbf{Avancement sur l'application}
+\end{flushleft}
+
+\begin{itemize}
+    \item \textit{Connexion des utilisateurs} \\
+    Tom a commencé à implémenter le système de connexion et le terminera prochainement.
+    \item \textit{Utilisation d'Axios} \\
+    Pour réaliser les différentes requetes HTTP, il est décidé par le groupe d'utiliser \textit{Axios}. 
+    \item \textit{API} \\
+    L'API est quasiment finie, il reste quelques fonctions à finaliser ou à réécrire pour utiliser correctement \textit{SQLAchemy} par exemple. \\
+    \item \textit{Base de données} \\
+    Un des problèmes soulevé par M.Festor lors de la validation du projet est la gestion de l'historique des parties. Une proposition simple venant de Camille est d'avoir un fichier texte où tous les essais sont récuperés. Néanmoins le caractère pratique de cette solution est questionné. Une 2ème option est proposé par Tom d'avoir une colonne dans la base de donneés sur les parties qui soit une longue chaine de caractères contenant toutes les propositions faites lors d'une parties, séparées par un séparateur. Le groupe remarque alors que cela pose problème pour le respect des différentes formes normales. Cette solution est retenue pour le moment, faute de mieux. 
+\end{itemize}
+
+
+\begin{flushleft}
+    \textbf{Répartition des taches:}
+\end{flushleft}
+\begin{itemize}
+    \item Tom: Finir le système de connexion
+    \item Alexandre: Finir les fonctions dans l'API
+    \item Camille: Finir les fonctions dans l'API
+    \item Guillaume: Réécrire les fonctions en \textit{SQLAchemy}
+    \item Tous : Apprendre à utiliser \textit{Axios} et commencer à réaliser les requetes HTTP
+\end{itemize}
+
+\begin{flushleft}
+    \textbf{Réunion suivante :} lundi 04/05/2022 à 9h
+\end{flushleft}
+
+\textit{Fin de réunion à 14h45}
+
+
+
+
+
+
+\end{document}
