@@ -91,3 +91,39 @@ void table_remove(table_t *one_table, char *one_key)
     int index = table_indexof(one_table, one_key);
     list_remove_key(one_table->bucket[index], one_key);
 }
+
+element_t *table_max_entropy(table_t one_table)
+{
+    // Given a table, return the element with highest entropy
+    int index = 0;
+    element_t *maxElement = list_max_entropy(one_table.bucket[index]);
+
+
+    index++;
+
+    if(index > one_table.size)
+    {
+        return maxElement;
+    }
+
+    for(index; index < one_table.size; index++)
+    {
+        list_t *currentList = one_table.bucket[index];
+
+        // If the list is empty, there's no element
+        if(list_is_empty)
+        {
+            continue;
+        }
+
+        // Get the element with highest entropy in current list 
+        element_t *currentElement = list_max_entropy(currentList);
+
+        if(maxElement->entropy < currentElement->entropy)
+        {
+            maxElement = currentElement;
+        }
+    }
+
+    return maxElement;
+}

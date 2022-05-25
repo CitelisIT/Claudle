@@ -32,4 +32,6 @@ table_t *table_copy(table_t *one_table);
 
 void table_remove(table_t *one_table, char *one_key);
 
+element_t *table_max_entropy(table_t one_table);
+
 #endif /* __TABLE_H__ */
