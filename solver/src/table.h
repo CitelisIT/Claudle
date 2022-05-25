@@ -28,4 +28,8 @@ bool table_contains(table_t *one_table, char *one_key);
 
 int table_get(table_t *one_table, char *one_key);
 
+table_t *table_copy(table_t *one_table);
+
+void table_remove(table_t *one_table, char *one_key);
+
 #endif /* __TABLE_H__ */

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "table.h"
+#include "linked_list.h"
 
 int hash(char *one_word)
 {
@@ -70,4 +71,23 @@ bool table_contains(table_t *one_table, char *one_key)
 {
     int index = table_indexof(one_table, one_key);
     return list_contains(one_table->bucket[index], one_key);
+}
+
+table_t *table_copy(table_t *one_table)
+{
+    table_t *new_table = table_create(one_table->size);
+    for (int i = 0; i < one_table->size; i++)
+    {
+        list_t *list = one_table->bucket[i];
+        list_t *new_list = list_copy(list);
+        new_table->bucket[i] = new_list;
+    }
+    new_table->nb_word = one_table->nb_word;
+    return new_table;
+}
+
+void table_remove(table_t *one_table, char *one_key)
+{
+    int index = table_indexof(one_table, one_key);
+    list_remove_key(one_table->bucket[index], one_key);
 }
