@@ -5,14 +5,16 @@
 
 int main()
 {
+    printf("creation");
     list_t *pattern = list_create();
-    list_append(pattern, 'a', 1);
-    list_append(pattern, 'b', 2);
-    list_append(pattern, 'c', 2);
+    printf("créé");
+    word_t* crane = char_to_word("crane");
+    word_t* slate = char_to_word("slate");
+    word_t* query = char_to_word("query");
+    list_append(pattern, crane);
+    list_append(pattern, slate);
+    list_append(pattern, query);
     assert(list_get_size(pattern) == 3);
-    assert(list_find(pattern, 'a') == 1);
-    assert(list_find(pattern, 'b') == 2);
-    assert(list_find(pattern, 'c') == 2);
     list_destroy(pattern);
     return 0;
 }
