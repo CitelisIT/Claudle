@@ -41,6 +41,8 @@ bool list_is_empty(list_t *one_list);
 
 void list_append(list_t *one_list, char *one_key, long entropy, int *one_score);
 
+void list_prepend(list_t *one_list, char *one_key, long entropy, int *one_score);
+
 double list_find(list_t *one_list, char *one_key);
 
 bool list_contains(list_t *one_list, char *one_key);
@@ -49,7 +51,7 @@ char *list_get_key(element_t *one_element);
 
 double list_get_entropy(element_t *one_element);
 
-int* list_get_score(element_t *one_element);
+int *list_get_score(element_t *one_element);
 
 void list_remove_key(list_t *one_list, char *one_key);
 
@@ -63,6 +65,5 @@ int list_get_size(list_t *one_list);
 void list_print(list_t *one_list);
 //
 // void list_remove_first(list_t *one_list);
-
 
 #endif /* __LINKED_LIST_H__ */

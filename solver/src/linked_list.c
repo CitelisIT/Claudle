@@ -124,6 +124,25 @@ void list_append(list_t *one_list, char *one_key, long entropy, int *one_score)
     }
 }
 
+void list_prepend(list_t *one_list, char *one_key, long entropy, int *one_score)
+{
+    node_t *new_node = node_create(element_create(one_key, entropy, one_score));
+
+    if (one_list->head == NULL)
+    {
+        one_list->head = new_node;
+        one_list->size++;
+        one_list->last = new_node;
+    }
+
+    else
+    {
+        new_node->next = one_list->head;
+        one_list->head = new_node;
+        one_list->size++;
+    }
+}
+
 double list_find(list_t *one_list, char *one_key)
 {
     node_t *one_node = one_list->head;
