@@ -25,7 +25,9 @@ io_tests : io_tests.o ../src/io.o ../src/dico.o ../src/linked_list.o ../src/tabl
 
 io_tests.o : io_tests.c ../src/io.o
 
+table_tests : table_tests.o ../src/table.o ../src/dico.o ../src/linked_list.o ../src/halfsiphash.o
 
+table_tests.o : table_tests.c ../src/table.o
 
 
 clean:
@@ -45,5 +47,8 @@ test_entropy: entropy_tests
 
 test_io: io_tests
 	$(RUN_ENV) ./io_tests
+
+test_table: table_tests
+	$(RUN_ENV) ./table_tests
 
 .SILENT: clean
