@@ -160,6 +160,32 @@ int count_same_patern(table_t *dico, int *patern, char *word)
     return count;
 }
 
+table_t *new_selected_table(table_t *dico, int *patern, char *word)
+{
+    list_t **lists = dico->bucket;
+    list_t *new_table = table_create(dico->size);
+    int count = 0;
+    bool add_word = false;
+    for (int i = 0; i < dico->size; i++)
+    {
+        node_t *curr = lists[i]->head;
+        while (curr != NULL)
+        {
+            if (curr->value != NULL)
+            {
+                add_word = compare_patern(patern, word, curr->value->key);
+                if (add_word)
+                {
+                    table_add(new_table, curr->value->key);
+                }
+                add_word = false;
+                curr = curr->next;
+            }
+        }
+    }
+    return new_table;
+}
+
 double calc_prob_patern(table_t *dico, int *patern, char *word, paterns *pat)
 {
     int posibilities = count_same_patern(dico, patern, word);
