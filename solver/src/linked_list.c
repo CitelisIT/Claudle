@@ -254,6 +254,32 @@ void list_remove_first(list_t *one_list)
     node_destroy(tmp);
 }
 
+element_t *list_max_entropy(list_t *one_list)
+{
+    // Given a list, return the element which has the highest entropy
+    if(one_list == NULL)
+    {
+        return NULL;
+    }
+
+    double max = one_list->head->value->entropy;
+    element_t *maxElement = one_list->head->value;
+
+    node_t *current = one_list->head;
+
+    while(current)
+    {
+        if(max < current->value->entropy)
+        {
+            max = current->value->entropy;
+            maxElement = current->value;
+        }
+        current = current->next;
+    }
+
+    return maxElement;
+}
+
 void list_print(list_t *one_list)
 {
     assert(one_list != NULL);

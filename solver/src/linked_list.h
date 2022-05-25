@@ -59,6 +59,8 @@ void list_remove_first(list_t *one_list);
 
 int list_get_size(list_t *one_list);
 
+element_t *list_max_entropy(list_t *one_list);
+
 // Might not need these for the solver
 // void element_print(element_t *one_element);
 //
