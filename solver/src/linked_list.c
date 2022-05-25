@@ -105,7 +105,7 @@ bool list_is_empty(list_t *one_list)
     return one_list->head == NULL;
 }
 
-void list_append(list_t *one_list, char *one_key, long entropy, int *one_score)
+void list_append(list_t *one_list, char *one_key, double entropy, int *one_score)
 {
     node_t *new_node = node_create(element_create(one_key, entropy, one_score));
 
@@ -124,7 +124,7 @@ void list_append(list_t *one_list, char *one_key, long entropy, int *one_score)
     }
 }
 
-void list_prepend(list_t *one_list, char *one_key, long entropy, int *one_score)
+void list_prepend(list_t *one_list, char *one_key, double entropy, int *one_score)
 {
     node_t *new_node = node_create(element_create(one_key, entropy, one_score));
 

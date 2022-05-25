@@ -39,9 +39,9 @@ void list_destroy(list_t *one_list);
 
 bool list_is_empty(list_t *one_list);
 
-void list_append(list_t *one_list, char *one_key, long entropy, int *one_score);
+void list_append(list_t *one_list, char *one_key, double entropy, int *one_score);
 
-void list_prepend(list_t *one_list, char *one_key, long entropy, int *one_score);
+void list_prepend(list_t *one_list, char *one_key, double entropy, int *one_score);
 
 double list_find(list_t *one_list, char *one_key);
 
