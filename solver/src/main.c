@@ -1,5 +1,5 @@
-#include "../src/entropy.h"
-#include "../src/io.h"
+#include "entropy.h"
+#include "io.h"
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
     case 4:
         proposed_word = "abdc";
         printf("importation mots: \n");
-        table_t *dico4 = dico_load("../dictionaries/francais/dico4.txt", word_size);
+        table_t *dico4 = dico_load("dictionaries/francais/dico4.txt", word_size);
         printf("Dico importé \n");
         printf("%s\n", proposed_word);
         dico = dico4;
@@ -24,7 +24,7 @@ int main()
     case 5:
         proposed_word = "crane";
         printf("importation mots: \n");
-        table_t *dico5 = dico_load("../dictionaries/francais/dico5.txt", word_size);
+        table_t *dico5 = dico_load("dictionaries/francais/dico5.txt", word_size);
         printf("Dico importé \n");
         printf("%s\n", proposed_word);
         dico = dico5;
@@ -32,7 +32,7 @@ int main()
     case 6:
         proposed_word = "abdcef";
         printf("importation mots: \n");
-        table_t *dico6 = dico_load("../dictionaries/francais/dico6.txt", word_size);
+        table_t *dico6 = dico_load("dictionaries/francais/dico6.txt", word_size);
         printf("Dico importé \n");
         printf("%s\n", proposed_word);
         dico = dico6;
@@ -40,7 +40,7 @@ int main()
     case 7:
         proposed_word = "abdcefg";
         printf("importation mots: \n");
-        table_t *dico7 = dico_load("../dictionaries/francais/dico7.txt", word_size);
+        table_t *dico7 = dico_load("dictionaries/francais/dico7.txt", word_size);
         printf("Dico importé \n");
         printf("%s\n", proposed_word);
         dico = dico7;
@@ -48,7 +48,7 @@ int main()
     case 8:
         proposed_word = "abdcefgh";
         printf("importation mots: \n");
-        table_t *dico8 = dico_load("../dictionaries/francais/dico8.txt", word_size);
+        table_t *dico8 = dico_load("dictionaries/francais/dico8.txt", word_size);
         printf("Dico importé \n");
         printf("%s\n", proposed_word);
         dico = dico8;
@@ -56,7 +56,7 @@ int main()
     case 9:
         proposed_word = "abdcefghi";
         printf("importation mots: \n");
-        table_t *dico9 = dico_load("../dictionaries/francais/dico9.txt", word_size);
+        table_t *dico9 = dico_load("dictionaries/francais/dico9.txt", word_size);
         printf("Dico importé \n");
         printf("%s\n", proposed_word);
         dico = dico9;
@@ -64,7 +64,7 @@ int main()
     case 10:
         proposed_word = "abdcefghij";
         printf("importation mots: \n");
-        table_t *dico10 = dico_load("../dictionaries/francais/dico10.txt", word_size);
+        table_t *dico10 = dico_load("dictionaries/francais/dico10.txt", word_size);
         printf("Dico importé \n");
         printf("%s\n", proposed_word);
         dico = dico10;
