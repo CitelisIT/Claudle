@@ -20,7 +20,14 @@ int main()
         list_print(newtable->bucket[i]);
     }
 
-    printf("%d", compare_patern(s3, "abcde", "tydyp"));
+    printf("Pattern: 00010, Compare: abcde - tydyp\n");
+    printf("%d\n", compare_patern(s3, "abcde", "tydyp"));
+    int s4[5] = {0, 0, 2, 2, 2};
+    printf("Pattern: 00222, Compare: crane - stage\n");
+    printf("%d\n", compare_patern(s4, "crane", "stage"));
+    int s5[5] = {0, 0, 0, 0, 0};
+    printf("Pattern: 00000, Compare: crane - stage\n");
+    printf("%d\n", compare_patern(s5, "crane", "stage"));
     // update_entropy(dico, pat);
     destroy_patern(pat);
     table_destroy(dico);
