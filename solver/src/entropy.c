@@ -49,6 +49,7 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
             {
                 return false;
             }
+            break;
         case 1:
             valid = false;
             for (int j = 0; j < strlen(word_to_test); j++)
