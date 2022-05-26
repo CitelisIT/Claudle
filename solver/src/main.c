@@ -5,12 +5,6 @@ int main()
 {
     int word_size = read_word_lengths();
 
-    int end_answer[word_size];
-    for (int i = 0; i < word_size; i++)
-    {
-        end_answer[i] = -1;
-    }
-
     table_t *dico;
     paterns *pat = init_patern(word_size);
     calc_patern(pat);
@@ -80,17 +74,40 @@ int main()
         break;
     }
 
-    user_input *user_response = get_hints(word_size);
+    user_input *user_response = create_user_response(word_size);
+    update_user_response(user_response, word_size);
     table_t *new_list = new_selected_table(dico, user_response->response, proposed_word);
     update_entropy(new_list, pat);
 
+    element_t *tmp;
+
     while (!user_response->exited && !user_response->valid)
     {
-        proposed_word = table_max_entropy(new_list)->key;
+        if (table_is_empty(new_list))
+        {
+            printf("pas de mots correspondants =(");
+            table_destroy(new_list);
+            destroy_user_input(user_response);
+            destroy_patern(pat);
+            return 0;
+        }
+
+        tmp = table_max_entropy(new_list);
+
+        if (!tmp->key)
+        {
+            printf("pas de mots correspondants =(");
+            table_destroy(new_list);
+            destroy_user_input(user_response);
+            destroy_patern(pat);
+            return 0;
+        }
+
+        proposed_word = tmp->key;
 
         printf("%s\n", proposed_word);
 
-        user_response = get_hints(word_size);
+        update_user_response(user_response, word_size);
 
         new_list = new_selected_table(new_list, user_response->response, proposed_word);
 
