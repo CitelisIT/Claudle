@@ -4,11 +4,13 @@
 #include <string.h>
 #include "io.h"
 
-int *get_hints(size_t word_size)
+user_input *get_hints(size_t word_size)
 {
     // Get input from user as a single string and ensure it contains only 0, 1 and 2
     // Keep getting input from user until it is valid
+    user_input *resp = calloc(1, sizeof(user_input));
     char *input = (char *)calloc(word_size + 1, sizeof(char));
+    resp->response = calloc(word_size, sizeof(int));
     char c;
     bool valid = false;
     error_t *error = (error_t *)calloc(1, sizeof(error_t));
@@ -22,14 +24,10 @@ int *get_hints(size_t word_size)
             if (error->exited)
             {
                 printf("\x1b[1mJeu terminé, à bientôt :)\x1b[0m\n");
-                int *res = calloc(word_size, sizeof(int));
-                for (size_t i = 0; i < word_size; i++)
-                {
-                    res[i] = -1;
-                }
+                resp->exited = true;
                 free(input);
                 free(error);
-                return res;
+                return resp;
             }
             else if (error->invalid_char)
             {
@@ -50,15 +48,19 @@ int *get_hints(size_t word_size)
     } while (!valid);
 
     // Convert the string to an array of ints
-    int *hints = (int *)malloc(sizeof(int) * word_size);
+    resp->valid = true;
     for (size_t i = 0; i < word_size; i++)
     {
-        hints[i] = input[i] - '0';
+        resp->response[i] = input[i] - '0';
+        if (resp->response[i] != 2)
+        {
+            resp->valid = false;
+        }
     }
 
     free(input);
     free(error);
-    return hints;
+    return resp;
 }
 
 bool validate_input(char *input, size_t word_size, error_t *error)
@@ -104,4 +106,10 @@ int read_word_lengths()
 
     fclose(file);
     return n;
+}
+
+void destroy_user_input(user_input *input)
+{
+    free(input->response);
+    free(input);
 }

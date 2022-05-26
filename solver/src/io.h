@@ -13,10 +13,21 @@ struct _error_t
 
 typedef struct _error_t error_t;
 
-int *get_hints(size_t word_size);
+struct _user_input
+{
+    bool valid;
+    bool exited;
+    int *response;
+};
+
+typedef struct _user_input user_input;
+
+user_input *get_hints(size_t word_size);
 
 bool validate_input(char *input, size_t word_size, error_t *error);
 
 int read_word_lengths();
+
+void destroy_user_input(user_input *input);
 
 #endif
