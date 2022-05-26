@@ -20,6 +20,8 @@ table_t *table_create(int size);
 
 void table_destroy(table_t *one_table);
 
+bool table_is_empty(table_t *one_table);
+
 int table_indexof(table_t *one_table, char *one_key);
 
 bool table_add(table_t *one_table, char *one_key);

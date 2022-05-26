@@ -4,13 +4,18 @@
 #include <string.h>
 #include "io.h"
 
-user_input *get_hints(size_t word_size)
+user_input *create_user_response(size_t word_size)
+{
+    user_input *input = (user_input *)calloc(1, sizeof(user_input));
+    input->response = (int *)calloc(word_size, sizeof(int));
+    return input;
+}
+
+void update_user_response(user_input *resp, size_t word_size)
 {
     // Get input from user as a single string and ensure it contains only 0, 1 and 2
     // Keep getting input from user until it is valid
-    user_input *resp = calloc(1, sizeof(user_input));
     char *input = (char *)calloc(word_size + 1, sizeof(char));
-    resp->response = calloc(word_size, sizeof(int));
     char c;
     bool valid = false;
     error_t *error = (error_t *)calloc(1, sizeof(error_t));
@@ -27,7 +32,7 @@ user_input *get_hints(size_t word_size)
                 resp->exited = true;
                 free(input);
                 free(error);
-                return resp;
+                return;
             }
             else if (error->invalid_char)
             {
@@ -60,7 +65,6 @@ user_input *get_hints(size_t word_size)
 
     free(input);
     free(error);
-    return resp;
 }
 
 bool validate_input(char *input, size_t word_size, error_t *error)

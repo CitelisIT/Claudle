@@ -40,6 +40,25 @@ void table_destroy(table_t *one_table)
     free(one_table);
 }
 
+bool table_is_empty(table_t *one_table)
+{
+    if(one_table == NULL)
+    {
+        return true;
+    }
+
+    // If all the list in the table are empty, we consider the table empty
+    for(int index = 0; index < one_table->size; index++)
+    {
+        if(!list_is_empty(one_table->bucket[index]))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 const char *hash_key = "8e7766f113d6818faafa2241e85295746ddfedc1463c435b52895683d6974ca8";
 const int hashOutputSize = 4;
 int table_indexof(table_t *one_table, char *one_key)
