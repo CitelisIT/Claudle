@@ -7,7 +7,7 @@ table_t *dico_load(char *filename, int n)
     char ch[30] = "";
     if (ptr == NULL)
     {
-        printf("file can't be opened \n");
+        printf("\x1b[31m\x1b[2mLe dictionnaire n'a pas pu être ouvert\x1b[0m\n");
         return NULL;
     }
 
