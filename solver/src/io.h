@@ -22,7 +22,9 @@ struct _user_input
 
 typedef struct _user_input user_input;
 
-user_input *get_hints(size_t word_size);
+user_input *create_user_response(size_t word_size);
+
+void update_user_response(user_input *resp, size_t word_size);
 
 bool validate_input(char *input, size_t word_size, error_t *error);
 
