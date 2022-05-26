@@ -49,6 +49,11 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
             {
                 checked[i] = true;
             }
+            else
+            {
+                free(checked);
+                return false;
+            }
         }
     }
     for (int i = 0; i < strlen(word); i++)
