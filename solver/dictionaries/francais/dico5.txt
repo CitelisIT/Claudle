@@ -1,3 +1,27 @@
+boeuf
+coeur
+novae
+naevi
+noeud
+soeur
+vitae
+voeux
+aequo
+oeils
+oeufs
+oeuve
+boeuf
+coeur
+novae
+naevi
+noeud
+soeur
+vitae
+voeux
+aequo
+oeils
+oeufs
+oeuve
 abaca
 abats
 abbes
@@ -1255,7 +1279,6 @@ buche
 buche
 bumes
 butes
-boeufs
 caban
 cabas
 cabot
@@ -1570,7 +1593,6 @@ choma
 chome
 chome
 chome
-choeur
 cibla
 cible
 cible
@@ -2012,8 +2034,6 @@ cable
 cable
 calin
 capre
-caecal
-caecum
 cedes
 cedre
 celes
@@ -2046,7 +2066,6 @@ conit
 conit
 cotes
 cotes
-coeurs
 dabas
 dacal
 dadas
@@ -2459,7 +2478,6 @@ eider
 elbot
 elfes
 elles
-elaeis
 embas
 embat
 embua
@@ -3061,8 +3079,6 @@ fites
 fohns
 fumes
 futes
-foetal
-foetus
 gable
 gades
 gadin
@@ -5163,7 +5179,6 @@ murit
 muron
 murit
 mutes
-moeurs
 naans
 nabab
 nabis
@@ -5385,7 +5400,6 @@ nurse
 nuton
 nuees
 nylon
-naevus
 nefle
 negre
 nepes
@@ -5404,7 +5418,6 @@ neper
 nevus
 neves
 notre
-noeuds
 oasis
 obels
 obier
@@ -7561,7 +7574,6 @@ sumes
 sures
 sutes
 sutra
-soeurs
 tabac
 tabar
 tabla
@@ -8100,7 +8112,6 @@ tatez
 tatat
 tatee
 tates
-taenia
 tetes
 tejus
 telex
@@ -8168,7 +8179,6 @@ urine
 urine
 urnes
 urubu
-uraeus
 urees
 usage
 usage
@@ -9002,19 +9012,6 @@ otera
 otiez
 otons
 otees
-oedipe
-oedeme
-oeilla
-oeille
-oeille
-oeille
-oestre
-oeuvra
-oeuvre
-oeuvre
-oeuvre
-oeuvee
-oeuves
 abaca
 abats
 abbes
@@ -10272,7 +10269,6 @@ buche
 buche
 bumes
 butes
-boeufs
 caban
 cabas
 cabot
@@ -10587,7 +10583,6 @@ choma
 chome
 chome
 chome
-choeur
 cibla
 cible
 cible
@@ -11029,8 +11024,6 @@ cable
 cable
 calin
 capre
-caecal
-caecum
 cedes
 cedre
 celes
@@ -11063,7 +11056,6 @@ conit
 conit
 cotes
 cotes
-coeurs
 dabas
 dacal
 dadas
@@ -11476,7 +11468,6 @@ eider
 elbot
 elfes
 elles
-elaeis
 embas
 embat
 embua
@@ -12078,8 +12069,6 @@ fites
 fohns
 fumes
 futes
-foetal
-foetus
 gable
 gades
 gadin
@@ -14180,7 +14169,6 @@ murit
 muron
 murit
 mutes
-moeurs
 naans
 nabab
 nabis
@@ -14402,7 +14390,6 @@ nurse
 nuton
 nuees
 nylon
-naevus
 nefle
 negre
 nepes
@@ -14421,7 +14408,6 @@ neper
 nevus
 neves
 notre
-noeuds
 oasis
 obels
 obier
@@ -16578,7 +16564,6 @@ sumes
 sures
 sutes
 sutra
-soeurs
 tabac
 tabar
 tabla
@@ -17117,7 +17102,6 @@ tatez
 tatat
 tatee
 tates
-taenia
 tetes
 tejus
 telex
@@ -17185,7 +17169,6 @@ urine
 urine
 urnes
 urubu
-uraeus
 urees
 usage
 usage
@@ -18019,16 +18002,3 @@ otera
 otiez
 otons
 otees
-oedipe
-oedeme
-oeilla
-oeille
-oeille
-oeille
-oestre
-oeuvra
-oeuvre
-oeuvre
-oeuvre
-oeuvee
-oeuves

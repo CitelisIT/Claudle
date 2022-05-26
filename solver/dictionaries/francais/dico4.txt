@@ -347,7 +347,6 @@ bele
 beta
 bete
 bome
-boeuf
 cabs
 caca
 cade
@@ -558,7 +557,6 @@ cone
 coni
 cote
 cote
-coeur
 daba
 dacd
 dada
@@ -1696,7 +1694,6 @@ noue
 noue
 nova
 nove
-novae
 nove
 nove
 noya
@@ -1719,7 +1716,6 @@ nuee
 nues
 nvad
 nvar
-naevi
 nepe
 nees
 nego
@@ -1727,7 +1723,6 @@ nene
 neon
 neos
 neve
-noeud
 oais
 obel
 obis
@@ -2411,7 +2406,6 @@ sene
 sevi
 sure
 surs
-soeur
 taco
 tacs
 tact
@@ -2685,7 +2679,6 @@ vise
 vise
 vite
 vits
-vitae
 vive
 vivo
 vies
@@ -2728,7 +2721,6 @@ vete
 vets
 vetu
 vint
-voeux
 wais
 wall
 watt
@@ -2832,7 +2824,6 @@ anon
 anee
 apre
 atre
-aequo
 eche
 eres
 ebat
@@ -2908,9 +2899,6 @@ otez
 otat
 otee
 otes
-oeils
-oeufs
-oeuve
 abat
 abbe
 abdo
@@ -3260,7 +3248,6 @@ bele
 beta
 bete
 bome
-boeuf
 cabs
 caca
 cade
@@ -3471,7 +3458,6 @@ cone
 coni
 cote
 cote
-coeur
 daba
 dacd
 dada
@@ -4609,7 +4595,6 @@ noue
 noue
 nova
 nove
-novae
 nove
 nove
 noya
@@ -4632,7 +4617,6 @@ nuee
 nues
 nvad
 nvar
-naevi
 nepe
 nees
 nego
@@ -4640,7 +4624,6 @@ nene
 neon
 neos
 neve
-noeud
 oais
 obel
 obis
@@ -5324,7 +5307,6 @@ sene
 sevi
 sure
 surs
-soeur
 taco
 tacs
 tact
@@ -5598,7 +5580,6 @@ vise
 vise
 vite
 vits
-vitae
 vive
 vivo
 vies
@@ -5641,7 +5622,6 @@ vete
 vets
 vetu
 vint
-voeux
 wais
 wall
 watt
@@ -5745,7 +5725,6 @@ anon
 anee
 apre
 atre
-aequo
 eche
 eres
 ebat
@@ -5821,6 +5800,3 @@ otez
 otat
 otee
 otes
-oeils
-oeufs
-oeuve
