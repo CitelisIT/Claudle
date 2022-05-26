@@ -37,56 +37,43 @@ void calc_patern(paterns *pat)
     }
 }
 
-bool compare_patern(int *patern, char *word, char *word_to_test)
+bool compare_patern(int *pattern, char *word, char *word_to_test)
 {
-    bool ok = false;
-
+    bool valid = false;
     for (int i = 0; i < strlen(word); i++)
     {
-        int j = 0;
-        switch (patern[i])
+        switch (pattern[i])
         {
         case 2:
-            ok = (word[i] == word_to_test[i]);
-            break;
-        case 1:
-            while (j < strlen(word))
+            if (word[i] != word_to_test[i])
             {
-                if (word[i] != word_to_test[j] && i != j)
-                {
-                    ok = true;
-                }
-                else
-                {
-                    ok = false;
-                }
-
-                j++;
+                return false;
             }
-            // printf(" cas1 %s\n", ok)
+        case 1:
+            for (int j = 0; j < strlen(word_to_test); j++)
+            {
+                if (word[i] == word_to_test[j] && i != j)
+                {
+                    valid = true;
+                }
+            }
+            if (!valid)
+            {
+                return false;
+            }
             break;
         case 0:
-            for (j = 0; j < strlen(word); j++)
+            for (int j = 0; j < strlen(word_to_test); j++)
             {
-                if (word[i] != word_to_test[j])
-                {
-                    ok = true;
-                }
-                else
+                if (word[i] == word_to_test[j])
                 {
                     return false;
                 }
             }
             break;
-        default:
-            break;
-        }
-        if (!ok)
-        {
-            return ok;
         }
     }
-    return ok;
+    return true;
 }
 
 int calculate_nb_matches(char *word, int *patern, table_t *dico)
