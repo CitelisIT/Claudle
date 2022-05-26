@@ -74,6 +74,12 @@ Le programme proposera un mot que vous devriez saisir dans le Wordle/Claudle. En
 - 0 pour une lettre colorée **Grise**
 
 Cela jusqu'à ce qu'on gagne le jeu.
+
+> Par exemple:
+>
+> ![Exemple score](solverExample.png)
+> 
+> La saisie ici est: 22001
   
 Pour quittez le programme, vous pouvez simplement saisir `-1`.
 
