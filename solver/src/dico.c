@@ -13,14 +13,14 @@ table_t *dico_load(char *filename, int n)
 
     while (fgets(ch, 30, ptr) != NULL)
     {
-        for (int i = 0; i < strlen(ch); i++)
+        for (size_t i = 0; i < strlen(ch); i++)
         {
             if (ch[i] == '\n' || ch[i] == '\r')
             {
                 ch[i] = '\0';
             }
         }
-        if (strlen(ch) == n)
+        if (strlen(ch) == (size_t)n)
         {
             bool added = table_add(table, ch);
             if (added)

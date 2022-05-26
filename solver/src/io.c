@@ -101,7 +101,7 @@ int read_word_lengths()
     if (file == NULL)
     {
         printf("\x1b[1m\x1b[31mImpossible d'ouvrir le fichier wsolf.txt\x1b[0m\n");
-        return NULL;
+        return -1;
     }
 
     int n;

@@ -25,9 +25,9 @@ table_t *new_selected_table(table_t *dico, int *patern, char *word);
 
 bool compare_patern(int *patern, char *word, char *word_to_test);
 
-double calc_prob_patern(table_t *dico, int *patern, char *word, paterns *pat);
+double calc_prob_patern(table_t *dico, int *patern, char *word);
 
-double calc_bit_patern(table_t *dico, int *patern, double proba_patern, char *word);
+double calc_bit_patern(double proba_patern);
 
 double calc_entropy(table_t *dico, char *word, paterns *pat);
 

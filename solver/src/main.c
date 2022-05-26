@@ -5,13 +5,18 @@ int main()
 {
     int word_size = read_word_lengths();
 
-    table_t *dico;
+    if (word_size == -1)
+    {
+        return 1;
+    }
+
+    table_t *dico = NULL;
     paterns *pat = init_patern(word_size);
     calc_patern(pat);
 
     char *proposed_word = "";
 
-    printf("Importation des mots:\n");
+    printf("Importation des mots...\n");
 
     switch (word_size)
     {

@@ -41,7 +41,7 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
 {
     bool valid = false;
     bool *checked = calloc(strlen(word), sizeof(bool));
-    for (int i = 0; i < strlen(word); i++)
+    for (size_t i = 0; i < strlen(word); i++)
     {
         if (pattern[i] == 2)
         {
@@ -56,14 +56,14 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
             }
         }
     }
-    for (int i = 0; i < strlen(word); i++)
+    for (size_t i = 0; i < strlen(word); i++)
     {
 
         switch (pattern[i])
         {
         case 1:
             valid = false;
-            for (int j = 0; j < strlen(word_to_test); j++)
+            for (size_t j = 0; j < strlen(word_to_test); j++)
             {
                 if (word[i] == word_to_test[j] && i != j)
                 {
@@ -77,7 +77,7 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
             }
             break;
         case 0:
-            for (int j = 0; j < strlen(word_to_test); j++)
+            for (size_t j = 0; j < strlen(word_to_test); j++)
             {
                 if (word[i] == word_to_test[j] && !checked[j])
                 {
@@ -108,7 +108,7 @@ int calculate_nb_matches(char *word, int *patern, table_t *dico)
         }
         bool matchBool = true;
         char *lettersUsed = "";
-        for (int j = 0; j < strlen(word); j++)
+        for (size_t j = 0; j < strlen(word); j++)
         {
             if (patern[j] == 1)
             {
@@ -183,7 +183,6 @@ table_t *new_selected_table(table_t *dico, int *patern, char *word)
 {
     list_t **lists = dico->bucket;
     table_t *new_table = table_create(dico->size);
-    int count = 0;
     bool add_word = false;
     for (int i = 0; i < dico->size; i++)
     {
@@ -206,13 +205,13 @@ table_t *new_selected_table(table_t *dico, int *patern, char *word)
     return new_table;
 }
 
-double calc_prob_patern(table_t *dico, int *patern, char *word, paterns *pat)
+double calc_prob_patern(table_t *dico, int *patern, char *word)
 {
     int posibilities = count_same_patern(dico, patern, word);
     return ((double)posibilities) / ((double)dico->nb_word);
 }
 
-double calc_bit_patern(table_t *dico, int *patern, double proba_patern, char *word)
+double calc_bit_patern(double proba_patern)
 {
     if (proba_patern == 0)
     {
@@ -228,8 +227,8 @@ double calc_entropy(table_t *dico, char *word, paterns *pat)
     int n = strlen(word);
     for (int i = 0; i < pow(3, n); i++)
     {
-        double p = calc_prob_patern(dico, pat->patern[i], word, pat);
-        entropy = entropy + p * calc_bit_patern(dico, pat->patern[i], p, word);
+        double p = calc_prob_patern(dico, pat->patern[i], word);
+        entropy = entropy + p * calc_bit_patern(p);
     }
     return entropy;
 }

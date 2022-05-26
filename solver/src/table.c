@@ -42,15 +42,15 @@ void table_destroy(table_t *one_table)
 
 bool table_is_empty(table_t *one_table)
 {
-    if(one_table == NULL)
+    if (one_table == NULL)
     {
         return true;
     }
 
     // If all the list in the table are empty, we consider the table empty
-    for(int index = 0; index < one_table->size; index++)
+    for (int index = 0; index < one_table->size; index++)
     {
-        if(!list_is_empty(one_table->bucket[index]))
+        if (!list_is_empty(one_table->bucket[index]))
         {
             return false;
         }
@@ -124,7 +124,7 @@ element_t *table_max_entropy(table_t *one_table)
     //     return maxElement;
     // }
 
-    for (index; index < one_table->size; index++)
+    for (; index < one_table->size; index++)
     {
         list_t *currentList = one_table->bucket[index];
 
