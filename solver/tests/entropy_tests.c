@@ -28,6 +28,9 @@ int main()
     int s5[5] = {0, 0, 0, 0, 0};
     printf("Pattern: 00000, Compare: crane - stage\n");
     printf("%d\n", compare_patern(s5, "crane", "stage"));
+    int s6[5] = {0, 0, 1, 1, 0};
+    printf("Pattern: 00110, Compare: crane - aouts\n");
+    printf("%d\n", compare_patern(s6, "crane", "aouts"));
     // update_entropy(dico, pat);
     destroy_patern(pat);
     table_destroy(dico);
