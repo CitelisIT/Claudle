@@ -683,7 +683,6 @@ alpage
 alphas
 alpine
 alpins
-althaea
 althea
 althee
 altier
@@ -1940,7 +1939,6 @@ biclou
 bicles
 bicots
 bicone
-bicoeur
 bidais
 bidait
 bidant
@@ -3823,7 +3821,6 @@ chomee
 chomes
 chumes
 chutes
-choeurs
 ciblai
 ciblas
 cibler
@@ -4903,12 +4900,6 @@ calins
 caline
 caline
 capres
-caecale
-caecaux
-caecums
-caesine
-caesium
-caetera
 cedent
 cedera
 cedres
@@ -4965,10 +4956,6 @@ cotoie
 cotoya
 cotoye
 cotoye
-coelome
-coenure
-coetera
-coeurse
 dacite
 dadais
 daguai
@@ -6718,7 +6705,6 @@ exulte
 exulte
 exuvie
 exvoto
-exaequo
 execre
 exedre
 exeats
@@ -7748,8 +7734,6 @@ fetons
 fetees
 futier
 fuhrer
-foetale
-foetaux
 gabare
 gabbro
 gabian
@@ -11076,7 +11060,6 @@ medium
 melbas
 mellah
 melons
-melaena
 membre
 membru
 membre
@@ -11792,7 +11775,6 @@ mejuge
 mejuge
 mejuge
 melias
-melaena
 meleze
 melena
 memere
@@ -13216,7 +13198,6 @@ phemes
 phenix
 phenol
 pheons
-phoenix
 piaffa
 piaffe
 piaffe
@@ -14270,7 +14251,6 @@ pechus
 pechat
 pechee
 peches
-poecile
 qanats
 qatari
 quadra
@@ -18220,7 +18200,6 @@ tateur
 tatiez
 tatons
 tatees
-taenias
 tetent
 tetera
 teflon
@@ -19265,9 +19244,6 @@ anonne
 anonne
 anonne
 aprete
-aegipan
-aeschne
-aethuse
 echent
 echera
 ebahie
@@ -19500,10 +19476,6 @@ ecurat
 ecuree
 ecures
 ecuyer
-ecoeura
-ecoeure
-ecoeure
-ecoeure
 edenta
 edente
 edente
@@ -20156,28 +20128,6 @@ oterez
 otions
 otames
 otates
-oedipes
-oedemes
-oeillai
-oeillas
-oeiller
-oeilles
-oeillet
-oeillez
-oeillat
-oeillee
-oeilles
-oersted
-oestral
-oestres
-oestrus
-oeuvrai
-oeuvras
-oeuvrer
-oeuvres
-oeuvrez
-oeuvrat
-oeuvees
 abacas
 abader
 abaque
@@ -20863,7 +20813,6 @@ alpage
 alphas
 alpine
 alpins
-althaea
 althea
 althee
 altier
@@ -22120,7 +22069,6 @@ biclou
 bicles
 bicots
 bicone
-bicoeur
 bidais
 bidait
 bidant
@@ -24003,7 +23951,6 @@ chomee
 chomes
 chumes
 chutes
-choeurs
 ciblai
 ciblas
 cibler
@@ -25083,12 +25030,6 @@ calins
 caline
 caline
 capres
-caecale
-caecaux
-caecums
-caesine
-caesium
-caetera
 cedent
 cedera
 cedres
@@ -25145,10 +25086,6 @@ cotoie
 cotoya
 cotoye
 cotoye
-coelome
-coenure
-coetera
-coeurse
 dacite
 dadais
 daguai
@@ -26898,7 +26835,6 @@ exulte
 exulte
 exuvie
 exvoto
-exaequo
 execre
 exedre
 exeats
@@ -27928,8 +27864,6 @@ fetons
 fetees
 futier
 fuhrer
-foetale
-foetaux
 gabare
 gabbro
 gabian
@@ -31256,7 +31190,6 @@ medium
 melbas
 mellah
 melons
-melaena
 membre
 membru
 membre
@@ -31972,7 +31905,6 @@ mejuge
 mejuge
 mejuge
 melias
-melaena
 meleze
 melena
 memere
@@ -33396,7 +33328,6 @@ phemes
 phenix
 phenol
 pheons
-phoenix
 piaffa
 piaffe
 piaffe
@@ -34450,7 +34381,6 @@ pechus
 pechat
 pechee
 peches
-poecile
 qanats
 qatari
 quadra
@@ -38400,7 +38330,6 @@ tateur
 tatiez
 tatons
 tatees
-taenias
 tetent
 tetera
 teflon
@@ -39445,9 +39374,6 @@ anonne
 anonne
 anonne
 aprete
-aegipan
-aeschne
-aethuse
 echent
 echera
 ebahie
@@ -39680,10 +39606,6 @@ ecurat
 ecuree
 ecures
 ecuyer
-ecoeura
-ecoeure
-ecoeure
-ecoeure
 edenta
 edente
 edente
@@ -40336,25 +40258,3 @@ oterez
 otions
 otames
 otates
-oedipes
-oedemes
-oeillai
-oeillas
-oeiller
-oeilles
-oeillet
-oeillez
-oeillat
-oeillee
-oeilles
-oersted
-oestral
-oestres
-oestrus
-oeuvrai
-oeuvras
-oeuvrer
-oeuvres
-oeuvrez
-oeuvrat
-oeuvees
