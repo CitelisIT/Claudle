@@ -330,3 +330,6 @@ $RECYCLE.BIN/
 
 # Compiled test files
 *_tests
+
+# Solver binary
+solver
