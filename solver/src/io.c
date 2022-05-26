@@ -89,13 +89,8 @@ bool validate_input(char *input, size_t word_size, error_t *error)
     return true;
 }
 
-int *read_word_lengths()
+int read_word_lengths()
 {
-    // get number of lines in file "wsolf.txt"
-    // allocate memory for an array of ints of size n
-    // read each line of file "wsolf.txt", parse it as an int and store it in the array
-    // return the array
-
     FILE *file = fopen("wsolf.txt", "r");
     if (file == NULL)
     {
@@ -104,22 +99,9 @@ int *read_word_lengths()
     }
 
     int n;
-    int lines = 0;
-    // iterate over file to get number of lines
-    while (fscanf(file, "%d\n", &n) != EOF)
-    {
-        lines++;
-    }
-    rewind(file);
 
-    // allocate memory for array of ints
-    int *wsol = (int *)calloc(lines, sizeof(int));
-    // iterate over file to get each line
-    for (int i = 0; i < lines; i++)
-    {
-        fscanf(file, "%d\n", &wsol[i]);
-    }
+    fscanf(file, "%d\n", &n);
 
     fclose(file);
-    return wsol;
+    return n;
 }

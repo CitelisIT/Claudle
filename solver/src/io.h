@@ -17,6 +17,6 @@ int *get_hints(size_t word_size);
 
 bool validate_input(char *input, size_t word_size, error_t *error);
 
-int *read_word_lengths();
+int read_word_lengths();
 
 #endif
