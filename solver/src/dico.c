@@ -2,7 +2,7 @@
 
 table_t *dico_load(char *filename, int n)
 {
-    table_t *table = table_create(1000);
+    table_t *table = table_create(1024);
     FILE *ptr = fopen(filename, "r");
     char ch[30] = "";
     if (ptr == NULL)
@@ -27,7 +27,6 @@ table_t *dico_load(char *filename, int n)
             {
                 table->nb_word++;
             }
-            
         }
     }
     fclose(ptr);

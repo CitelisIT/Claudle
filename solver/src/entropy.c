@@ -50,21 +50,35 @@ bool compare_patern(int *patern, char *word, char *word_to_test)
             ok = (word[i] == word_to_test[i]);
             break;
         case 1:
-            while (j < strlen(word) && word[i] != word_to_test[j])
+            while (j < strlen(word))
             {
+                if (word[i] != word_to_test[j] && i != j)
+                {
+                    ok = true;
+                }
+                else
+                {
+                    ok = false;
+                }
+
                 j++;
             }
-            ok = (word[i] == word[j]);
+            // printf(" cas1 %s\n", ok)
             break;
         case 0:
-            while (j < strlen(word) && word[i] != word_to_test[j])
+            for (j = 0; j < strlen(word); j++)
             {
-                j++;
+                if (word[i] != word_to_test[j])
+                {
+                    ok = true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            ok = (word[i] != word[j]);
             break;
         default:
-
             break;
         }
         if (!ok)

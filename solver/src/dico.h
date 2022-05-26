@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "linked_list.h"
 #include "table.h"
 
 #ifndef __DICO__H__

@@ -64,6 +64,7 @@ bool table_add(table_t *one_table, char *one_key)
         return false;
     }
     list_prepend(one_table->bucket[ind], one_key, 0, s);
+    one_table->nb_word++;
     return true;
 }
 
@@ -92,36 +93,35 @@ void table_remove(table_t *one_table, char *one_key)
     list_remove_key(one_table->bucket[index], one_key);
 }
 
-element_t *table_max_entropy(table_t one_table)
+element_t *table_max_entropy(table_t *one_table)
 {
     // Given a table, return the element with highest entropy
     int index = 0;
-    element_t *maxElement = list_max_entropy(one_table.bucket[index]);
+    double maxEntropy = 0;
+    element_t *maxElement;
 
+    // if (index > one_table->size)
+    // {
+    //     return maxElement;
+    // }
 
-    index++;
-
-    if(index > one_table.size)
+    for (index; index < one_table->size; index++)
     {
-        return maxElement;
-    }
-
-    for(index; index < one_table.size; index++)
-    {
-        list_t *currentList = one_table.bucket[index];
+        list_t *currentList = one_table->bucket[index];
 
         // If the list is empty, there's no element
-        if(list_is_empty)
+        if (list_is_empty(currentList))
         {
             continue;
         }
 
-        // Get the element with highest entropy in current list 
+        // Get the element with highest entropy in current list
         element_t *currentElement = list_max_entropy(currentList);
 
-        if(maxElement->entropy < currentElement->entropy)
+        if (maxEntropy < currentElement->entropy)
         {
             maxElement = currentElement;
+            maxEntropy = maxElement->entropy;
         }
     }
 
