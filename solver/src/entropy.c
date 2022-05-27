@@ -62,7 +62,7 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
             bool valid = false;
             for (size_t j = 0; j < strlen(word); j++)
             {
-                if (!checked[j] && word[i] == word_to_test[j])
+                if (!checked[j] && word[i] == word_to_test[j] && i != j)
                 {
                     checked[j] = true;
                     valid = true;
