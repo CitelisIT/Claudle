@@ -39,9 +39,8 @@ void calc_patern(paterns *pat)
 
 bool compare_patern(int *pattern, char *word, char *word_to_test)
 {
-    bool valid = false;
     bool *checked = calloc(strlen(word), sizeof(bool));
-    for (size_t i = 0; i < strlen(word); i++)
+    for (size_t i = 0; i < strlen(word); i++) // first pass to eliminate 2s
     {
         if (pattern[i] == 2)
         {
@@ -56,18 +55,18 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
             }
         }
     }
-    for (size_t i = 0; i < strlen(word); i++)
+    for (size_t i = 0; i < strlen(word); i++) // second pass to eliminate 1s
     {
-
-        switch (pattern[i])
+        if (pattern[i] == 1)
         {
-        case 1:
-            valid = false;
-            for (size_t j = 0; j < strlen(word_to_test); j++)
+            bool valid = false;
+            for (size_t j = 0; j < strlen(word); j++)
             {
-                if (word[i] == word_to_test[j] && i != j)
+                if (!checked[j] && word[i] == word_to_test[j])
                 {
+                    checked[j] = true;
                     valid = true;
+                    break;
                 }
             }
             if (!valid)
@@ -75,8 +74,12 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
                 free(checked);
                 return false;
             }
-            break;
-        case 0:
+        }
+    }
+    for (size_t i = 0; i < strlen(word); i++)
+    {
+        if (pattern[i] == 0)
+        {
             for (size_t j = 0; j < strlen(word_to_test); j++)
             {
                 if (word[i] == word_to_test[j] && !checked[j])
@@ -85,9 +88,6 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
                     return false;
                 }
             }
-            break;
-        default:
-            break;
         }
     }
     free(checked);
