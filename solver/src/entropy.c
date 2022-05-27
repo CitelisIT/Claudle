@@ -244,7 +244,7 @@ void update_entropy(table_t *dico, paterns *pat)
             while (curr != NULL)
             {
                 curr->value->entropy = calc_entropy(dico, curr->value->key, pat);
-                printf("%f, %s\n", curr->value->entropy, curr->value->key);
+                // printf("%f, %s\n", curr->value->entropy, curr->value->key);
                 curr = curr->next;
             }
         }
