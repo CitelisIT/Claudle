@@ -116,7 +116,7 @@ element_t *table_max_entropy(table_t *one_table)
 {
     // Given a table, return the element with highest entropy
     int index = 0;
-    double maxEntropy = 0;
+    double maxEntropy = -1.0;
     element_t *maxElement;
 
     // if (index > one_table->size)
@@ -136,7 +136,6 @@ element_t *table_max_entropy(table_t *one_table)
 
         // Get the element with highest entropy in current list
         element_t *currentElement = list_max_entropy(currentList);
-
         if (maxEntropy < currentElement->entropy)
         {
             maxElement = currentElement;
