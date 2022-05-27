@@ -69,11 +69,10 @@ bool compare_patern(int *pattern, char *word, char *word_to_test)
                         free(checked);
                         return false;
                     }
-                    else
+                    else if (!valid)
                     {
                         checked[j] = true;
                         valid = true;
-                        break;
                     }
                 }
             }
