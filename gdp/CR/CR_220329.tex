@@ -1,0 +1,67 @@
+\documentclass[12pt,a4paper,final]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\begin{document}
+
+
+\begin{center}
+\Large \textbf{Compte-rendu de la réunion du 29 mars 2022}
+\end{center}
+\textbf{16h25 -- Salle 1.15}
+\vskip 0,5cm
+
+\begin{center}
+\begin{tabular}{|l|r|}
+    \hline
+    Présent & Absent \\
+    \hline
+    Tom BENE & Personne \\
+    Alexandre LI & \\
+    Camille MOUSSU & \\
+    Guillaume RICARD & \\
+    \hline
+\end{tabular}
+\end{center}
+
+\begin{flushleft}
+    \textbf{Ordre du jour}
+\end{flushleft}
+
+\begin{enumerate}
+    \item Proposition de structures de données
+	\item Retour sur la conception de l'API
+    \item Validation de la conception du projet par M. Festor
+
+\end{enumerate}
+
+\begin{flushleft}
+    \textbf{Proposition de structures de données}
+\end{flushleft}
+Guillaume et Alexandre ont réfléchi à quelle structure de données implémenter pour stocker le dictionnaires et les mots candidats. La première idée est celle des tables de hachage. Une autre idée est d'utiliser des arbres. Cependant, cette implémentation semble plus complexe et ne semble pas présenter d'avantage concret pour notre cas de figure, c'est donc les structure de table de hachage qui est retenue. 
+
+\begin{flushleft}
+    \textbf{Retour sur la conception de l'API}
+\end{flushleft}
+Camille et Tom énumèrent l'esnsemble des routes de l'API qu'il sera nécessaire d'avoir. Ces routes sont les routes "/", "/login", "/register", "/profile" et "/stats". \\
+Il est décidé d'aborder la conception de l'API de manière modulaire afin de mieux pouvoir structurer notre code.
+
+\begin{flushleft}
+    \textbf{Validation de la conception du projet}
+\end{flushleft}
+Le groupe a prévu d'envoyer le document de conception complété à M. Festor. Si possible, nous prévoyons de nous entretenir avec lui jeudi avant ou après le CM.
+
+\begin{flushleft}
+    \textbf{Réunion suivante :} mardi 20/04/2022 à 14h
+\end{flushleft}
+
+\textit{Fin de réunion à 17h00}
+
+\end{document}
+
